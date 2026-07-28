@@ -1,0 +1,222 @@
+@import "tailwindcss";
+
+@theme {
+  /* --- EXTENDED BREAKPOINTS --- */
+  /* Added XS for fine-tuning on small phones */
+  --breakpoint-xs: 400px; 
+  
+  /* Your original breakpoints */
+  --breakpoint-sm: 540px;
+  --breakpoint-md: 720px;
+  --breakpoint-lg: 960px;
+  --breakpoint-xl: 1140px;
+  --breakpoint-2xl: 1320px;
+  
+  /* Added for modern large screens */
+  --breakpoint-3xl: 1600px;
+  --breakpoint-4xl: 1920px;
+
+  /* --- YOUR FONTS (Kept same) --- */
+  
+  --font-family-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-playfair: "Playfair Display", serif;
+  --font-sourceSans: "Source Sans Pro", sans-serif;
+  --font-cormorant: "Cormorant Garamond", serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-baskerville: "Baskerville", serif;
+  --font-workSans: "Work Sans", sans-serif;
+  --font-libreBaskerville: "Libre Baskerville", serif;
+  --font-raleway: "Raleway", sans-serif;
+  --font-lora: "Lora", serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-sourceSans3: "Source Sans 3", sans-serif;
+  --font-nunito: "Nunito", sans-serif;
+  
+  --font-sourceSans: "Source Sans 3", sans-serif;
+  --font-cormorant: "Cormorant Garamond", serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-baskerville: "Baskerville", serif; /* self-host */
+  --font-workSans: "Work Sans", sans-serif;
+  --font-libreBaskerville: "Libre Baskerville", serif;
+  --font-raleway: "Raleway", sans-serif;
+  --font-lora: "Lora", serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-nunito: "Nunito", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-cinzelDecorative: "Cinzel Decorative", serif;
+  --font-righteous: "Righteous", cursive;
+
+  /* --- YOUR COLORS (Kept same) --- */
+  --color-black: #000000;
+  --color-dark-700: #090e34b3;
+  --color-dark: #111928;
+  --color-dark-2: #1F2A37;
+  --color-dark-3: #374151;
+  --color-dark-4: #4B5563;
+  --color-dark-5: #6B7280;
+  --color-dark-6: #9CA3AF;
+  --color-dark-7: #D1D5DB;
+  --color-dark-8: #E5E7EB;
+  --color-price: #C40C0C;
+  --color-primary: #0A2D53;
+  --color-dark-reddish-brown: #4B1605;
+  --color-deep-burgundy: #4B050D;
+  --color-deep-purple: #4B053C;
+  --color-hero: #9EDF9C;
+  --color-lightblue: #FFE100;
+  --color-neon-purple: #7102F9;
+  --color-newlightblue: #e4fdff;
+  --color-my-blue: #1E9AE0;
+  --color-my-blue-2: #1E77DB;
+  --color-hero-btn: #9ed976;
+  --color-blue-dark: #06506A;
+  --color-secondary: #13C296;
+  --color-placesColor: #2D536F;
+  --color-body-color: #637381;
+  --color-body-secondary: #8899A8;
+  --color-warning: #FBBF24;
+  --color-stroke: #DFE4EA;
+  --color-gray-1: #F9FAFB;
+  --color-gray-2: #F3F4F6;
+  --color-gray-7: #CED4DA;
+  --color-dashHover: #c3f9ff;
+  --color-myblue: #16B9E5;
+  --color-dark-variant: #032A35;
+  --color-light-variant: #0A5A6F;
+  --color-accent-1: #F4A261;
+  --color-accent-2: #E76F51;
+  --color-neutral-light: #EAEAEA;
+  --color-neutral-dark: #1B1B1B;
+  --color-riec-red: #e11b25;
+  --color-riec-orange: #ee7a18;
+  --color-riec-orange-light: #ff8c2e;
+  --color-riec-yellow: #ffd700;
+  --color-riec-dark: #1a1a1a;
+  --color-riec-gray: #2d2d2d;
+
+  /* --- SHADOWS --- */
+  --shadow-input: 0px 7px 20px rgba(0, 0, 0, 0.03);
+  --shadow-form: 0px 1px 55px -11px rgba(0, 0, 0, 0.01);
+  --shadow-pricing: 0px 0px 40px 0px rgba(0, 0, 0, 0.08);
+  --shadow-switch-1: 0px 0px 5px rgba(0, 0, 0, 0.15);
+  --shadow-testimonial: 0px 10px 20px 0px rgba(92, 115, 160, 0.07);
+  --shadow-testimonial-btn: 0px 8px 15px 0px rgba(72, 72, 138, 0.08);
+  --shadow-1: 0px 1px 3px 0px rgba(166, 175, 195, 0.40);
+  --shadow-2: 0px 5px 12px 0px rgba(0, 0, 0, 0.10);
+
+  /* --- ANIMATIONS & KEYFRAMES --- */
+  --animate-blob: blob 7s infinite;
+  --animate-bounce: bounce 2s infinite;
+  --animate-fade-in-up: fadeInUp 0.5s ease-out;
+
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* --- REFINED CONTAINER UTILITY --- */
+/* This ensures the content is centered and bounds properly at every new breakpoint */
+@utility container {
+  margin-inline: auto;
+  padding-inline: 16px; /* Keeps padding on mobile */
+  width: 100%;
+  
+  /* Stops container from growing too wide on specific screens */
+  @media (min-width: 540px) { max-width: 540px; }
+  @media (min-width: 720px) { max-width: 720px; }
+  @media (min-width: 960px) { max-width: 960px; }
+  @media (min-width: 1140px) { max-width: 1140px; }
+  @media (min-width: 1320px) { max-width: 1320px; }
+  @media (min-width: 1600px) { max-width: 1536px; } /* New 3XL width */
+  @media (min-width: 1920px) { max-width: 1800px; } /* New 4XL width */
+}
+
+/* --- HELPER UTILITIES --- */
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  /* Primary brand gradient */
+  .bg-riec-gradient {
+    background-image: linear-gradient(
+      90deg,
+      var(--color-riec-red) 0%,
+      var(--color-riec-orange) 40%,
+      var(--color-riec-yellow) 100%
+    );
+  }
+
+  /* Dark fancy variant (navbar / footer) */
+  .bg-riec-gradient-dark {
+    background-image: linear-gradient(
+      90deg,
+      var(--color-riec-dark) 0%,
+      var(--color-riec-gray) 50%,
+      var(--color-riec-dark) 100%
+    );
+  }
+
+  /* Soft highlight gradient (cards / CTA) */
+  .bg-riec-gradient-soft {
+    background-image: linear-gradient(
+      135deg,
+      var(--color-riec-orange-light) 0%,
+      var(--color-riec-orange) 50%,
+      var(--color-riec-red) 100%
+    );
+  }
+}
+
+/* ── RichEditor (Tiptap) ── */
+.tiptap { outline: none; }
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--color-dark-6);
+  pointer-events: none;
+  height: 0;
+}
+.tiptap h1 { font-size: 1.1em; font-weight: 700; margin: 0.4em 0; }
+.tiptap h2 { font-size: 1em;   font-weight: 700; margin: 0.3em 0; }
+.tiptap ul  { list-style: disc;    padding-left: 1.4em; margin: 0.3em 0; }
+.tiptap ol  { list-style: decimal; padding-left: 1.4em; margin: 0.3em 0; }
+.tiptap blockquote {
+  border-left: 3px solid var(--color-riec-orange);
+  padding-left: 0.75em;
+  margin: 0.4em 0;
+  color: var(--color-body-color);
+}
+.tiptap hr { border: none; border-top: 1px solid var(--color-stroke); margin: 0.5em 0; }
+.tiptap p  { margin: 0.2em 0; }
+
+/* ── RichContent (rendered HTML) ── */
+.rich-content h1 { font-size: 1em; font-weight: 700; margin: 0.5em 0 0.2em; color: var(--color-primary); }
+.rich-content h2 { font-size: 0.9em; font-weight: 700; margin: 0.4em 0 0.2em; color: var(--color-primary); }
+.rich-content p  { margin: 0.2em 0; }
+.rich-content ul { list-style: disc;    padding-left: 1.3em; margin: 0.3em 0; }
+.rich-content ol { list-style: decimal; padding-left: 1.3em; margin: 0.3em 0; }
+.rich-content li { margin: 0.1em 0; }
+.rich-content strong { font-weight: 700; }
+.rich-content em     { font-style: italic; }
+.rich-content u      { text-decoration: underline; }
+.rich-content s      { text-decoration: line-through; }
+.rich-content blockquote {
+  border-left: 3px solid var(--color-riec-orange);
+  padding-left: 0.6em;
+  margin: 0.3em 0;
+  color: var(--color-body-color);
+}
+.rich-content hr { border: none; border-top: 1px solid var(--color-stroke); margin: 0.4em 0; }

@@ -1,0 +1,559 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "completed_projects": "Projects",
+    "plans": "Plans",
+    "about_us": "About Us",
+    "get_a_quote": "Get a Quote",
+    "serv": {
+      "construction": "Construction",
+      "architecture": "Architecture",
+      "maintenance": "Maintenance"
+    },
+    "projects": {
+      "residential": "Residential",
+      "commercial": "Commercial",
+      "industrial": "Industrial"
+    },
+    "shop_nav": {
+      "materials": "Materials",
+      "tools": "Tools",
+      "equipment": "Equipment"
+    }
+  },
+  "projects": {
+    "page_title": "Projects",
+    "page_description": "Explore RIEC's portfolio of completed architectural and construction projects across residential, commercial, and industrial sectors.",
+    "tag": "PORTFOLIO",
+    "title": "Works.",
+    "description": "A curated collection of RIEC's high-end architectural landmarks. From monolith industrial designs to luxury urban escapes, we define the skyline of tomorrow through structural excellence.",
+    "filter": "Filter",
+    "view_case_study": "View Case Study",
+    "load_more": "LOAD MORE PROJECTS",
+    "filters": {
+      "all": "All Projects",
+      "residential": "Residential",
+      "commercial": "Commercial",
+      "industrial": "Industrial"
+    },
+    "items": {
+      "urban_design": {
+        "title": "Commercial / Urban Design"
+      },
+      "luxury_residential": {
+        "title": "Luxury Residential"
+      },
+      "industrial_architecture": {
+        "title": "Industrial Architecture"
+      },
+      "corporate_hq": {
+        "title": "Corporate / HQ"
+      },
+      "residential_development": {
+        "title": "Residential Development"
+      },
+      "public_space": {
+        "title": "Public Space"
+      }
+    }
+  },
+  "plans": {
+    "page_title": "Engineering Plans",
+    "page_description": "Explore RIEC's comprehensive engineering and architectural plans for residential, commercial, and industrial projects.",
+    "hero": {
+      "tag": "ENGINEERING EXCELLENCE",
+      "title1": "Architectural &",
+      "title2": "Engineering Plans",
+      "description": "Precision and innovation at the core of every structure we design. From initial concept to final technical specifications.",
+      "button1": "View Our Portfolio",
+      "button2": "Our Methodology"
+    },
+    "blueprints": {
+      "title": "Technical Blueprints",
+      "description": "Explore our library of residential, commercial, and industrial engineering solutions."
+    },
+    "filters": {
+      "all": "All Plans",
+      "residential": "Residential",
+      "commercial": "Commercial",
+      "industrial": "Industrial"
+    },
+    "items": {
+      "eco_villa": {
+        "title": "Eco-Villa Floor Plan",
+        "subtitle": "Sustainability-focused design"
+      },
+      "trade_hub": {
+        "title": "Global Trade Hub",
+        "subtitle": "Grade-A Corporate Structure"
+      },
+      "warehouse": {
+        "title": "Smart Warehouse V2",
+        "subtitle": "Optimized Logistics Network"
+      },
+      "skyline_loft": {
+        "title": "Skyline Loft Interior",
+        "subtitle": "Modern Minimalist Concept"
+      }
+    },
+    "spotlight": {
+      "tag": "SPOTLIGHT SELECTION",
+      "title": "Eco-Villa Floor Plan",
+      "description": "Our signature residential blueprint focuses on energy efficiency, natural lighting, and seamless indoor-outdoor living. This comprehensive package includes all necessary engineering documentation for regulatory approval and construction.",
+      "documents_title": "Included Document Sets:",
+      "preview": "PREVIEW/DEMO",
+      "preview_title": "Technical Overlay v2.1"
+    },
+    "documents": {
+      "architectural": "Architectural Drawings",
+      "architectural_desc": "Floor plans, elevations, sections",
+      "structural": "Structural Drawings",
+      "structural_desc": "Foundation, beams, column details",
+      "mep": "MEP Drawings",
+      "mep_desc": "Mechanical, electrical, plumbing",
+      "interior": "Interior Layouts",
+      "interior_desc": "Finishes, cabinetry, lighting"
+    },
+    "how_we_plan": {
+      "title": "How We Plan",
+      "description": "Our rigorous engineering methodology ensures that every line drawn translates into a safe, sustainable, and efficient physical structure."
+    },
+    "methodology": {
+      "site": {
+        "title": "Site & Concept",
+        "desc": "Topographic analysis, zoning compliance, and preliminary conceptual sketches to define the vision."
+      },
+      "design": {
+        "title": "Engineering Design",
+        "desc": "Structural calculations, MEP coordination, and integration of sustainable technologies and materials."
+      },
+      "specs": {
+        "title": "Final Specs",
+        "desc": "Finalized construction documents, material schedules, and technical specifications for bidding."
+      }
+    },
+    "cta": {
+      "title": "Have a unique vision?",
+      "description": "Work directly with our lead architects and engineers to develop a custom plan tailored to your specific site and requirements.",
+      "button": "Request a Custom Plan"
+    }
+  },
+  "about": {
+    "page_title": "About Us",
+    "page_description": "Learn about RIEC's mission, values, and the team behind Rwanda's leading construction and engineering company.",
+    "values": {
+      "title": "Core Values",
+      "subtitle": "The principles that guide our every decision, from the smallest structural detail to the largest master plan.",
+      "ethics_link": "Our Ethics Charter",
+      "integrity": {
+        "title": "Integrity",
+        "desc": "We hold ourselves to the highest ethical standards, ensuring transparency and honesty in every partnership."
+      },
+      "precision": {
+        "title": "Precision",
+        "desc": "Excellence is in the details. Our engineering rigor ensures that every structure we build is a masterpiece of accuracy."
+      },
+      "sustainability": {
+        "title": "Sustainability",
+        "desc": "Building for tomorrow requires respecting the environment today. We prioritize eco-friendly materials and methods."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "desc": "We embrace the latest technologies, from BIM to smart materials, to solve the world's most complex construction challenges."
+      }
+    },
+    "journey": {
+      "title": "Our Journey",
+      "1998": {
+        "title": "Founding of RIEC",
+        "desc": "The beginning of a vision. RIEC was founded with a small team of 5 engineers determined to change the local landscape."
+      },
+      "2005": {
+        "title": "First Residential Tower Project",
+        "desc": "A milestone achievement. RIEC completed its first major residential tower, setting new standards for quality and design in the region."
+      },
+      "2014": {
+        "title": "Global Expansion",
+        "desc": "RIEC's expertise is recognized internationally. We opened our first overseas office and secured projects in multiple countries across East Africa and beyond."
+      },
+      "2020": {
+        "title": "National Innovation Award",
+        "desc": "RIEC is honored with the National Innovation Award for our groundbreaking use of sustainable materials and construction techniques in urban development projects."
+      },
+      "2024": {
+        "title": "Carbon-Neutral Pledge",
+        "desc": "Committing to a sustainable future. RIEC pledges to achieve 100% carbon-neutral operations across all sites by 2030."
+      }
+    },
+    "team": {
+      "title": "The Minds Behind the Landmarks",
+      "subtitle": "Our leadership team brings together decades of international experience in civil engineering, project management, and architectural design.",
+      "ceo": {
+        "name": "Libert IZERE",
+        "role": "CHIEF EXECUTIVE OFFICER",
+        "desc": "Visionary leader with extensive experience in structural engineering and project management, steering RIEC toward excellence."
+      },
+      "operation_manager": {
+        "name": "Barnabe RWAKAZINA",
+        "role": "OPERATION MANAGER",
+        "desc": "Ensures smooth day-to-day operations and efficient project delivery across all RIEC sites."
+      },
+      "project_engineer": {
+        "name": "Jean Damascene MANIRAFASHA",
+        "role": "PROJECT ENGINEER",
+        "desc": "Technical expert responsible for project planning, execution, and quality assurance on complex infrastructure projects."
+      },
+      "electrical_engineer": {
+        "name": "Serge Adelit MUHUZA",
+        "role": "ELECTRICAL ENGINEER",
+        "desc": "Specialist in electrical systems design, power distribution, and sustainable energy solutions for construction projects."
+      },
+      "developer_it_manager": {
+        "name": "Rosine TUYISHIMIRE",
+        "role": "DEVELOPER & IT MANAGER",
+        "desc": "Manages RIEC's digital infrastructure, software development, and IT systems to keep the organization at the cutting edge."
+      },
+      "site_engineer_assistant_operator": {
+        "name": "Tresor Alype BALINDA",
+        "role": "SITE ENGINEER & ASSISTANT OPERATOR",
+        "desc": "On-site engineering support and operational assistance, ensuring construction standards are met at every phase."
+      }
+    },
+    "contact": {
+      "title": "Contact Us",
+      "subtitle": "Ready to start your next landmark project? Reach out to our team of experts for a consultation.",
+      "form": {
+        "name": "Full Name",
+        "email": "Email Address",
+        "subject": "Subject",
+        "message": "Message",
+        "submit": "Send Message"
+      },
+      "office": {
+        "title": "Main Office",
+        "address1": "KG 40 St, Kimironko",
+        "address2": "Bibare, Gasabo District, Kigali"
+      },
+      "phone": {
+        "title": "Phone",
+        "number1": "+250 787 106 854",
+        "number2": "+250 784 231 101"
+      },
+      "email": {
+        "title": "Email",
+        "inquiry": "inquiry@riec.rw",
+        "careers": "careers@riec.rw"
+      },
+      "hours": {
+        "title": "Office Hours",
+        "weekday": "Mon - Fri:",
+        "weekday_time": "8:00 AM - 6:00 PM",
+        "saturday": "Saturday:",
+        "saturday_time": "10:00 AM - 2:00 PM",
+        "sunday": "Sunday:",
+        "sunday_time": "Closed"
+      }
+    }
+  },
+  "dash": {
+    "search": "Search or type command…",
+    "portal": "Admin Portal",
+    "dashboard": "Dashboard",
+    "language": "Language",
+    "logout": "Logout",
+    "nav": {
+      "overview": "Overview",
+      "projects": "Projects",
+      "services": "Services",
+      "careers": "Careers",
+      "applications": "Applications",
+      "contact": "Contact",
+      "payments": "Payments"
+    },
+    "kpi": {
+      "projects": "Total Projects",
+      "careers": "Open Careers",
+      "applications": "Applications",
+      "unread": "Unread Messages"
+    },
+    "projects_by_cat": "Projects by Category",
+    "messages": "Messages",
+    "open_careers": "Open Careers",
+    "recent_apps": "Recent Applications",
+    "total": "total",
+    "roles": "roles",
+    "new": "new",
+    "live": "Live",
+    "draft": "Draft",
+    "mark_read": "Mark read",
+    "read": "Read",
+    "no_messages": "No messages yet.",
+    "no_roles": "No open roles.",
+    "no_apps": "No applications yet.",
+    "loading": "Loading…",
+    "projects_page": {
+      "title": "Projects",
+      "total": "total projects",
+      "new_btn": "New Project",
+      "filter_type": "Filter by type",
+      "filter_category": "Filter by category",
+      "filter_location": "Filter by location",
+      "per_page": "/ page",
+      "col_title": "Title",
+      "col_location": "Location",
+      "col_type": "Type",
+      "col_category": "Category",
+      "col_purchasable": "Purchasable",
+      "col_status": "Status",
+      "col_actions": "Actions",
+      "yes": "Yes",
+      "no": "No",
+      "empty": "No projects found.",
+      "page_of": "Page {{page}} of {{total}}",
+      "prev": "Previous",
+      "next": "Next",
+      "delete_confirm": "Delete this project? This cannot be undone."
+    },
+    "wizard": {
+      "new_title": "New Project",
+      "edit_title": "Edit Project",
+      "step_of": "Step {{step}} of {{total}}",
+      "step_basic": "Basic Info",
+      "step_details": "Details",
+      "step_settings": "Settings",
+      "step_media": "Media",
+      "back": "Back",
+      "next": "Next",
+      "create": "Create",
+      "update": "Update",
+      "saving": "Saving…",
+      "field_title": "Title",
+      "field_slug": "Slug",
+      "field_description": "Description",
+      "field_location": "Location",
+      "field_type": "Project Type",
+      "field_category": "Category",
+      "field_service_slug": "Service Slug (optional)",
+      "field_featured": "Featured",
+      "field_featured_desc": "Show on homepage featured section",
+      "field_purchasable": "Plan Purchasable",
+      "field_purchasable_desc": "Allow clients to purchase engineering plans",
+      "field_images": "Project Images (optional)",
+      "field_assets": "Project Assets / Documents (optional)",
+      "click_images": "Click to select images",
+      "click_docs": "Click to select documents",
+      "files_selected": "{{count}} file(s) selected",
+      "settings_hint": "Configure visibility and purchase options.",
+      "select_type": "Select type…",
+      "select_category": "Select category…"
+    },
+    "services_page": {
+      "title": "Services",
+      "count": "services",
+      "new_btn": "New Service",
+      "new_title": "New Service",
+      "edit_title": "Edit Service",
+      "field_title": "Title",
+      "field_slug": "Slug",
+      "field_description": "Description",
+      "cancel": "Cancel",
+      "create": "Create",
+      "update": "Update",
+      "empty": "No services found.",
+      "delete_confirm": "Delete this service?",
+      "prev": "Previous",
+      "next": "Next",
+      "page": "Page {{page}}"
+    },
+    "careers_page": {
+      "title": "Careers",
+      "open_roles": "open roles",
+      "post_btn": "Post Career",
+      "filter_dept": "Filter by department",
+      "filter_loc": "Filter by location",
+      "field_title": "Title",
+      "field_slug": "Slug",
+      "field_dept": "Department",
+      "field_location": "Location",
+      "field_type": "Employment Type",
+      "field_desc": "Description",
+      "select_type": "Select…",
+      "cancel": "Cancel",
+      "post": "Post Career",
+      "empty": "No active jobs found.",
+      "prev": "Previous",
+      "next": "Next",
+      "page": "Page {{page}}"
+    },
+    "applications_page": {
+      "title": "Applications",
+      "total": "total",
+      "filter_job": "Filter by Job ID (or ALL)",
+      "col_applicant": "Applicant",
+      "col_email": "Email",
+      "col_job": "Job",
+      "col_status": "Status",
+      "pending": "Pending",
+      "empty": "No applications found.",
+      "prev": "Previous",
+      "next": "Next",
+      "page": "Page {{page}}"
+    },
+    "contact_page": {
+      "title": "Contact Submissions",
+      "total": "total",
+      "filter_all": "All submissions",
+      "filter_unread": "Unread only",
+      "filter_read": "Read only",
+      "mark_read": "Mark read",
+      "read": "Read",
+      "empty": "No submissions yet.",
+      "prev": "Previous",
+      "next": "Next",
+      "page": "Page {{page}}"
+    },
+    "payments_page": {
+      "title": "Payments",
+      "subtitle": "Manage checkout and download tokens",
+      "checkout_title": "Initiate Checkout",
+      "checkout_sub": "Trigger a project plan purchase",
+      "field_project_id": "Project ID",
+      "field_tier_id": "Tier ID",
+      "field_name": "Full Name",
+      "field_email": "Email",
+      "start_btn": "Start Checkout",
+      "processing": "Processing…",
+      "open_url": "Open Checkout URL",
+      "downloads_title": "Fetch Downloads",
+      "downloads_sub": "Retrieve assets by purchase token",
+      "token_placeholder": "Purchase token…",
+      "fetch_btn": "Fetch",
+      "loading_downloads": "Loading downloads…",
+      "no_downloads": "No downloads found for this token."
+    }
+  },
+  "common": {
+    "submit": "Submit",
+    "search": "Search",
+    "readMore": "Read More",
+    "contactUs": "Contact Us",
+    "hero": {
+      "title1": "Transforming Ideas into",
+      "title2": "Stunning Structures",
+      "description": "From concept to  completion, we deliver quality construction services for homes, businesses and communities.  We provide the best architectural design, construction and building maintenance",
+      "button1": "GET STARTED",
+      "button2": "VIEW PROJECTS"
+    },
+    "intro": {
+      "title": "Our Vision & Precision",
+      "text1": "Year of",
+      "text2": "Excellence",
+      "text3": "Architecture that shapes the future",
+      "text4": "RIEC combines architectural innovation with construction expertise to create spaces that inspire and endure. Our team of skilled professionals is dedicated to delivering exceptional results, from concept to completion. With a commitment to quality, sustainability, and client satisfaction, we bring your vision to life with precision and care.",
+      "stats": {
+        "projects": "Completed Projects",
+        "awards": "Design Awards"
+      }
+    },
+    "services": {
+      "title": "Featured Services",
+      "surveying": "Land Surveying",
+      "boundary_surveying": "Boundary Surveying",
+      "topographic_surveying": "Topographic Surveying",
+      "construction_layout": "Construction Layout",
+      "interior_design": "Interior Design",
+      "house_design": "House Design",
+      "construction_supervision": "Construction Supervision",
+      "property_valuation": "Property Valuation",
+      "descriptions": {
+        "surveying": "Advanced geodetic measurements using RTK-GPS and robotic total stations for precise topographical data.",
+        "boundary_surveying": "Defining legal property limits with surgical accuracy to mitigate risk and ensure compliance.",
+        "topographic_surveying": "High-resolution 3D terrain modeling and contour mapping for comprehensive site analysis.",
+        "construction_layout": "Translating blueprints to reality with precision staking and gridline establishment on-site.",
+        "interior_design": "Bespoke spatial planning and aesthetic curation for high-end residential and commercial environments.",
+        "house_design": "End-to-end architectural solutions and project management from conceptualization to key handover.",
+        "construction_supervision": "Expert technical oversight ensuring structural integrity and adherence to international safety standards.",
+        "property_valuation": "Professional market appraisal and financial assessment for real estate assets and infrastructure."
+      }
+    },
+    "projects": {
+      "title": "Our Latest Projects",
+      "description": "Our Latest Projects stand as a testament to our dedication and expertise. These projects embody the culmination of our hard work.",
+      "all_categories": "All Categories",
+      "view_all": "View All",
+      "view_more": "View more",
+      "of_total": "of total",
+      "interior_design": "Interior and Design",
+      "interior_constructions": "Interior Constructions",
+      "residential": "Residential",
+      "residential_construction": "Residential Construction",
+      "green_sustainable": "Green and Sustainable",
+      "green_constructions": "Green and Sustainable Constructions",
+      "commercial": "Commercial",
+      "commercial_constructions": "Commercial Constructions",
+      "industrial": "Industrial",
+      "industrial_constructions": "Industrial Constructions",
+      "edustructures": "EduStructures",
+      "edustructures_constructions": "EduStructures Constructions"
+    },
+    "solutions": {
+      "tag": "WHAT WE DO?",
+      "title": "Solutions We Deliver",
+      "description": "We provide end-to-end construction solutions tailored to your needs. From planning and design to execution and maintenance, we ensure every project is delivered with precision and quality.",
+      "plan": {
+        "title": "Plan & Visualize",
+        "description": "We begin with project planning, site analysis, and architectural 3D design to help you clearly visualize the final space before construction starts."
+      },
+      "build": {
+        "title": "Build & Execute",
+        "description": "Our skilled team handles all construction work with precision — from structure to finishing — ensuring quality, safety, and efficiency at every stage."
+      },
+      "renovate": {
+        "title": "Renovate & Transform",
+        "description": "Whether it's upgrading a room or redesigning an entire space, we bring modern, functional, and creative transformations to existing structures."
+      },
+      "deliver": {
+        "title": "Deliver & Support",
+        "description": "Once completed, we hand over the final project with full quality checks and continue to provide maintenance and support when needed."
+      }
+    },
+    "footer": {
+      "brand_description": "We design and build spaces that blend innovation with craftsmanship. Every project is executed with precision, creativity, and a deep commitment to quality. Your dream structure starts with our expertise.",
+      "company": "Company",
+      "services": "Our Services",
+      "follow_us": "Follow Us",
+      "phone": "Phone",
+      "email": "Email",
+      "location": "Location",
+      "rights_reserved": "All Rights Reserved",
+      "privacy_policy": "Privacy Policy",
+      "terms_conditions": "Terms & Conditions",
+      "company_links": {
+        "teams": "Teams",
+        "career": "Career",
+        "blogs": "Blogs",
+        "pricing": "Pricing",
+        "services": "Services",
+        "projects": "Projects",
+        "plans": "Plans",
+        "about_us": "About Us",
+        "login": "Login"
+      },
+      "service_links": {
+        "residential": "Residential Construction",
+        "commercial": "Commercial Construction",
+        "renovation": "Renovation & Remodeling",
+        "architecture": "Architecture & 3D Design",
+        "project_management": "Project Management",
+        "structural": "Structural Engineering"
+      },
+      "contact": {
+        "phone_number": "+250 787 106 854",
+        "email_address": "info@riec.rw",
+        "address_line1": "KG 11 Ave, Kimironko, Kigali, Rwanda",
+        "address_line2": "Houston, TX 77032"
+      }
+    }
+  }
+}

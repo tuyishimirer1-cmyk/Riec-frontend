@@ -1,0 +1,559 @@
+{
+  "nav": {
+    "home": "Ahabanza",
+    "services": "Serivisi",
+    "completed_projects": "Imishinga",
+    "plans": "Gura Plan",
+    "about_us": "Ibitwerekeye",
+    "get_a_quote": "Saba Igiciro",
+    "serv": {
+      "construction": "Ubwubatsi",
+      "architecture": "Ubishushanyo",
+      "maintenance": "Kubungabunga"
+    },
+    "projects": {
+      "residential": "Imiturire",
+      "commercial": "Ubucuruzi",
+      "industrial": "Inganda"
+    },
+    "shop_nav": {
+      "materials": "Ibikoresho By'ubwubatsi",
+      "tools": "Ibikoresho By'akazi",
+      "equipment": "Ibikoresho By'ibanze"
+    }
+  },
+  "projects": {
+    "page_title": "Imishinga",
+    "page_description": "Reba portfolio ya RIEC y'imishinga y'ubwubatsi n'ibishushanyo byarangiye mu turere tw'imiturire, ubucuruzi n'inganda.",
+    "tag": "PORTFOLIO",
+    "title": "Ibikorwa.",
+    "description": "Icyegeranyo cy'imishinga y'ubwubatsi bw'indashyikirwa ya RIEC. Kuva ku bishushanyo by'inganda nini kugeza ku mazu y'ubwiza mu mujyi, dusobanura imiterere y'ejo hazaza binyuze mu buziranenge bw'imiterere.",
+    "filter": "Shungura",
+    "view_case_study": "Reba Isesengura",
+    "load_more": "REBA IMISHINGA MYINSHI",
+    "filters": {
+      "all": "Imishinga Yose",
+      "residential": "Imiturire",
+      "commercial": "Ubucuruzi",
+      "industrial": "Inganda"
+    },
+    "items": {
+      "urban_design": {
+        "title": "Ubucuruzi / Gushushanya Imijyi"
+      },
+      "luxury_residential": {
+        "title": "Imiturire y'Ubwiza"
+      },
+      "industrial_architecture": {
+        "title": "Ibishushanyo by'Inganda"
+      },
+      "corporate_hq": {
+        "title": "Ubucuruzi / Icyicaro Gikuru"
+      },
+      "residential_development": {
+        "title": "Iterambere ry'Imiturire"
+      },
+      "public_space": {
+        "title": "Umwanya Rusange"
+      }
+    }
+  },
+  "plans": {
+    "page_title": "Gahunda z'Ubwubatsi",
+    "page_description": "Reba gahunda z'ubwubatsi n'ibishushanyo bya RIEC ku mishinga y'imiturire, ubucuruzi n'inganda.",
+    "hero": {
+      "tag": "UBUNARARIBONYE MU BWUBATSI",
+      "title1": "Ibishushanyo &",
+      "title2": "Gahunda z'Ubwubatsi",
+      "description": "Inziranenge n'udushya mu mutima w'imiterere yose dushushanya. Kuva ku gitekerezo cya mbere kugeza ku mashusho ya tekiniki y'iherezo.",
+      "button1": "Reba Portfolio Yacu",
+      "button2": "Uburyo Bwacu"
+    },
+    "blueprints": {
+      "title": "Amashusho ya Tekiniki",
+      "description": "Reba isomero ryacu ry'ibisubizo by'ubwubatsi bw'imiturire, ubucuruzi n'inganda."
+    },
+    "filters": {
+      "all": "Gahunda Zose",
+      "residential": "Imiturire",
+      "commercial": "Ubucuruzi",
+      "industrial": "Inganda"
+    },
+    "items": {
+      "eco_villa": {
+        "title": "Igishushanyo cy'Inzu ya Eco-Villa",
+        "subtitle": "Igishushanyo cyibanze ku birambye"
+      },
+      "trade_hub": {
+        "title": "Ikigo cy'Ubucuruzi Mpuzamahanga",
+        "subtitle": "Imiterere y'Ubucuruzi Grade-A"
+      },
+      "warehouse": {
+        "title": "Ububiko Bwubatswe Neza V2",
+        "subtitle": "Urusobe rw'Ibicuruzwa rwatunganijwe"
+      },
+      "skyline_loft": {
+        "title": "Imbere y'Inzu ya Skyline Loft",
+        "subtitle": "Igitekerezo Kigezweho cy'Ubwiza"
+      }
+    },
+    "spotlight": {
+      "tag": "IHITAMO RYIHARIYE",
+      "title": "Igishushanyo cy'Inzu ya Eco-Villa",
+      "description": "Igishushanyo cyacu cy'imiturire cyibanze ku gukoresha ingufu neza, urumuri rw'ibanze, no guhuza imbere n'inyuma y'inzu. Iyi paketi yuzuye irimo inyandiko zose z'ubwubatsi zikenewe kugira ngo hemezwe kandi zubakwe.",
+      "documents_title": "Inyandiko Zirimo:",
+      "preview": "KUREBA/DEMO",
+      "preview_title": "Igishushanyo cya Tekiniki v2.1"
+    },
+    "documents": {
+      "architectural": "Amashusho y'Ibishushanyo",
+      "architectural_desc": "Amashusho y'inzu, ibice, ibice",
+      "structural": "Amashusho y'Imiterere",
+      "structural_desc": "Urufatiro, inkingi, amakuru y'inkingi",
+      "mep": "Amashusho ya MEP",
+      "mep_desc": "Imashini, amashanyarazi, amazi",
+      "interior": "Imbere y'Inzu",
+      "interior_desc": "Ibyuma, kabine, amatara"
+    },
+    "how_we_plan": {
+      "title": "Uburyo Dutegura",
+      "description": "Uburyo bwacu bw'ubwubatsi bukomeye bureba ko buri murongo ushushanywa uhinduka imiterere ifatika, irambye, kandi ikora neza."
+    },
+    "methodology": {
+      "site": {
+        "title": "Ahantu & Igitekerezo",
+        "desc": "Isesengura ry'imiterere y'ubutaka, kubahiriza amategeko, n'amashusho y'ibanze kugira ngo hasobanurwe icyerekezo."
+      },
+      "design": {
+        "title": "Gushushanya Ubwubatsi",
+        "desc": "Imibare y'imiterere, guhuza MEP, no guhuza tekinolojiya n'ibikoresho birambye."
+      },
+      "specs": {
+        "title": "Amashusho y'Iherezo",
+        "desc": "Inyandiko z'ubwubatsi zarangiye, gahunda y'ibikoresho, n'amashusho ya tekiniki kugira ngo habeho amasoko."
+      }
+    },
+    "cta": {
+      "title": "Ufite icyerekezo cyihariye?",
+      "description": "Kora hamwe n'abashushanya bacu bakuru n'inzobere kugira ngo mukore gahunda yihariye ikurikije ahantu n'ibyo ukeneye.",
+      "button": "Saba Gahunda Yihariye"
+    }
+  },
+  "about": {
+    "page_title": "Ibitwerekeye",
+    "page_description": "Wige ku ntego ya RIEC, indangagaciro, n'ikipe inyuma y'isosiyete ikomeye y'ubwubatsi n'ubwubatsi mu Rwanda.",
+    "values": {
+      "title": "Indangagaciro Nyamukuru",
+      "subtitle": "Amahame ayobora ibyemezo byacu byose, kuva ku bisobanuro bito by'imiterere kugeza ku gahunda nini.",
+      "ethics_link": "Amahame Yacu y'Imyitwarire",
+      "integrity": {
+        "title": "Ubunyangamugayo",
+        "desc": "Twiyemeje amahame yo hejuru y'imyitwarire, tureba ko hari gusobanura no kuba inyangamugayo mu bufatanye bwose."
+      },
+      "precision": {
+        "title": "Inziranenge",
+        "desc": "Ubunararibonye buri mu bisobanuro. Ubwubatsi bwacu bukomeye bureba ko buri miterere tubaka ari igihangano cy'inziranenge."
+      },
+      "sustainability": {
+        "title": "Ibirambye",
+        "desc": "Kubaka ejo hazaza bisaba kubaha ibidukikije uyu munsi. Dushyira imbere ibikoresho n'uburyo bwiza ku bidukikije."
+      },
+      "innovation": {
+        "title": "Udushya",
+        "desc": "Twakira tekinolojiya zigezweho, kuva kuri BIM kugeza ku bikoresho byubatswe neza, kugira ngo dukemure ibibazo bigoye by'ubwubatsi."
+      }
+    },
+    "journey": {
+      "title": "Urugendo Rwacu",
+      "1998": {
+        "title": "Gushinga RIEC",
+        "desc": "Intangiriro ry'icyerekezo. RIEC yashinzwe n'itsinda rito ry'injeniyeri 5 bafite intego yo guhindura imiterere y'ibyubakire mu akarere."
+      },
+      "2005": {
+        "title": "Umushinga wa Mbere w'Inzu Ndende",
+        "desc": "Intambwe ikomeye. RIEC yarangije umushinga wayo wa mbere w'inzu ndende, ushyiraho inziranenge nshya y'ubwiza n'ibishushanyo mu karere."
+      },
+      "2014": {
+        "title": "Kwaguka ku Isi",
+        "desc": "Ubuhanga bwa RIEC bumenyekanye ku rwego mpuzamahanga. Twafunguye ibiro byacu bya mbere hanze y'igihugu kandi twabonye imishinga mu bihugu byinshi muri Afurika y'Iburasirazuba no hanze yayo."
+      },
+      "2020": {
+        "title": "Igihembo cy'Igihugu cy'Udushya",
+        "desc": "Kwemezwa kubera ubunararibonye mu bwubatsi. Umushinga wacu wa 'Green-Steel' watsinze igihembo cy'Udushya mu Bwubatsi."
+      },
+      "2024": {
+        "title": "Isezerano ryo Kurengera Ibidukikije",
+        "desc": "Kwiyemeza ejo hazaza rirambye. RIEC yiyemeje kugera ku 100% y'ibikorwa bidafite ingaruka ku bidukikije kuri buri hantu twubaka mu 2030."
+      }
+    },
+    "team": {
+      "title": "Inzobere Zacu",
+      "subtitle": "Ikipe yacu y'ubuyobozi ihuza imyaka myinshi y'uburambe mpuzamahanga mu bwubatsi, mucunga umushinga, n'ibishushanyo by'inyubako.",
+      "ceo": {
+        "name": "Libert IZERE",
+        "role": "UMUYOBOZI MUKURU",
+        "desc": "Uyoboye RIEC afite icyerekezo, afite uburambe mu bwubatsi n'umugenzura w'umushinga."
+      },
+      "operation_manager": {
+        "name": "Barnabe RWAKAZINA",
+        "role": "UMUCUNGANZI W'IMIRIMO",
+        "desc": "Yitondere ko imirimo y'umunsi ku munsi igenda neza kandi imishinga ikaba igasohoka mu gihe."
+      },
+      "project_engineer": {
+        "name": "Jean Damascene MANIRAFASHA",
+        "role": "INJENIYERI W'UMUSHINGA",
+        "desc": "Inzobere mu bitekerezo by'ubwubatsi, igenamiterere, no kugenzura ubuziranenge bw'umushinga."
+      },
+      "electrical_engineer": {
+        "name": "Serge Adelit MUHUZA",
+        "role": "INJENIYERI W'AMASHANYARAZI",
+        "desc": "Inzobere mu gushushanya sisitemu z'amashanyarazi, gukwirakwiza ingufu, n'ibisubizo by'ingufu birambye."
+      },
+      "developer_it_manager": {
+        "name": "Rosine TUYISHIMIRE",
+        "role": "UMUKORESHA WA TEKINIKI & UMUCUNGANZI WA IT",
+        "desc": "Yicungura infrastructure ya RIEC, iterambere rya software, n'isisitemu z'IT kugira ngo isosiyete ibe ku rwego rwo hejuru."
+      },
+      "site_engineer_assistant_operator": {
+        "name": "Tresor Alype BALINDA",
+        "role": "INJENIYERI W'AHANTU & UMUFATANYABIKORWA",
+        "desc": "Inkunga y'ubwubatsi ku mushinga no kugenzura ko imiterere y'ubwubatsi ihuye n'ibisabwa mu bwumvikane bwose."
+      }
+    },
+    "contact": {
+      "title": "Twandikire",
+      "subtitle": "Witeguye gutangira umushinga wawe ukurikira? Twandikire ikipe yacu y'inzobere kugira ngo uhabwe inama.",
+      "form": {
+        "name": "Amazina Yuzuye",
+        "email": "Aderesi ya Imeri",
+        "subject": "Ingingo",
+        "message": "Ubutumwa",
+        "submit": "Ohereza Ubutumwa"
+      },
+      "office": {
+        "title": "Ibiro Bikuru",
+        "address1": "KG 40 St, Kimironko",
+        "address2": "Bibare, Gasabo District, Kigali"
+      },
+      "phone": {
+        "title": "Telefoni",
+        "number1": "+250 787 106 854",
+        "number2": "+250 784 231 101"
+      },
+      "email": {
+        "title": "Imeri",
+        "inquiry": "inquiry@riec.rw",
+        "careers": "careers@riec.rw"
+      },
+      "hours": {
+        "title": "Amasaha y'Akazi",
+        "weekday": "Ku wa mbere - Ku wa gatanu:",
+        "weekday_time": "8:00 AM - 6:00 PM",
+        "saturday": "Ku wa gatandatu:",
+        "saturday_time": "10:00 AM - 2:00 PM",
+        "sunday": "Ku cyumweru:",
+        "sunday_time": "Birafunze"
+      }
+    }
+  },
+  "dash": {
+    "search": "Shakisha cyangwa andika itegeko…",
+    "portal": "Urubuga rw'Ubuyobozi",
+    "dashboard": "Ikibaho",
+    "language": "Ururimi",
+    "logout": "Sohoka",
+    "nav": {
+      "overview": "Incamake",
+      "projects": "Imishinga",
+      "services": "Serivisi",
+      "careers": "Akazi",
+      "applications": "Ibyifuzo",
+      "contact": "Ubutumwa",
+      "payments": "Ubwishyu"
+    },
+    "kpi": {
+      "projects": "Imishinga Yose",
+      "careers": "Akazi Gafunguye",
+      "applications": "Ibyifuzo",
+      "unread": "Ubutumwa Butasomwe"
+    },
+    "projects_by_cat": "Imishinga Hakurikijwe Icyiciro",
+    "messages": "Ubutumwa",
+    "open_careers": "Akazi Gafunguye",
+    "recent_apps": "Ibyifuzo Biheruka",
+    "total": "byose",
+    "roles": "imirimo",
+    "new": "bishya",
+    "live": "Hagaragara",
+    "draft": "Inyandikorugero",
+    "mark_read": "Shyira nk'isomwe",
+    "read": "Isomwe",
+    "no_messages": "Nta butumwa buriho.",
+    "no_roles": "Nta mirimo ifunguye.",
+    "no_apps": "Nta byifuzo biriho.",
+    "loading": "Gutegereza…",
+    "projects_page": {
+      "title": "Imishinga",
+      "total": "imishinga yose",
+      "new_btn": "Umushinga Mushya",
+      "filter_type": "Shungura hakurikijwe ubwoko",
+      "filter_category": "Shungura hakurikijwe icyiciro",
+      "filter_location": "Shungura hakurikijwe ahantu",
+      "per_page": "/ urupapuro",
+      "col_title": "Izina",
+      "col_location": "Ahantu",
+      "col_type": "Ubwoko",
+      "col_category": "Icyiciro",
+      "col_purchasable": "Gura",
+      "col_status": "Imiterere",
+      "col_actions": "Ibikorwa",
+      "yes": "Yego",
+      "no": "Oya",
+      "empty": "Nta mishinga ibonetse.",
+      "page_of": "Urupapuro {{page}} kuri {{total}}",
+      "prev": "Ibanza",
+      "next": "Ikurikira",
+      "delete_confirm": "Siba uyu mushinga? Ntibizasubizwa."
+    },
+    "wizard": {
+      "new_title": "Umushinga Mushya",
+      "edit_title": "Hindura Umushinga",
+      "step_of": "Intambwe {{step}} kuri {{total}}",
+      "step_basic": "Amakuru Shingiro",
+      "step_details": "Ibisobanuro",
+      "step_settings": "Igenamiterere",
+      "step_media": "Amafoto n'Inyandiko",
+      "back": "Subira",
+      "next": "Komeza",
+      "create": "Shiraho",
+      "update": "Hindura",
+      "saving": "Kubika…",
+      "field_title": "Izina",
+      "field_slug": "Slug",
+      "field_description": "Ibisobanuro",
+      "field_location": "Ahantu",
+      "field_type": "Ubwoko bw'Umushinga",
+      "field_category": "Icyiciro",
+      "field_service_slug": "Slug ya Serivisi (si ngombwa)",
+      "field_featured": "Ihariye",
+      "field_featured_desc": "Erekana ku rupapuro rw'ahabanza",
+      "field_purchasable": "Gura Gahunda",
+      "field_purchasable_desc": "Reka abakiriya bagure gahunda z'ubwubatsi",
+      "field_images": "Amafoto y'Umushinga (si ngombwa)",
+      "field_assets": "Inyandiko z'Umushinga (si ngombwa)",
+      "click_images": "Kanda ushyireho amafoto",
+      "click_docs": "Kanda ushyireho inyandiko",
+      "files_selected": "{{count}} dosiye zahiswemo",
+      "settings_hint": "Tegura ibigaragara n'ibyo gugurana.",
+      "select_type": "Hitamo ubwoko…",
+      "select_category": "Hitamo icyiciro…"
+    },
+    "services_page": {
+      "title": "Serivisi",
+      "count": "serivisi",
+      "new_btn": "Serivisi Nshya",
+      "new_title": "Serivisi Nshya",
+      "edit_title": "Hindura Serivisi",
+      "field_title": "Izina",
+      "field_slug": "Slug",
+      "field_description": "Ibisobanuro",
+      "cancel": "Reka",
+      "create": "Shiraho",
+      "update": "Hindura",
+      "empty": "Nta serivisi ibonetse.",
+      "delete_confirm": "Siba iyi serivisi?",
+      "prev": "Ibanza",
+      "next": "Ikurikira",
+      "page": "Urupapuro {{page}}"
+    },
+    "careers_page": {
+      "title": "Akazi",
+      "open_roles": "imirimo ifunguye",
+      "post_btn": "Tangaza Akazi",
+      "filter_dept": "Shungura hakurikijwe ishami",
+      "filter_loc": "Shungura hakurikijwe ahantu",
+      "field_title": "Izina",
+      "field_slug": "Slug",
+      "field_dept": "Ishami",
+      "field_location": "Ahantu",
+      "field_type": "Ubwoko bw'Akazi",
+      "field_desc": "Ibisobanuro",
+      "select_type": "Hitamo…",
+      "cancel": "Reka",
+      "post": "Tangaza Akazi",
+      "empty": "Nta mirimo ifunguye ibonetse.",
+      "prev": "Ibanza",
+      "next": "Ikurikira",
+      "page": "Urupapuro {{page}}"
+    },
+    "applications_page": {
+      "title": "Ibyifuzo",
+      "total": "byose",
+      "filter_job": "Shungura hakurikijwe ID y'Akazi (cyangwa BYOSE)",
+      "col_applicant": "Usaba",
+      "col_email": "Imeri",
+      "col_job": "Akazi",
+      "col_status": "Imiterere",
+      "pending": "Gutegerezwa",
+      "empty": "Nta byifuzo bibonetse.",
+      "prev": "Ibanza",
+      "next": "Ikurikira",
+      "page": "Urupapuro {{page}}"
+    },
+    "contact_page": {
+      "title": "Ubutumwa Bwoherejwe",
+      "total": "byose",
+      "filter_all": "Ubutumwa bwose",
+      "filter_unread": "Butasomwe gusa",
+      "filter_read": "Busomwe gusa",
+      "mark_read": "Shyira nk'isomwe",
+      "read": "Isomwe",
+      "empty": "Nta butumwa buriho.",
+      "prev": "Ibanza",
+      "next": "Ikurikira",
+      "page": "Urupapuro {{page}}"
+    },
+    "payments_page": {
+      "title": "Ubwishyu",
+      "subtitle": "Gucunga ubwishyu n'ibikoresho byo kurura",
+      "checkout_title": "Tangira Ubwishyu",
+      "checkout_sub": "Tangira kugura gahunda y'umushinga",
+      "field_project_id": "ID y'Umushinga",
+      "field_tier_id": "ID y'Icyiciro",
+      "field_name": "Amazina Yuzuye",
+      "field_email": "Imeri",
+      "start_btn": "Tangira Ubwishyu",
+      "processing": "Gutunganya…",
+      "open_url": "Fungura Aderesi y'Ubwishyu",
+      "downloads_title": "Kurura Dosiye",
+      "downloads_sub": "Shakisha dosiye hakoreshejwe token y'ubwishyu",
+      "token_placeholder": "Token y'ubwishyu…",
+      "fetch_btn": "Shakisha",
+      "loading_downloads": "Gutegereza dosiye…",
+      "no_downloads": "Nta dosiye ibonetse kuri iyi token."
+    }
+  },
+  "common": {
+    "submit": "Ohereza",
+    "search": "Shakisha",
+    "readMore": "Soma Byinshi",
+    "contactUs": "Twandikire",
+    "hero": {
+      "title1": "Duhindura Ibitekerezo mu",
+      "title2": "Ibikorwa Byiza, Bigaragara",
+      "description": "Kuva ku gitekerezo kugeza ku ishyirwa mu bikorwa, dutanga serivisi z'ubwubatsi z'ubuziranenge ku mazu, ubucuruzi n'imiryango. Dutanga serivisi nziza zo gushushanya, ubwubatsi no kubungabunga inyubako",
+      "button1": "TANGIRA",
+      "button2": "REBA IMISHINGA"
+    },
+    "intro": {
+      "title": "Icyerekezo cyacu",
+      "text1": "Imyaka y'",
+      "text2": "Ubunararibonye",
+      "text3": "Ibishushanyo mbonera bijyanye n'igihe kizaza",
+      "text4": "RIEC ihuza udushya mu by’ubwubatsi n’ubumenyi buhanitse mu kubaka, igahanga ibikorwaremezo biteye ishema kandi biramba. Ikipe yacu igizwe n’inzobere zifite ubunararibonye yitangira gutanga ibisubizo by’indashyikirwa kuva ku gitekerezo cya mbere kugeza ku ishyirwa mu bikorwa. Twiyemeje ubuziranenge, kurengera ibidukikije, no kunyurwa kw’abakiriya, tugashyira mu bikorwa icyerekezo cyawe mu buryo burambye kandi bwitondewe.",
+      "stats": {
+        "projects": "Imishinga Yarangiye",
+        "awards": "Ibihembo"
+      }
+    },
+    "services": {
+      "title": "Serivisi Zihariye",
+      "surveying": "Gupima Ubutaka",
+      "boundary_surveying": "Gupima Imbibi z'Ubutaka",
+      "topographic_surveying": "Gupima Imiterere y'Ubutaka",
+      "construction_layout": "Gutegura Ubwubatsi",
+      "interior_design": "Gushushanya Imbere y'Inzu",
+      "house_design": "Gushushanya Inzu",
+      "construction_supervision": "Kugenzura Ubwubatsi",
+      "property_valuation": "Gushyiraho Agaciro k'Umutungo",
+      "descriptions": {
+        "surveying": "Gupima neza ubutaka hakoreshejwe RTK-GPS na robotic total stations kugira ngo tubone amakuru y'ubutaka yuzuye.",
+        "boundary_surveying": "Kugena imbibi z'ubutaka mu buryo bw'amategeko n'inziranenge kugira ngo habeho umutekano no kubahiriza amategeko.",
+        "topographic_surveying": "Gukora ikarita y'imiterere y'ubutaka mu buryo bwa 3D n'amakuru y'intera z'ubutaka kugira ngo habeho isesengura ryuzuye ry'ahantu.",
+        "construction_layout": "Guhindura amashusho y'ubwubatsi mu bikorwa nyabyo hakoreshejwe uburyo bw'inziranenge bwo gushyiraho inkingi n'imirongo y'ubwubatsi.",
+        "interior_design": "Gutegura no gutunga imbere y'inzu mu buryo bwihariye kandi bwiza ku bihe by'ababyeyi n'ubucuruzi.",
+        "house_design": "Gutanga ibisubizo byuzuye byo kubaka inzu kuva ku gushushanya kugeza ku gutanga inzugi z'inzu.",
+        "construction_supervision": "Kugenzura ubwubatsi n'inziranenge za tekiniki kugira ngo habeho imiterere ikomeye no kubahiriza amahame mpuzamahanga y'umutekano.",
+        "property_valuation": "Gusesengura agaciro k'umutungo mu masoko no gukora isesengura ry'imari ku mutungo w'ubutaka n'ibikorwa remezo."
+      }
+    },
+    "projects": {
+      "title": "Imishinga Yacu Iheruka",
+      "description": "Imishinga yacu iheruka ni ubuhamya bw'ubwitange n'ubumenyi bwacu. Iyi mishinga igaragaza ibisubizo by'akazi kacu gakomeje.",
+      "all_categories": "Ibyiciro Byose",
+      "view_all": "Reba Byose",
+      "view_more": "Reba byinshi",
+      "of_total": "ku byose",
+      "interior_design": "Imbere y'Inzu n'Ibishushanyo",
+      "interior_constructions": "Ubwubatsi bw'Imbere y'Inzu",
+      "residential": "Imiturire",
+      "residential_construction": "Ubwubatsi bw'Imiturire",
+      "green_sustainable": "Icyatsi n'Ibirambye",
+      "green_constructions": "Ubwubatsi bw'Icyatsi n'Ibirambye",
+      "commercial": "Ubucuruzi",
+      "commercial_constructions": "Ubwubatsi bw'Ubucuruzi",
+      "industrial": "Inganda",
+      "industrial_constructions": "Ubwubatsi bw'Inganda",
+      "edustructures": "Ibikorwa by'Uburezi",
+      "edustructures_constructions": "Ubwubatsi bw'Ibikorwa by'Uburezi"
+    },
+    "solutions": {
+      "tag": "DUKORA IKI?",
+      "title": "Ibisubizo Dutanga",
+      "description": "Dutanga ibisubizo byuzuye by'ubwubatsi bikurikije ibyo ukeneye. Kuva ku gutegura no gushushanya kugeza ku gukora no kubungabunga, tureba ko buri mushinga utangwa mu buryo bw'inziranenge kandi bw'ubuziranenge.",
+      "plan": {
+        "title": "Gutegura no Kwerekana",
+        "description": "Dutangira no gutegura umushinga, gusesengura ahantu, no gushushanya mu buryo bwa 3D kugira ngo ubone neza uko umwanya uzaba umeze mbere y'uko ubwubatsi butangira."
+      },
+      "build": {
+        "title": "Kubaka no Gukora",
+        "description": "Ikipe yacu y'inzobere ikora imirimo yose y'ubwubatsi mu buryo bw'inziranenge — kuva ku miterere kugeza ku kurangiza — tureba ko hari ubuziranenge, umutekano, n'imikorere myiza kuri buri cyiciro."
+      },
+      "renovate": {
+        "title": "Kuvugurura no Guhindura",
+        "description": "Niba ari uguteza imbere icyumba cyangwa gushushanya umwanya wose, tuzana impinduka zigezweho, zikoreshwa neza, kandi ziremereye ku nyubako zihari."
+      },
+      "deliver": {
+        "title": "Gutanga no Gutera Inkunga",
+        "description": "Iyo byarangiye, dutanga umushinga wuzuye hamwe no kugenzura ubuziranenge kandi tukomeza gutanga serivisi zo kubungabunga no gutera inkunga iyo bikenewe."
+      }
+    },
+    "footer": {
+      "brand_description": "Dushushanya kandi tubaka imyanya ihuza udushya n'ubuhanga. Buri mushinga ukorwa mu buryo bw'inziranenge, ubuhanga, n'ubwitange bukomeye ku buziranenge. Icyerekezo cyawe cy'inyubako gitangira ku bumenyi bwacu.",
+      "company": "Isosiyete",
+      "services": "Serivisi Zacu",
+      "follow_us": "Dukorane",
+      "phone": "Telefoni",
+      "email": "Imeri",
+      "location": "Aho Duri",
+      "rights_reserved": "Uburenganzira Bwose Burarinzwe",
+      "privacy_policy": "Politiki y'Ibanga",
+      "terms_conditions": "Amabwiriza n'Amategeko",
+      "company_links": {
+        "teams": "Amakipe",
+        "career": "Akazi",
+        "blogs": "Inyandiko",
+        "pricing": "Ibiciro",
+        "services": "Serivisi",
+        "projects": "Imishinga",
+        "plans": "Gura Plan",
+        "about_us": "Ibitwerekeye",
+        "login": "Kwinjika Inyuma"
+      },
+      "service_links": {
+        "residential": "Ubwubatsi bw'Imiturire",
+        "commercial": "Ubwubatsi bw'Ubucuruzi",
+        "renovation": "Kuvugurura no Guhindura",
+        "architecture": "Ibishushanyo n'Igishushanyo 3D",
+        "project_management": "Gucunga Imishinga",
+        "structural": "Ubwubatsi bw'Imiterere"
+      },
+      "contact": {
+        "phone_number": "+250 787 106 854",
+        "email_address": "info@riec.rw",
+        "address_line1": "KG 11 Ave, Kimironko, Kigali, Rwanda",
+        "address_line2": "Houston, TX 77032"
+      }
+    }
+  }
+}
