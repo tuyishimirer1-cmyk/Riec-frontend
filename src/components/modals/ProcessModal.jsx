@@ -1,9 +1,9 @@
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
-import { X, ArrowRight, CheckCircle } from 'lucide-react'
+import { X, ArrowRight } from 'lucide-react'
 import PropTypes from 'prop-types'
 
-const ProcessModal = ({ isOpen, onClose, service }) => {
+const ProcessModal = ({ isOpen, onClose, service, onGetQuote }) => {
   const modalRef = useRef(null)
   const overlayRef = useRef(null)
   const contentRef = useRef(null)
@@ -93,23 +93,19 @@ const ProcessModal = ({ isOpen, onClose, service }) => {
   const defaultProcess = [
     {
       title: 'Consultation',
-      description: 'Initial meeting to understand your requirements and project scope',
-      icon: '📋'
+      description: 'Initial meeting to understand your requirements and project scope'
     },
     {
       title: 'Planning & Design',
-      description: 'Detailed planning and design phase with expert architects',
-      icon: '🏗️'
+      description: 'Detailed planning and design phase with expert architects'
     },
     {
       title: 'Implementation',
-      description: 'Professional execution of the project with quality assurance',
-      icon: '⚡'
+      description: 'Professional execution of the project with quality assurance'
     },
     {
       title: 'Quality Review',
-      description: 'Final inspection and delivery with comprehensive documentation',
-      icon: '✅'
+      description: 'Final inspection and delivery with comprehensive documentation'
     }
   ]
 
@@ -122,20 +118,19 @@ const ProcessModal = ({ isOpen, onClose, service }) => {
     }
   }
 
+  if (!isOpen) return null
+
   return (
     <>
       {/* Overlay */}
       <div
         ref={overlayRef}
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none"
+        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
         onClick={onClose}
       />
 
       {/* Modal */}
-      <div
-        ref={modalRef}
-        className="fixed inset-0 flex items-center justify-center p-4 z-50 pointer-events-none"
-      >
+      <div className="fixed inset-0 flex items-center justify-center p-4 z-50 pointer-events-none">
         <div
           ref={modalRef}
           className="bg-slate-900/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-700/50 w-full max-w-4xl max-h-[90vh] overflow-hidden pointer-events-auto"
@@ -146,7 +141,7 @@ const ProcessModal = ({ isOpen, onClose, service }) => {
             <div>
               <h2 className="text-2xl font-bold text-white mb-1">Our Process</h2>
               <p className="text-slate-300 text-sm">
-                How we deliver excellence in <span className="text-riec-orange font-semibold">{service.title || service.name}</span>
+                {service.title || service.name} project workflow
               </p>
             </div>
             <button 
@@ -171,11 +166,7 @@ const ProcessModal = ({ isOpen, onClose, service }) => {
                   {/* Content */}
                   <div className="flex-1">
                     <div className="flex items-start justify-between mb-3">
-                      <div className="flex items-center gap-3">
-                        <span className="text-2xl">{step.icon || '📋'}</span>
-                        <h3 className="text-xl font-bold text-white">{step.title}</h3>
-                      </div>
-                      <CheckCircle className="w-5 h-5 text-green-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <h3 className="text-xl font-bold text-white">{step.title}</h3>
                     </div>
                     <p className="text-slate-300 leading-relaxed">{step.description}</p>
                     
@@ -198,16 +189,24 @@ const ProcessModal = ({ isOpen, onClose, service }) => {
             <div className="mt-8 p-6 bg-gradient-to-r from-riec-orange/20 to-riec-orange/10 rounded-xl border border-riec-orange/30">
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="text-lg font-bold text-white mb-1">Ready to get started?</h4>
+                  <h4 className="text-lg font-bold text-white mb-1">Start Your Project</h4>
                   <p className="text-slate-300 text-sm">
-                    Let us help you bring your vision to life with our expert team
+                    Contact us to discuss your requirements
                   </p>
                 </div>
                 <button
-                  onClick={onClose}
+                  onClick={() => {
+                    if (onGetQuote) {
+                      onGetQuote()
+                    } else {
+                      // Fallback: navigate to contact page
+                      onClose()
+                      window.location.href = '/contact'
+                    }
+                  }}
                   className="bg-riec-orange text-white px-6 py-3 rounded-lg font-semibold hover:bg-riec-orange-light transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg"
                 >
-                  Get a Quote
+                  Send Message
                 </button>
               </div>
             </div>
@@ -225,7 +224,8 @@ ProcessModal.propTypes = {
     title: PropTypes.string,
     name: PropTypes.string,
     process: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
-  })
+  }),
+  onGetQuote: PropTypes.func
 }
 
 export default ProcessModal

@@ -123,7 +123,7 @@ export default function ServicesGrid({
                   <div className={`grid gap-2 transition-all duration-300 overflow-hidden ${isExpanded ? 'grid-cols-1' : 'grid-cols-2'}`}
                     style={{ maxHeight: isExpanded ? 'none' : '200px' }}
                   >
-                    {relatedProjects.slice(0, isExpanded ? 6 : 4).map((project, index) => (
+                    {relatedProjects.slice(0, isExpanded ? 6 : 4).map((project) => (
                       <div 
                         key={project.id}
                         className="bg-gray-50 rounded-lg p-3 border transition-all duration-200 hover:bg-gray-100 hover:shadow-md cursor-pointer"
@@ -164,39 +164,6 @@ export default function ServicesGrid({
         )
       })}
     </div>
-
-    {/* Pagination */}
-    {totalPages && totalPages > 1 && (
-      <div className="flex items-center justify-between mt-4">
-        <span className="text-[10px]" style={{ color: 'var(--color-body-color)' }}>
-          {t('dash.services_page.showing', {
-            first: (page - 1) * pageSize + 1,
-            last: Math.min(page * pageSize, total),
-            total,
-            defaultValue: `Showing ${(page - 1) * pageSize + 1}–${Math.min(page * pageSize, total)} of ${total}`,
-          })}
-        </span>
-        <div className="flex items-center gap-2">
-          <button onClick={onPagePrev} disabled={page === 1}
-            className="rounded-xl border px-3 py-1.5 text-xs font-medium transition-colors disabled:opacity-40"
-            style={{ borderColor: 'var(--color-stroke)', color: 'var(--color-body-color)' }}
-            onMouseEnter={(e) => { if (page > 1) e.currentTarget.style.background = 'var(--color-gray-1)' }}
-            onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
-            {t('dash.services_page.prev', { defaultValue: 'Previous' })}
-          </button>
-          <span className="text-xs" style={{ color: 'var(--color-body-color)' }}>
-            {t('dash.services_page.page_of', { page, total: totalPages, defaultValue: `Page ${page} of ${totalPages}` })}
-          </span>
-          <button onClick={onPageNext} disabled={page >= totalPages}
-            className="rounded-xl border px-3 py-1.5 text-xs font-medium transition-colors disabled:opacity-40"
-            style={{ borderColor: 'var(--color-stroke)', color: 'var(--color-body-color)' }}
-            onMouseEnter={(e) => { if (page < totalPages) e.currentTarget.style.background = 'var(--color-gray-1)' }}
-            onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
-            {t('dash.services_page.next', { defaultValue: 'Next' })}
-          </button>
-        </div>
-      </div>
-    )}
     </>
   )
 }

@@ -72,6 +72,7 @@ export default function ApplicationsDashboardPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
+        {/* eslint-disable-next-line no-unused-vars */}
         {STAT_CARDS.map(({ label, value, icon: Icon, bg, color }) => (
           <div key={label} className="rounded-2xl bg-white border p-4 flex items-center gap-3"
             style={{ borderColor: 'var(--color-stroke)', boxShadow: 'var(--shadow-1)' }}>

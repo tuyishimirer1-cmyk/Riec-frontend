@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useCreateCheckout, useGetPaymentStats } from '../../react-query'
+import { useCreateCheckout } from '../../react-query'
 import CheckoutForm   from './Payment/CheckoutForm'
 import DownloadsPanel from './Payment/DownloadsPanel'
 
@@ -17,7 +17,7 @@ export default function PaymentsDashboardPage() {
       const result = await initCheckoutMutation.mutateAsync(data)
       setCheckoutUrl(result?.checkoutUrl || result?.url)
       setStatus('succeeded')
-    } catch (e) {
+    } catch {
       setStatus('failed')
     }
   }

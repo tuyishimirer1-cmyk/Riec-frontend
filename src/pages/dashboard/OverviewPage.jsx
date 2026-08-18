@@ -129,16 +129,24 @@ export default function OverviewPage() {
             return (
               <Card
                 key={k.label}
-                className="cursor-pointer"
-                onClick={() => navigate(k.linkTo)}
-                onMouseEnter={(e) => handleMouseEnter(e.currentTarget)}
-                onMouseLeave={(e) => handleMouseLeave(e.currentTarget)}
-                onMouseDown={(e) => handleMouseDown(e.currentTarget)}
-                onMouseUp={(e) => handleMouseUp(e.currentTarget)}
               >
                 <div
                   ref={(el) => { cardsRef.current[i] = el }}
-                  className="p-5 flex items-start justify-between"
+                  className="p-5 flex items-start justify-between cursor-pointer"
+                  onClick={() => navigate(k.linkTo)}
+                  onMouseEnter={(e) => handleMouseEnter(e.currentTarget)}
+                  onMouseLeave={(e) => handleMouseLeave(e.currentTarget)}
+                  onMouseDown={(e) => handleMouseDown(e.currentTarget)}
+                  onMouseUp={(e) => handleMouseUp(e.currentTarget)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      navigate(k.linkTo)
+                    }
+                  }}
+                  aria-label={`View ${k.label}: ${k.value} items`}
                 >
                   <div>
                     <p className="text-xs font-medium mb-1" style={{ color: 'var(--color-body-color)' }}>{k.label}</p>
@@ -219,7 +227,7 @@ export default function OverviewPage() {
                 >
                   <div>
                     <p className="text-xs font-semibold" style={{ color: 'var(--color-primary)' }}>{p.title}</p>
-                    <p className="text-[10px]" style={{ color: 'var(--color-body-color)' }}>{p.location || '—'} · {p.category}</p>
+                    <p className="text-[10px]" style={{ color: 'var(--color-body-color)' }}>{p.location || 'Location N/A'} · {p.category}</p>
                   </div>
                   <span
                     className="rounded-full px-2 py-0.5 text-[10px] font-semibold"

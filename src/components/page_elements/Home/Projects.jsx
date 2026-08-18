@@ -22,10 +22,16 @@ const Projects = () => {
   // Fetch categories on mount
   const { data: categoriesData, isLoading: categoriesLoading } = useGetCategories()
   const { data: categoriesSummaryData, isLoading: summaryLoading } = useGetCategoriesSummary()
-  const { data: projectsData, isLoading: projectsLoading } = useGetProjectsByCategory(selectedCategory)
-
+  
+  // Fetch all projects (when no category selected) or projects by category
+  const { data: allProjectsData } = useGetProjects({ page: 1, limit: 6 })
+  const { data: categoryProjectsData } = useGetProjectsByCategory(selectedCategory)
+  
   const categories = categoriesData || []
   const categoriesSummary = categoriesSummaryData
+  
+  // Use category projects if category is selected, otherwise use all projects
+  const projectsData = selectedCategory ? categoryProjectsData : allProjectsData
   const projects = projectsData?.items || []
   const categoriesStatus = categoriesLoading || summaryLoading ? 'loading' : 'idle'
 
@@ -64,24 +70,24 @@ const Projects = () => {
     {
       id: 'fallback-4',
       image: '/project4.png',
-      title: t('common.projects.commercial'),
-      subtitle: t('common.projects.commercial_constructions'),
+      title: 'Modern Office Building',
+      subtitle: 'Commercial Construction',
       category: 'COMMERCIAL',
       bgColor: 'bg-white'
     },
     {
       id: 'fallback-5',
       image: '/project5.png',
-      title: t('common.projects.industrial'),
-      subtitle: t('common.projects.industrial_constructions'),
+      title: 'Industrial Complex',
+      subtitle: 'Industrial Construction',
       category: 'INDUSTRIAL',
       bgColor: 'bg-white'
     },
     {
       id: 'fallback-6',
       image: '/project6.png',
-      title: t('common.projects.edustructures'),
-      subtitle: t('common.projects.edustructures_constructions'),
+      title: 'Infrastructure Development',
+      subtitle: 'Industrial Construction',
       category: 'INDUSTRIAL',
       bgColor: 'bg-white'
     }
@@ -209,39 +215,60 @@ const Projects = () => {
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayProjects.map((project, index) => (
-            <div
-              key={project.id || index}
-              ref={el => cardsRef.current[index] = el}
-              className="group bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
-            >
-              <div className="aspect-4/3 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-6 flex items-center justify-between">
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    {project.subtitle}
-                  </p>
-                  {project.category && (
-                    <span className="inline-block mt-2 text-xs bg-riec-orange text-white px-2 py-1 rounded-full">
-                      {project.category}
-                    </span>
-                  )}
+          {displayProjects.map((project, index) => {
+            // Get image from project (handles both API and fallback projects)
+            const projectImage = project.images?.[0]?.url || project.image || '/project1.png';
+            const projectSubtitle = project.subtitle || project.location || project.description?.substring(0, 50);
+            
+            return (
+              <div
+                key={project.id || index}
+                ref={el => cardsRef.current[index] = el}
+                className="group bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+              >
+                <div className="aspect-4/3 overflow-hidden">
+                  <img
+                    src={projectImage}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    onError={(e) => {
+                      e.target.src = '/project1.png'; // Fallback if image fails to load
+                    }}
+                  />
                 </div>
-                <div className={`${project.bgColor} ${project.bgColor === 'bg-white' ? 'border-2 border-gray-300 text-gray-900' : 'text-white bg-riec-orange'} w-12 h-12 rounded-full flex items-center justify-center group-hover:border-2 group-hover:border-riec-orange group-hover:text-white group-hover:scale-110 group-hover:bg-riec-orange-light transition-transform duration-300`}>
-                  <ArrowRight className="w-5 h-5" />
+                <div className="p-6 flex items-center justify-between">
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-1">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm">
+                      {projectSubtitle}
+                    </p>
+                    {project.category && (
+                      <span className="inline-block mt-2 text-xs bg-riec-orange text-white px-2 py-1 rounded-full">
+                        {project.category}
+                      </span>
+                    )}
+                  </div>
+                  <Link
+                    to={
+                      project.slug || !project.id?.startsWith('fallback-')
+                        ? `/projects/${project.slug || project.id}`
+                        : `/projects?category=${project.category}`
+                    }
+                    className={`${project.bgColor || 'bg-white'} ${project.bgColor === 'bg-white' || !project.bgColor ? 'border-2 border-gray-300 text-gray-900' : 'text-white bg-riec-orange'} w-12 h-12 rounded-full flex items-center justify-center group-hover:border-2 group-hover:border-riec-orange group-hover:text-white group-hover:scale-110 group-hover:bg-riec-orange-light transition-all duration-300 cursor-pointer hover:shadow-lg`}
+                    aria-label={
+                      project.slug || !project.id?.startsWith('fallback-')
+                        ? `View ${project.title} details`
+                        : `Browse ${project.category?.toLowerCase()} projects`
+                    }
+                  >
+                    <ArrowRight className="w-5 h-5 pointer-events-none" />
+                  </Link>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Loading State */}

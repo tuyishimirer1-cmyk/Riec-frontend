@@ -12,7 +12,6 @@ export default function StepBar({ current }) {
         {STEPS.map((step, i) => {
           const done    = i < current
           const active  = i === current
-          const pending = i > current
 
           return (
             <div key={i} className="flex items-center flex-1 last:flex-none">

@@ -64,6 +64,23 @@ export function StepDetails({ serviceSlugs, onToggleService }) {
       </FField>
       <div>
         <p className="mb-2 text-xs font-semibold" style={{ color: 'var(--color-body-color)' }}>
+          {t('dash.wizard.field_price', { defaultValue: 'Base Price (optional)' })}
+        </p>
+        <div className="grid grid-cols-3 gap-2">
+          <Field as="select" name="currency" className={selectCls}>
+            <option value="USD">USD ($)</option>
+            <option value="RWF">RWF (FRw)</option>
+          </Field>
+          <div className="col-span-2">
+            <Field name="basePrice" type="number" placeholder="e.g. 150000" className={inputCls} min="0" step="1000" />
+          </div>
+        </div>
+        <p className="mt-1 text-[10px]" style={{ color: 'var(--color-body-color)' }}>
+          {t('dash.wizard.field_price_hint', { defaultValue: 'Leave empty to show "Price on request"' })}
+        </p>
+      </div>
+      <div>
+        <p className="mb-2 text-xs font-semibold" style={{ color: 'var(--color-body-color)' }}>
           {t('dash.wizard.field_services', { defaultValue: 'Services' })}
         </p>
         <div className="space-y-2">

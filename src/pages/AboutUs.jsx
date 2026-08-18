@@ -6,6 +6,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useQuoteModal } from '../components/layouts/MainLayout';
 import { Link } from 'react-router-dom';
+import { useCreateContact } from '../react-query/contactQuery';
+import toast from 'react-hot-toast';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -53,6 +55,43 @@ const AboutUs = () => {
   const teamRef = useRef(null);
   const contactRef = useRef(null);
 
+  // Contact form state
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const createContactMutation = useCreateContact();
+
+  const handleContactChange = (e) => {
+    const { name, value } = e.target;
+    setContactForm(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Validation
+    if (!contactForm.name || !contactForm.email || !contactForm.message) {
+      toast.error('Please fill in all required fields');
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      await createContactMutation.mutateAsync(contactForm);
+      toast.success('Message sent successfully! We will contact you soon.');
+      setContactForm({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      toast.error('Failed to send message. Please try again.');
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const coreValues = [
     { icon: Settings, title: t('about.values.integrity.title'), description: t('about.values.integrity.desc') },
     { icon: Ruler,    title: t('about.values.precision.title'), description: t('about.values.precision.desc') },
@@ -69,7 +108,7 @@ const AboutUs = () => {
 
   const team = [
     { name: t('about.team.ceo.name'),                          role: t('about.team.ceo.role'),                          desc: t('about.team.ceo.desc'),                          image: '/libert.jpeg',                                     email: 'izerlibert10@gmail.com',   phone: '0787 106 857' },
-    { name: t('about.team.operation_manager.name'),            role: t('about.team.operation_manager.role'),            desc: t('about.team.operation_manager.desc'),            image: '/zing.png',                                        email: 'futuremanirakiza@gmail.com', phone: '0784 231 161' },
+    { name: t('about.team.operation_manager.name'),            role: t('about.team.operation_manager.role'),            desc: t('about.team.operation_manager.desc'),            image: 'team2.jpg',                                        email: 'futuremanirakiza@gmail.com', phone: '0784 231 161' },
     { name: t('about.team.project_engineer.name'),             role: t('about.team.project_engineer.role'),             desc: t('about.team.project_engineer.desc'),             image: '/team3.jpg',                                       email: 'riec2025@gmail.com',        phone: '0738 117 255' },
     { name: t('about.team.electrical_engineer.name'),          role: t('about.team.electrical_engineer.role'),          desc: t('about.team.electrical_engineer.desc'),          image: '/team4.jpg',                                       email: 'muhuzasergeadelit@gmail.com', phone: '+250 780 584 866' },
     { name: t('about.team.developer_it_manager.name'),         role: t('about.team.developer_it_manager.role'),         desc: t('about.team.developer_it_manager.desc'),         image: '/rosine.png',                                     email: 'riec2025@gmail.com',        phone: '0783 968 441' },
@@ -248,28 +287,60 @@ const AboutUs = () => {
                 {t('about.contact.subtitle')}
               </p>
 
-              <form className="space-y-6">
-                {[
-                  { label: t('about.contact.form.name'),    type: 'text',  placeholder: 'John Doe' },
-                  { label: t('about.contact.form.email'),   type: 'email', placeholder: 'john@example.com' },
-                  { label: t('about.contact.form.subject'), type: 'text',  placeholder: 'Inquiry about Infrastructure Project' },
-                ].map(({ label, type, placeholder }) => (
-                  <div key={label}>
-                    <label className="block text-slate-300 font-semibold mb-2">{label}</label>
-                    <input type={type} placeholder={placeholder}
-                      className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:border-riec-orange focus:outline-none transition-colors" />
-                  </div>
-                ))}
+              <form className="space-y-6" onSubmit={handleContactSubmit}>
+                <div>
+                  <label className="block text-slate-300 font-semibold mb-2">{t('about.contact.form.name')}</label>
+                  <input 
+                    type="text" 
+                    name="name"
+                    value={contactForm.name}
+                    onChange={handleContactChange}
+                    placeholder="John Doe"
+                    required
+                    className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:border-riec-orange focus:outline-none transition-colors" 
+                  />
+                </div>
+                <div>
+                  <label className="block text-slate-300 font-semibold mb-2">{t('about.contact.form.email')}</label>
+                  <input 
+                    type="email" 
+                    name="email"
+                    value={contactForm.email}
+                    onChange={handleContactChange}
+                    placeholder="john@example.com"
+                    required
+                    className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:border-riec-orange focus:outline-none transition-colors" 
+                  />
+                </div>
+                <div>
+                  <label className="block text-slate-300 font-semibold mb-2">{t('about.contact.form.subject')}</label>
+                  <input 
+                    type="text" 
+                    name="subject"
+                    value={contactForm.subject}
+                    onChange={handleContactChange}
+                    placeholder="Inquiry about Infrastructure Project"
+                    className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:border-riec-orange focus:outline-none transition-colors" 
+                  />
+                </div>
                 <div>
                   <label className="block text-slate-300 font-semibold mb-2">{t('about.contact.form.message')}</label>
-                  <textarea rows="5" placeholder="Tell us about your project requirements..."
-                    className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:border-riec-orange focus:outline-none resize-none transition-colors" />
+                  <textarea 
+                    name="message"
+                    value={contactForm.message}
+                    onChange={handleContactChange}
+                    rows="5" 
+                    placeholder="Tell us about your project requirements..."
+                    required
+                    className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:border-riec-orange focus:outline-none resize-none transition-colors" 
+                  />
                 </div>
-                <button type="submit"
-                  className="bg-riec-orange text-white font-bold px-8 py-4 rounded-lg transition-all duration-300"
-                  onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
-                  onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
-                  {t('about.contact.form.submit')}
+                <button 
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="bg-riec-orange text-white font-bold px-8 py-4 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90"
+                >
+                  {isSubmitting ? 'Sending...' : t('about.contact.form.submit')}
                 </button>
               </form>
             </div>
@@ -292,6 +363,7 @@ const AboutUs = () => {
                   title: t('about.contact.email.title'),
                   lines: [t('about.contact.email.inquiry'), t('about.contact.email.careers')],
                 },
+              // eslint-disable-next-line no-unused-vars
               ].map(({ Icon, title, lines }) => (
                 <div key={title} className="flex items-start gap-4">
                   <div className="bg-riec-orange/10 p-4 rounded-lg flex-shrink-0">

@@ -85,7 +85,7 @@ const NotFound = () => {
           {/* Quick Actions */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => window.location.href = 'mailto:info@riec.rw'}
+              onClick={() => window.location.href = 'mailto:riec2025@gmail.com'}
               className="rounded-full bg-riec-orange px-6 py-3 text-sm font-semibold text-white hover:bg-riec-orange-light transition-all duration-300 hover:scale-105 shadow-lg"
             >
               Contact Support

@@ -32,7 +32,6 @@ import EnhancedProjectCard from '../components/page_elements/Projects/EnhancedPr
 const ProjectDetails = () => {
   const { slug } = useParams()
   const navigate = useNavigate()
-  const [isLiked, setIsLiked] = useState(false)
   const [isShared, setIsShared] = useState(false)
   const [buyerInfo, setBuyerInfo] = useState({ fullName: '', email: '' })
 
@@ -43,6 +42,9 @@ const ProjectDetails = () => {
   const removeFavoriteMutation = useRemoveFavorite()
   const createCheckoutMutation = useCreateCheckout()
   const fetchDownloadUrlMutation = useGetProjectAssetDownloadUrl()
+
+  // Derive isLiked directly from favoriteStatus instead of using local state
+  const isLiked = favoriteStatus?.favorited ?? false
 
   const heroRef = useRef(null)
   const sectionsRef = useRef(null)
@@ -114,12 +116,6 @@ const ProjectDetails = () => {
     return () => ctx.revert()
   }, [project])
 
-  useEffect(() => {
-    if (typeof favoriteStatus?.favorited === 'boolean') {
-      setIsLiked(favoriteStatus.favorited)
-    }
-  }, [favoriteStatus])
-
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-riec-dark text-slate-100">
@@ -190,11 +186,10 @@ const ProjectDetails = () => {
     try {
       if (isLiked) {
         await removeFavoriteMutation.mutateAsync(slug)
-        setIsLiked(false)
       } else {
         await addFavoriteMutation.mutateAsync(slug)
-        setIsLiked(true)
       }
+      // No need to update local state - React Query will refetch favoriteStatus
     } catch (e) {
       const message = e?.response?.data?.message || 'Unable to update favorites.'
       window.alert(Array.isArray(message) ? message.join(', ') : message)
@@ -208,15 +203,36 @@ const ProjectDetails = () => {
     }
 
     try {
-      const result = await createCheckoutMutation.mutateAsync({
+      const payload = {
         projectId: project.id,
-        tierId,
         fullName: buyerInfo.fullName,
         email: buyerInfo.email,
-      })
+      }
+      
+      // Only add tierId if it's provided (for tier-based purchases)
+      if (tierId) {
+        payload.tierId = tierId
+      }
 
-      const checkoutLink = result?.link || result?.paymentLink || result?.checkoutUrl || result?.url
-      if (checkoutLink) window.open(checkoutLink, '_blank', 'noopener,noreferrer')
+      const result = await createCheckoutMutation.mutateAsync(payload)
+      
+      // Backend wraps response in { statusCode, message, data }
+      const responseData = result?.data || result
+
+      const checkoutLink = responseData?.link || responseData?.paymentLink || responseData?.checkoutUrl || responseData?.url
+      
+      if (checkoutLink) {
+        // Check if it's a test mode redirect (same domain) or external payment gateway
+        const isTestMode = responseData?.testMode === true || checkoutLink.startsWith(window.location.origin)
+        
+        if (isTestMode) {
+          // Test mode: redirect in same window to show result
+          window.location.href = checkoutLink
+        } else {
+          // Production mode: open payment gateway in new tab
+          window.open(checkoutLink, '_blank', 'noopener,noreferrer')
+        }
+      }
     } catch (e) {
       const message = e?.response?.data?.message || 'Unable to start checkout.'
       window.alert(Array.isArray(message) ? message.join(', ') : message)
@@ -317,7 +333,13 @@ const ProjectDetails = () => {
                 </div>
               </div>
               
-              <p className="text-slate-200 text-sm md:text-base leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.5s' }}>{description}</p>
+              {description && (
+                <div 
+                  className="rich-content text-slate-200 text-sm md:text-base leading-relaxed animate-fade-in-up max-w-none"
+                  style={{ animationDelay: '0.5s' }}
+                  dangerouslySetInnerHTML={{ __html: description }}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -427,6 +449,75 @@ const ProjectDetails = () => {
             </section>
           )}
 
+          {/* Simple Purchase Section (when no pricing tiers but project is purchasable) */}
+          {purchasable && pricingTiers.length === 0 && (
+            <section>
+              <h2 className="mb-8 text-3xl font-bold text-white animate-fade-in-up">Purchase This Project</h2>
+              
+              <div className="max-w-2xl mx-auto bg-slate-900/80 p-8 rounded-3xl shadow-[0_18px_60px_rgba(0,0,0,0.6)] border border-slate-700/50">
+                <div className="text-center mb-8">
+                  <p className="text-5xl font-bold text-white mb-4">
+                    {project.basePrice ? (
+                      <>
+                        {Number(project.basePrice).toLocaleString()}
+                        <span className="text-2xl ml-2">{project.currency === 'RWF' ? 'Rwf' : 'USD'}</span>
+                      </>
+                    ) : 'Price on Request'}
+                  </p>
+                  <p className="text-slate-400">Complete engineering plans and documentation</p>
+                </div>
+
+                <div className="space-y-4 mb-8">
+                  <input
+                    value={buyerInfo.fullName}
+                    onChange={(e) => setBuyerInfo((prev) => ({ ...prev, fullName: e.target.value }))}
+                    placeholder="Your full name"
+                    className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-riec-orange focus:outline-none transition-colors"
+                  />
+                  <input
+                    type="email"
+                    value={buyerInfo.email}
+                    onChange={(e) => setBuyerInfo((prev) => ({ ...prev, email: e.target.value }))}
+                    placeholder="Your email address"
+                    className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-riec-orange focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <p className="rounded-xl border border-riec-orange/30 bg-riec-orange/10 px-4 py-3 text-xs text-slate-200 mb-6">
+                  📧 After payment, you'll receive a download token via email to access all project documents and plans.
+                </p>
+
+                <button
+                  onClick={() => {
+                    if (!buyerInfo.fullName || !buyerInfo.email) {
+                      window.alert('Please enter your name and email to continue with purchase.')
+                      return
+                    }
+                    if (!project.basePrice) {
+                      window.alert('Please contact us directly for pricing information.')
+                      return
+                    }
+                    // For simple purchases without tiers, don't send tierId
+                    handleCheckout(undefined)
+                  }}
+                  disabled={createCheckoutMutation.isPending || !project.basePrice}
+                  className="w-full bg-riec-orange text-white px-8 py-4 rounded-xl font-semibold hover:bg-riec-orange-light transition-all duration-300 hover:scale-105 group disabled:cursor-not-allowed disabled:opacity-50 text-lg"
+                >
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">
+                    {project.basePrice ? 'Purchase Now' : 'Contact for Price'}
+                  </span>
+                  <ArrowRight className="inline-block w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-2" />
+                </button>
+
+                {!project.basePrice && (
+                  <p className="text-center text-slate-400 text-sm mt-4">
+                    Contact us at <a href="mailto:riec2025@gmail.com" className="text-riec-orange hover:underline">riec2025@gmail.com</a> for pricing
+                  </p>
+                )}
+              </div>
+            </section>
+          )}
+
           {/* Enhanced Assets/Documents */}
           {assets.length > 0 && (
             <section>
@@ -445,8 +536,8 @@ const ProjectDetails = () => {
                     {assets.map((asset, index) => (
                       <tr key={asset.id} className="border-b border-slate-700/60 last:border-b-0 hover:bg-slate-800/30 transition-all duration-200 animate-fade-in-up" style={{ animationDelay: `${index * 0.05}s` }}>
                         <td className="px-6 py-4">{asset.documentType || asset.type}</td>
-                        <td className="px-6 py-4">{asset.version || '—'}</td>
-                        <td className="px-6 py-4">{asset.uploadedBy?.name || '—'}</td>
+                        <td className="px-6 py-4">{asset.version || 'N/A'}</td>
+                        <td className="px-6 py-4">{asset.uploadedBy?.name || 'N/A'}</td>
                         <td className="px-6 py-4">
                           <div className="flex gap-3">
                             <button className="group text-riec-orange hover:text-riec-orange-light transition-colors duration-300 hover:scale-110">

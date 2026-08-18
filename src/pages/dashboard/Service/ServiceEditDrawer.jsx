@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useCallback } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik'
 import gsap from 'gsap'
@@ -129,6 +129,7 @@ export default function ServiceEditDrawer({ editing, onClose }) {
         {/* Tab bar — only when editing */}
         {editing && (
           <div className="flex border-b flex-shrink-0" style={{ borderColor: 'var(--color-stroke)' }}>
+            {/* eslint-disable-next-line no-unused-vars */}
             {TABS.map(({ key, labelKey, defaultLabel, Icon }) => (
               <button key={key} onClick={() => setTab(key)}
                 className="flex items-center gap-1.5 px-5 py-3 text-xs font-semibold transition-colors relative"

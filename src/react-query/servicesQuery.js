@@ -33,7 +33,7 @@ export function useGetService(id, { include, enabled = true } = {}) {
   return useQuery({
     queryKey: ['service', id, include],
     queryFn: async () => {
-      const response = await axios.get(`${BASE}/services/${id}`, {
+      const response = await axios.get(`${BASE}/services/identifier/${id}`, {
         params: include ? { include } : undefined,
         headers: getAuthHeaders(),
       })
@@ -68,7 +68,7 @@ export function useUpdateService() {
 
   return useMutation({
     mutationFn: async ({ id, ...body }) => {
-      const response = await axios.put(`${BASE}/services/${id}`, body, { headers: getAuthHeaders() })
+      const response = await axios.put(`${BASE}/services/identifier/${id}`, body, { headers: getAuthHeaders() })
       return response.data.data ?? response.data
     },
     onSuccess: (updated) => {
@@ -86,7 +86,7 @@ export function useDeleteService() {
 
   return useMutation({
     mutationFn: async (id) => {
-      await axios.delete(`${BASE}/services/${id}`, { headers: getAuthHeaders() })
+      await axios.delete(`${BASE}/services/identifier/${id}`, { headers: getAuthHeaders() })
       return id
     },
     onSuccess: (id) => {

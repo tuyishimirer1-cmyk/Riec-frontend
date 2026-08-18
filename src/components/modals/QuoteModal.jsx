@@ -48,7 +48,7 @@ const QuoteModal = ({ isOpen, onClose }) => {
     setSubmitting(true)
     try {
       await createQuoteMutation.mutateAsync(form)
-      toast.success('Your request has been sent. We will get back to you soon.')
+      toast.success('Message sent successfully. We will contact you soon.')
       setForm({
         projectType: '',
         location: '',
@@ -66,7 +66,7 @@ const QuoteModal = ({ isOpen, onClose }) => {
       setStep(0)
       onClose()
     } catch (err) {
-      toast.error('Could not send your request. Please try again.')
+      toast.error('Failed to send message. Please try again.')
       console.error(err)
     } finally {
       setSubmitting(false)
@@ -78,7 +78,7 @@ const QuoteModal = ({ isOpen, onClose }) => {
       return (
         <div className="space-y-4">
           <h2 className="text-lg font-semibold text-slate-100">
-            Tell us about your project
+            Project Details
           </h2>
           <div>
             <label className="mb-1 block text-xs font-semibold text-slate-300">
@@ -126,7 +126,7 @@ const QuoteModal = ({ isOpen, onClose }) => {
       return (
         <div className="space-y-4">
           <h2 className="text-lg font-semibold text-slate-100">
-            Scope & budget
+            Project Budget & Scope
           </h2>
           <div>
             <label className="mb-1 block text-xs font-semibold text-slate-300">
@@ -185,7 +185,7 @@ const QuoteModal = ({ isOpen, onClose }) => {
       return (
         <div className="space-y-4">
           <h2 className="text-lg font-semibold text-slate-100">
-            How can we contact you?
+            Contact Information
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
             <div>
@@ -255,7 +255,7 @@ const QuoteModal = ({ isOpen, onClose }) => {
     return (
       <div className="space-y-4 text-sm text-slate-100">
         <h2 className="text-lg font-semibold text-slate-100">
-          Review your request
+          Review Details
         </h2>
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-1 text-slate-300">
@@ -295,7 +295,7 @@ const QuoteModal = ({ isOpen, onClose }) => {
         <div className="mb-4 flex items-center justify-between">
           <div className="space-y-1">
             <p className="text-xs uppercase tracking-[0.25em] text-slate-500">
-              Custom plan request
+              PROJECT INQUIRY
             </p>
             <h1 className="text-xl font-semibold text-white">
               Tell us about your project
@@ -357,7 +357,7 @@ const QuoteModal = ({ isOpen, onClose }) => {
                 onClick={handleSubmit}
                 className="rounded-full bg-riec-orange px-5 py-2 text-xs font-semibold text-white shadow-[0_12px_35px_rgba(248,113,22,0.45)] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-riec-orange-light"
               >
-                {submitting ? 'Sending…' : 'Submit request'}
+                {submitting ? 'Sending…' : 'Send Message'}
               </button>
             )}
           </div>

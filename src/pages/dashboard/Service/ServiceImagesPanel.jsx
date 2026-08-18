@@ -163,7 +163,7 @@ export default function ServiceImagesPanel({ serviceId }) {
                 <div className="flex items-center justify-between px-2 py-1.5 border-t"
                   style={{ borderColor: 'var(--color-stroke)' }}>
                   <p className="text-[10px] truncate flex-1" style={{ color: 'var(--color-body-color)' }}>
-                    {img.caption || '—'}
+                    {img.caption || 'No caption'}
                   </p>
                   {img.order != null && (
                     <span className="text-[10px] flex-shrink-0 ml-1" style={{ color: 'var(--color-dark-6)' }}>

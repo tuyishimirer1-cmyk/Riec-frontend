@@ -10,6 +10,7 @@ import ServiceSection from '../components/page_elements/Services/ServiceSection'
 import ScrollIndicator from '../components/page_elements/Services/ScrollIndicator'
 import ProcessModal from '../components/modals/ProcessModal'
 import { useGetServices, useGetServiceImages } from '../react-query'
+import { getServiceDefaultImage } from '../utils/serviceImageHelper'
 
 const TASK_ICONS = [Layers, CheckCircle, Wrench]
 
@@ -21,7 +22,7 @@ const truncate = (str, limit) => {
 
 function ServiceSectionWithImage({ service, index, onViewProjects, onViewProcess }) {
   const { data: images } = useGetServiceImages(service.id, { limit: 1 })
-  const image = images?.[0]?.url || '/service-placeholder.png'
+  const image = images?.[0]?.url || getServiceDefaultImage(service)
   return (
     <ServiceSection
       key={service.id}
@@ -73,8 +74,9 @@ function Services() {
     () =>
       servicesList.map((service, index) => {
         const id =
-          service.id ||
           service.slug ||
+          service.identifier ||
+          service.id ||
           (service.title || `service-${index}`).toLowerCase().replace(/\s+/g, '-')
         const Icon =
           iconMap[id] ||
@@ -95,7 +97,7 @@ function Services() {
           id,
           title: service.title || service.name,
           description: service.shortDescription || service.description,
-          image: service.imageUrl || '/service-placeholder.png',
+          image: getServiceDefaultImage(service),
           features,
           icon: Icon,
         }

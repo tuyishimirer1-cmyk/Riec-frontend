@@ -5,7 +5,7 @@
     "completed_projects": "Projects",
     "plans": "Plans",
     "about_us": "About Us",
-    "get_a_quote": "Get a Quote",
+    "get_a_quote": "Contact Us",
     "serv": {
       "construction": "Construction",
       "architecture": "Architecture",
@@ -140,119 +140,178 @@
     }
   },
   "about": {
-    "page_title": "About Us",
-    "page_description": "Learn about RIEC's mission, values, and the team behind Rwanda's leading construction and engineering company.",
+    "page_title": "About Us - RIEC Rwanda",
+    "page_description": "Discover RIEC's story: Rwanda's premier construction and engineering company. Learn about our mission, values, and the expert team building the nation's future, one landmark at a time.",
+    "hero": {
+      "tag": "ABOUT RIEC",
+      "title": "Building Rwanda's Future",
+      "subtitle": "One Landmark at a Time",
+      "description": "For over two decades, RIEC has been at the forefront of Rwanda's transformation—designing, engineering, and constructing the infrastructure that shapes our nation's skyline and future."
+    },
+    "mission": {
+      "tag": "OUR MISSION",
+      "title": "Engineering Excellence, Building Trust",
+      "description": "At RIEC, we deliver engineering and construction solutions that exceed expectations while upholding the highest standards of safety, quality, and sustainability."
+    },
+    "story": {
+      "tag": "OUR STORY",
+      "title": "Our Story",
+      "paragraph1": "Founded with a vision to elevate Rwanda's construction landscape, RIEC began as a small team of engineers. We have grown into one of Rwanda's most trusted names in construction and architectural design.",
+      "paragraph2": "Over the years, we have built strong relationships with clients and communities. Every project reflects our commitment to quality, innovation, and sustainable practices.",
+      "paragraph3": "Today, RIEC continues to deliver residential, commercial, and industrial projects across Rwanda."
+    },
     "values": {
-      "title": "Core Values",
-      "subtitle": "The principles that guide our every decision, from the smallest structural detail to the largest master plan.",
-      "ethics_link": "Our Ethics Charter",
+      "tag": "CORE VALUES",
+      "title": "Our Core Values",
+      "subtitle": "These principles guide our work and define how we serve our clients.",
+      "ethics_link": "View Our Ethics Charter",
       "integrity": {
-        "title": "Integrity",
-        "desc": "We hold ourselves to the highest ethical standards, ensuring transparency and honesty in every partnership."
+        "title": "Integrity First",
+        "desc": "We work with complete transparency and honesty. Our clients trust us with their projects, and we maintain the highest ethical standards."
       },
       "precision": {
-        "title": "Precision",
-        "desc": "Excellence is in the details. Our engineering rigor ensures that every structure we build is a masterpiece of accuracy."
+        "title": "Engineering Precision",
+        "desc": "Excellence is in the details. Every calculation, measurement, and specification is executed with accuracy. We meet and exceed industry standards."
       },
       "sustainability": {
-        "title": "Sustainability",
-        "desc": "Building for tomorrow requires respecting the environment today. We prioritize eco-friendly materials and methods."
+        "title": "Sustainable Building",
+        "desc": "We prioritize eco-friendly materials, energy-efficient designs, and construction methods that respect the environment and provide long-term value."
       },
       "innovation": {
-        "title": "Innovation",
-        "desc": "We embrace the latest technologies, from BIM to smart materials, to solve the world's most complex construction challenges."
+        "title": "Continuous Innovation",
+        "desc": "We use cutting-edge technologies like Building Information Modeling (BIM), smart materials, and automated systems to deliver superior results."
       }
     },
     "journey": {
-      "title": "Our Journey",
+      "tag": "OUR JOURNEY",
+      "title": "Company Milestones",
       "1998": {
-        "title": "Founding of RIEC",
-        "desc": "The beginning of a vision. RIEC was founded with a small team of 5 engineers determined to change the local landscape."
+        "title": "Company Founded",
+        "desc": "RIEC was established with a vision to transform Rwanda's construction industry. Our founding team of 5 engineers set out to deliver quality projects."
       },
       "2005": {
-        "title": "First Residential Tower Project",
-        "desc": "A milestone achievement. RIEC completed its first major residential tower, setting new standards for quality and design in the region."
+        "title": "First Major Project",
+        "desc": "RIEC completed its first major residential tower project, introducing new standards for structural integrity and construction efficiency."
       },
       "2014": {
-        "title": "Global Expansion",
-        "desc": "RIEC's expertise is recognized internationally. We opened our first overseas office and secured projects in multiple countries across East Africa and beyond."
+        "title": "Regional Expansion",
+        "desc": "We expanded across East Africa, opening international offices and undertaking landmark projects in multiple countries."
       },
       "2020": {
-        "title": "National Innovation Award",
-        "desc": "RIEC is honored with the National Innovation Award for our groundbreaking use of sustainable materials and construction techniques in urban development projects."
+        "title": "Innovation Recognition",
+        "desc": "RIEC received the prestigious National Innovation Award for our pioneering use of sustainable materials and advanced construction techniques in urban development—validation of our commitment to pushing the boundaries of what's possible."
       },
       "2024": {
-        "title": "Carbon-Neutral Pledge",
-        "desc": "Committing to a sustainable future. RIEC pledges to achieve 100% carbon-neutral operations across all sites by 2030."
+        "title": "Sustainability Commitment",
+        "desc": "Looking ahead to a greener future, RIEC pledged to achieve 100% carbon-neutral operations across all construction sites by 2030. This ambitious goal reflects our dedication to environmental stewardship and sustainable development."
       }
     },
     "team": {
-      "title": "The Minds Behind the Landmarks",
-      "subtitle": "Our leadership team brings together decades of international experience in civil engineering, project management, and architectural design.",
+      "tag": "OUR TEAM",
+      "title": "Meet the Minds Behind the Landmarks",
+      "subtitle": "Our leadership team combines decades of international expertise in civil engineering, architectural design, and project management. Together, they guide RIEC's vision and ensure every project delivers excellence.",
       "ceo": {
         "name": "Libert IZERE",
-        "role": "CHIEF EXECUTIVE OFFICER",
-        "desc": "Visionary leader with extensive experience in structural engineering and project management, steering RIEC toward excellence."
+        "role": "Chief Executive Officer & Founder",
+        "desc": "Visionary leader and structural engineering expert with over 15 years of experience. Libert founded RIEC with a mission to elevate Rwanda's construction standards and has successfully guided the company through transformative growth, establishing RIEC as a trusted name in engineering excellence."
       },
       "operation_manager": {
         "name": "Barnabe RWAKAZINA",
-        "role": "OPERATION MANAGER",
-        "desc": "Ensures smooth day-to-day operations and efficient project delivery across all RIEC sites."
+        "role": "Operations Manager",
+        "desc": "Master of logistics and efficiency, Barnabe ensures seamless coordination across all RIEC projects. His expertise in operations management guarantees that every project is delivered on time, within budget, and to the highest quality standards."
       },
       "project_engineer": {
         "name": "Jean Damascene MANIRAFASHA",
-        "role": "PROJECT ENGINEER",
-        "desc": "Technical expert responsible for project planning, execution, and quality assurance on complex infrastructure projects."
+        "role": "Senior Project Engineer",
+        "desc": "Technical virtuoso responsible for complex infrastructure project planning, execution, and quality assurance. Jean Damascene's engineering precision and problem-solving excellence have been instrumental in delivering some of RIEC's most challenging and prestigious projects."
       },
       "electrical_engineer": {
         "name": "Serge Adelit MUHUZA",
-        "role": "ELECTRICAL ENGINEER",
-        "desc": "Specialist in electrical systems design, power distribution, and sustainable energy solutions for construction projects."
+        "role": "Lead Electrical Engineer",
+        "desc": "Specialist in advanced electrical systems design, power distribution networks, and sustainable energy integration. Serge's innovative approach to electrical engineering ensures every RIEC project incorporates cutting-edge, efficient, and reliable power solutions."
       },
       "developer_it_manager": {
         "name": "Rosine TUYISHIMIRE",
-        "role": "DEVELOPER & IT MANAGER",
-        "desc": "Manages RIEC's digital infrastructure, software development, and IT systems to keep the organization at the cutting edge."
+        "role": "IT Manager & Digital Solutions Lead",
+        "desc": "Technology architect keeping RIEC at the digital forefront. Rosine manages our IT infrastructure, BIM systems, and custom software solutions that enhance project efficiency, collaboration, and innovation across all departments."
       },
       "site_engineer_assistant_operator": {
         "name": "Tresor Alype BALINDA",
-        "role": "SITE ENGINEER & ASSISTANT OPERATOR",
-        "desc": "On-site engineering support and operational assistance, ensuring construction standards are met at every phase."
+        "role": "Site Engineer & Assistant Operations Manager",
+        "desc": "On-the-ground expert ensuring construction standards, safety protocols, and quality benchmarks are consistently met at every project phase. Tresor's hands-on leadership and technical knowledge are crucial to RIEC's reputation for excellence."
+      }
+    },
+    "why_choose": {
+      "tag": "WHY CHOOSE RIEC",
+      "title": "What Sets Us Apart",
+      "proven_track": {
+        "title": "Proven Track Record",
+        "desc": "Decades of successfully delivered projects across residential, commercial, and industrial sectors throughout Rwanda and East Africa."
+      },
+      "expert_team": {
+        "title": "Expert Team",
+        "desc": "Highly qualified engineers, architects, and project managers with international training and certifications."
+      },
+      "quality_assurance": {
+        "title": "Quality Assurance",
+        "desc": "Rigorous quality control processes at every stage, from initial design through final inspection and handover."
+      },
+      "modern_tech": {
+        "title": "Modern Technology",
+        "desc": "We leverage the latest construction technologies, BIM software, and engineering tools to deliver superior results."
+      },
+      "client_focused": {
+        "title": "Client-Focused",
+        "desc": "Your vision drives every decision we make. We listen, collaborate, and adapt to ensure your complete satisfaction."
+      },
+      "sustainable": {
+        "title": "Sustainability First",
+        "desc": "Environmental responsibility isn't optional—it's integrated into every project through eco-friendly practices and materials."
       }
     },
     "contact": {
-      "title": "Contact Us",
-      "subtitle": "Ready to start your next landmark project? Reach out to our team of experts for a consultation.",
+      "tag": "GET IN TOUCH",
+      "title": "Start Your Project with RIEC",
+      "subtitle": "Ready to bring your vision to life? Whether it's a residential dream home, commercial development, or industrial facility, our team of experts is here to turn your ideas into reality.",
+      "cta_button": "Schedule a Consultation",
       "form": {
         "name": "Full Name",
         "email": "Email Address",
-        "subject": "Subject",
-        "message": "Message",
-        "submit": "Send Message"
+        "phone": "Phone Number",
+        "subject": "Project Type",
+        "message": "Tell us about your project...",
+        "submit": "Send Message",
+        "sending": "Sending..."
       },
       "office": {
-        "title": "Main Office",
+        "title": "Head Office",
         "address1": "KG 40 St, Kimironko",
-        "address2": "Bibare, Gasabo District, Kigali"
+        "address2": "Bibare, Gasabo District",
+        "address3": "Kigali, Rwanda"
       },
       "phone": {
-        "title": "Phone",
-        "number1": "+250 787 106 854",
-        "number2": "+250 784 231 101"
+        "title": "Contact Numbers",
+        "number1": "+250 787 106 857",
+        "number2": "+250 784 231 161"
       },
       "email": {
-        "title": "Email",
-        "inquiry": "inquiry@riec.rw",
-        "careers": "careers@riec.rw"
+        "title": "Email Us",
+        "inquiry": "riec2025@gmail.com",
+        "careers": "riec2025@gmail.com",
+        "support": "riec2025@gmail.com"
       },
       "hours": {
-        "title": "Office Hours",
-        "weekday": "Mon - Fri:",
+        "title": "Business Hours",
+        "weekday": "Monday - Friday",
         "weekday_time": "8:00 AM - 6:00 PM",
-        "saturday": "Saturday:",
+        "saturday": "Saturday",
         "saturday_time": "10:00 AM - 2:00 PM",
-        "sunday": "Sunday:",
+        "sunday": "Sunday",
         "sunday_time": "Closed"
+      },
+      "follow": {
+        "title": "Follow Our Work",
+        "description": "Stay updated with our latest projects, industry insights, and company news on social media."
       }
     }
   },
@@ -550,7 +609,7 @@
       },
       "contact": {
         "phone_number": "+250 787 106 854",
-        "email_address": "info@riec.rw",
+        "email_address": "riec2025@gmail.com",
         "address_line1": "KG 11 Ave, Kimironko, Kigali, Rwanda",
         "address_line2": "Houston, TX 77032"
       }

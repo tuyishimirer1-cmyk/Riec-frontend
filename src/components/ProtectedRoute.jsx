@@ -7,6 +7,15 @@ const ProtectedRoute = ({ children, requireAuth = true, roles }) => {
   const role = auth?.role
   const isAuthenticated = !!accessToken
 
+  // Show loading state while checking authentication
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-riec-orange"></div>
+      </div>
+    )
+  }
+
   if (requireAuth && !isAuthenticated) {
     return <Navigate to="/login" replace />
   }

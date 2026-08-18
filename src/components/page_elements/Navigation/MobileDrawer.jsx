@@ -239,7 +239,7 @@ const MobileDrawer = ({
               onClick={handleQuoteClick}
               className="w-full bg-riec-orange text-white px-4 sm:px-6 py-3 sm:py-4 rounded-lg text-sm sm:text-base font-semibold hover:bg-riec-orange-light transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg"
             >
-              Get a Quote
+              Contact Us
             </button>
             
             {/* Quick Links */}

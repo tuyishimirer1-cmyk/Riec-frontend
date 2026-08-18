@@ -70,7 +70,7 @@ export default function ServiceModal({ editing, onClose, onCreate, onUpdate }) {
               close()
             }}
           >
-            {({ isSubmitting, values, setFieldValue }) => (
+            {({ isSubmitting }) => (
               <Form className="space-y-3">
                 <FField name="name" label={t('dash.services_page.field_name', { defaultValue: 'Name' })} required>
                   <Field name="name" placeholder="e.g. Construction" className={inputCls} />

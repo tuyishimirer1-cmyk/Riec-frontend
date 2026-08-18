@@ -69,8 +69,9 @@ export default function ContactUs() {
   })
 
   const infoItems = [
-    { icon: Phone, label: t('nav.phone', { defaultValue: 'Phone' }), value: '+250 788 000 000', href: 'tel:+250788000000' },
-    { icon: Mail, label: t('nav.email', { defaultValue: 'Email' }), value: 'info@riec.rw', href: 'mailto:info@riec.rw' },
+    { icon: Phone, label: t('nav.phone', { defaultValue: 'Phone' }), value: '+250 787 106 854', href: 'tel:+250787106854' },
+    { icon: Phone, label: t('nav.phone', { defaultValue: 'Phone' }), value: '+250 784 231 101', href: 'tel:+250784231101' },
+    { icon: Mail, label: t('nav.email', { defaultValue: 'Email' }), value: 'riec2025@gmail.com', href: 'mailto:riec2025@gmail.com' },
     { icon: MapPin, label: t('nav.location', { defaultValue: 'Location' }), value: 'Kigali, Rwanda', href: '#' },
     { icon: Clock, label: t('contact.hours', { defaultValue: 'Working Hours' }), value: 'Mon–Fri: 8:00 AM – 5:00 PM', href: null },
   ]

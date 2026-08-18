@@ -116,8 +116,8 @@ export default function PrivacyPolicy() {
             <div className="inline-flex items-center gap-2 text-slate-400 text-sm">
               <Mail className="h-4 w-4" />
               {t('privacy.questions', { defaultValue: 'Questions about our privacy policy?' })}
-              <a href="mailto:info@riec.rw" className="text-riec-orange font-semibold hover:underline ml-1">
-                info@riec.rw
+              <a href="mailto:riec2025@gmail.com" className="text-riec-orange font-semibold hover:underline ml-1">
+                riec2025@gmail.com
               </a>
             </div>
           </div>

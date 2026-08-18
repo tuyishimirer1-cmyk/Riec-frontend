@@ -168,6 +168,7 @@ const Navigation = ({isDefault}) => {
                         text-sm sm:text-base xl:text-base
                         font-semibold
                         font-poppins
+                        whitespace-nowrap
                         ${activePage === item.path ? 'text-lightblue font-bold' : 'text-white'}
                         hover:text-lightblue
                         relative

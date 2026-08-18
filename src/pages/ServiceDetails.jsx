@@ -18,6 +18,7 @@ import { useGetService } from '../react-query'
 import { useQuoteModal } from '../components/layouts/MainLayout'
 import ProcessModal from '../components/modals/ProcessModal'
 import EnhancedProjectCard from '../components/page_elements/Projects/EnhancedProjectCard'
+import { getServiceDefaultImage } from '../utils/serviceImageHelper'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -26,6 +27,13 @@ const ServiceDetails = () => {
   const navigate = useNavigate()
   const [isProcessModalOpen, setIsProcessModalOpen] = useState(false)
   const { openQuoteModal } = useQuoteModal() || {}
+  
+  const handleGetQuote = () => {
+    setIsProcessModalOpen(false)
+    setTimeout(() => {
+      if (openQuoteModal) openQuoteModal()
+    }, 100)
+  }
   
   // Fetch service details with related published projects included
   const { data: service, isLoading: serviceLoading, error: serviceError } = useGetService(serviceId, {
@@ -113,7 +121,7 @@ const ServiceDetails = () => {
     )
   }
 
-  const mainImage = service?.images?.[0]?.url || '/service-placeholder.png'
+  const mainImage = getServiceDefaultImage(service)
 
   // Service features based on mainTasks
   const features = service.mainTasks?.map((task, index) => ({
@@ -173,7 +181,7 @@ const ServiceDetails = () => {
                     onClick={openQuoteModal}
                     className="bg-white/10 backdrop-blur-sm text-white px-8 py-3 rounded-lg font-semibold border border-white/30 hover:bg-white/20 transition-all duration-300 hover:scale-105"
                   >
-                    Get a Quote
+                    Send Message
                   </button>
                 </div>
               </div>
@@ -272,6 +280,7 @@ const ServiceDetails = () => {
         isOpen={isProcessModalOpen}
         onClose={() => setIsProcessModalOpen(false)}
         service={service}
+        onGetQuote={handleGetQuote}
       />
     </>
   )

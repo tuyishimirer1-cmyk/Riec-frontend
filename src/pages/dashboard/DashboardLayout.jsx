@@ -9,7 +9,7 @@ import {
   Wrench,
 } from 'lucide-react'
 import gsap from 'gsap'
-import { useAuth, useLogout } from '../../react-query'
+import { useAuth, useLogout, useGetContactSubmissions } from '../../react-query'
 
 const NAV = [
   { to: '/dashboard/overview',      labelKey: 'dash.nav.overview',      icon: LayoutDashboard },
@@ -36,12 +36,18 @@ export default function DashboardLayout() {
 
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [langOpen,   setLangOpen]   = useState(false)
+  const [notifOpen,  setNotifOpen]  = useState(false)
   const [search,     setSearch]     = useState('')
+
+  // Fetch unread notifications
+  const { data: notificationsData } = useGetContactSubmissions({ page: 1, pageSize: 5 })
+  const unreadNotifications = (notificationsData?.items || []).filter(item => !item.read)
 
   const sidebarRef = useRef(null)
   const contentRef = useRef(null)
   const drawerRef  = useRef(null)
   const overlayRef = useRef(null)
+  const notifRef   = useRef(null)
 
   useEffect(() => {
     gsap.fromTo(sidebarRef.current,
@@ -69,6 +75,19 @@ export default function DashboardLayout() {
       { opacity: 0, y: 14 },
       { opacity: 1, y: 0, duration: 0.38, ease: 'power2.out' })
   }, [location.pathname])
+
+  // Close notification dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (notifRef.current && !notifRef.current.contains(event.target)) {
+        setNotifOpen(false)
+      }
+    }
+    if (notifOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [notifOpen])
 
   const handleLogout = async () => {
     await logoutMutation.mutateAsync()
@@ -261,12 +280,106 @@ export default function DashboardLayout() {
           </div>
 
           <div className="ml-auto flex items-center gap-2">
-            <button className="relative rounded-xl p-2 hover:bg-[var(--color-gray-1)]"
-              style={{ color: 'var(--color-body-color)' }}>
-              <Bell className="h-4 w-4" />
-              <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full"
-                style={{ background: 'var(--color-riec-orange)' }} />
-            </button>
+            {/* Notification Bell */}
+            <div className="relative" ref={notifRef}>
+              <button 
+                onClick={() => setNotifOpen(!notifOpen)}
+                className="relative rounded-xl p-2 hover:bg-[var(--color-gray-1)] transition-colors"
+                style={{ color: 'var(--color-body-color)' }}
+              >
+                <Bell className="h-4 w-4" />
+                {unreadNotifications.length > 0 && (
+                  <>
+                    <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full"
+                      style={{ background: 'var(--color-riec-orange)' }} />
+                    <span className="absolute -top-1 -right-1 h-4 w-4 flex items-center justify-center rounded-full text-[9px] font-bold text-white"
+                      style={{ background: 'var(--color-riec-orange)' }}>
+                      {unreadNotifications.length}
+                    </span>
+                  </>
+                )}
+              </button>
+
+              {/* Notification Dropdown */}
+              {notifOpen && (
+                <div className="absolute top-full right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border z-50 overflow-hidden"
+                  style={{ borderColor: 'var(--color-stroke)' }}>
+                  <div className="p-4 border-b" style={{ borderColor: 'var(--color-stroke)', background: 'var(--color-gray-1)' }}>
+                    <h3 className="text-xs font-bold" style={{ color: 'var(--color-primary)' }}>
+                      Notifications
+                    </h3>
+                    <p className="text-[10px]" style={{ color: 'var(--color-body-color)' }}>
+                      {unreadNotifications.length} unread message{unreadNotifications.length !== 1 ? 's' : ''}
+                    </p>
+                  </div>
+                  
+                  <div className="max-h-96 overflow-y-auto">
+                    {unreadNotifications.length > 0 ? (
+                      unreadNotifications.map((notif) => (
+                        <div 
+                          key={notif.id}
+                          onClick={() => {
+                            navigate('/dashboard/contact')
+                            setNotifOpen(false)
+                          }}
+                          className="p-3 border-b cursor-pointer hover:bg-[var(--color-gray-1)] transition-colors"
+                          style={{ borderColor: 'var(--color-stroke)' }}
+                        >
+                          <div className="flex items-start gap-2">
+                            <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold"
+                              style={{ background: 'rgba(238,122,24,0.12)', color: 'var(--color-riec-orange)' }}>
+                              {notif.name?.[0]?.toUpperCase() || '?'}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs font-semibold truncate" style={{ color: 'var(--color-primary)' }}>
+                                {notif.name}
+                              </p>
+                              <p className="text-[10px] truncate" style={{ color: 'var(--color-body-color)' }}>
+                                {notif.subject || 'New message'}
+                              </p>
+                              <p className="text-[10px] line-clamp-2 mt-1" style={{ color: 'var(--color-dark-5)' }}>
+                                {notif.message}
+                              </p>
+                              <p className="text-[9px] mt-1" style={{ color: 'var(--color-dark-6)' }}>
+                                {new Date(notif.createdAt).toLocaleDateString('en-US', { 
+                                  month: 'short', 
+                                  day: 'numeric',
+                                  hour: '2-digit',
+                                  minute: '2-digit'
+                                })}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="p-8 text-center">
+                        <Bell className="h-8 w-8 mx-auto mb-2" style={{ color: 'var(--color-dark-6)' }} />
+                        <p className="text-xs" style={{ color: 'var(--color-body-color)' }}>
+                          No new notifications
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {unreadNotifications.length > 0 && (
+                    <div className="p-3 border-t text-center" style={{ borderColor: 'var(--color-stroke)', background: 'var(--color-gray-1)' }}>
+                      <button 
+                        onClick={() => {
+                          navigate('/dashboard/contact')
+                          setNotifOpen(false)
+                        }}
+                        className="text-[10px] font-semibold hover:underline"
+                        style={{ color: 'var(--color-riec-orange)' }}
+                      >
+                        View all messages
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
             <div className="hidden sm:flex items-center gap-2 rounded-xl border px-3 py-2"
               style={{ borderColor: 'var(--color-stroke)', background: 'var(--color-gray-1)' }}>
               <div className="flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold"

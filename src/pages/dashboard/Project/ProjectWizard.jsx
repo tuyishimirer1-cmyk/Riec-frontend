@@ -88,6 +88,8 @@ export default function ProjectWizard({ editing, onClose, onCreate, onUpdate }) 
         featured:    !!values.featured,
         purchasable: !!values.purchasable,
         youtubeVideoUrl: values.youtubeVideoUrl || undefined,
+        basePrice: values.basePrice ? Number(values.basePrice) : undefined,
+        currency: values.currency || 'USD',
       }
 
       let project
@@ -137,6 +139,8 @@ export default function ProjectWizard({ editing, onClose, onCreate, onUpdate }) 
     featured:    !!editing.featured,
     purchasable: !!editing.purchasable,
     youtubeVideoUrl: editing.youtubeVideoUrl || '',
+    basePrice:   editing.basePrice   || '',
+    currency:    editing.currency    || 'USD',
   } : EMPTY
 
   const isLastStep = step === STEPS.length - 1

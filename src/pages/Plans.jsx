@@ -243,19 +243,24 @@ const Plans = () => {
                 })}
               </div>
             </div>
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 relative overflow-hidden">
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 relative overflow-hidden min-h-[400px]">
               <div className="absolute inset-0 opacity-10">
                 <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
               </div>
-              <div className="relative z-10 aspect-square flex items-center justify-center">
-                <div className="text-center">
-                  <p className="text-gray-400 text-sm mb-2">{t('plans.spotlight.preview')}</p>
-                  <p className="text-white font-bold text-lg">{t('plans.spotlight.preview_title')}</p>
-                </div>
+              <div className="relative z-10 h-full flex items-center justify-center">
+                <img 
+                  src="/project1.png" 
+                  alt="Technical Blueprint Preview" 
+                  className="w-full h-full object-contain rounded-lg"
+                />
               </div>
-              <button className="absolute bottom-6 right-6 bg-riec-orange text-white p-3 rounded-full hover:scale-110 transition-transform">
-                <ArrowRight className="w-5 h-5" />
-              </button>
+              <a 
+                href="/projects" 
+                className="absolute bottom-6 right-6 z-20 bg-riec-orange text-white p-4 rounded-full hover:scale-110 hover:shadow-2xl transition-all cursor-pointer shadow-lg"
+                aria-label="View all projects"
+              >
+                <ArrowRight className="w-6 h-6" />
+              </a>
             </div>
           </div>
         </div>

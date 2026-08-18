@@ -8,7 +8,7 @@ import { DOCUMENT_TYPES, selectCls } from '../constants'
 
 /* ── Helpers ── */
 function formatBytes(bytes) {
-  if (!bytes) return '—'
+  if (!bytes) return 'N/A'
   if (bytes < 1024) return `${bytes} B`
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
@@ -206,7 +206,7 @@ export default function AssetsPanel({ projectId }) {
                       </td>
                       {/* Version */}
                       <td className="px-4 py-3" style={{ color: 'var(--color-body-color)' }}>
-                        {asset.version || '—'}
+                        {asset.version || 'N/A'}
                       </td>
                       {/* Downloadable toggle */}
                       <td className="px-4 py-3">

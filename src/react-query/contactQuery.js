@@ -44,6 +44,27 @@ export function useMarkSubmissionRead() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['contact-submissions'] })
+      queryClient.invalidateQueries({ queryKey: ['dashboard-stats'] })
+    },
+  })
+}
+
+// useReplyToSubmission
+export function useReplyToSubmission() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async ({ id, reply, adminEmail }) => {
+      const response = await axios.patch(
+        `${BASE}/contact/admin/submissions/${id}/reply`,
+        { reply, adminEmail },
+        { headers: getAuthHeaders() }
+      )
+      return response.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['contact-submissions'] })
+      queryClient.invalidateQueries({ queryKey: ['dashboard-stats'] })
     },
   })
 }

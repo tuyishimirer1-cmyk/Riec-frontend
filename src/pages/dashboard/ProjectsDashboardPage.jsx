@@ -41,7 +41,15 @@ export default function ProjectsDashboardPage() {
 
   const handleDelete = async (id) => {
     if (!window.confirm(t('dash.projects_page.delete_confirm', { defaultValue: 'Delete this project? This cannot be undone.' }))) return
-    await deleteProjectMutation.mutateAsync(id)
+    
+    try {
+      await deleteProjectMutation.mutateAsync(id)
+      alert('Project deleted successfully!')
+    } catch (error) {
+      console.error('Delete error:', error)
+      const message = error?.response?.data?.message || error?.message || 'Failed to delete project'
+      alert(`Error: ${Array.isArray(message) ? message.join(', ') : message}`)
+    }
   }
 
   const handlePublish = async (id) => publishProjectMutation.mutateAsync(id)

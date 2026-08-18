@@ -57,15 +57,6 @@ export default function ProjectsTable({
             onBlur={(e) => e.target.style.borderColor = 'var(--color-stroke)'}
           />
         ))}
-        <select value={pageSize} onChange={(e) => onPageSizeChange(Number(e.target.value))}
-          className="rounded-xl border px-3 py-2 text-xs focus:outline-none"
-          style={{ borderColor: 'var(--color-stroke)', background: '#fff', color: 'var(--color-primary)' }}>
-          {[10, 20, 50].map((n) => (
-            <option key={n} value={n}>
-              {n} {t('dash.projects_page.per_page', { defaultValue: '/ page' })}
-            </option>
-          ))}
-        </select>
       </div>
 
       {/* Table */}
@@ -92,7 +83,7 @@ export default function ProjectsTable({
                     <p className="font-semibold" style={{ color: 'var(--color-primary)' }}>{p.title}</p>
                     <p className="text-[10px]" style={{ color: 'var(--color-body-color)' }}>{p.slug}</p>
                   </td>
-                  <td className="px-4 py-3" style={{ color: 'var(--color-body-color)' }}>{p.location || '—'}</td>
+                  <td className="px-4 py-3" style={{ color: 'var(--color-body-color)' }}>{p.location || 'N/A'}</td>
                   <td className="px-4 py-3" style={{ color: 'var(--color-body-color)' }}>{p.type}</td>
                   <td className="px-4 py-3" style={{ color: 'var(--color-body-color)' }}>{p.category}</td>
                   <td className="px-4 py-3">
@@ -149,34 +140,6 @@ export default function ProjectsTable({
             </tbody>
           </table>
         </div>
-
-        {/* Pagination */}
-        <div className="flex items-center justify-between border-t px-4 py-3"
-          style={{ borderColor: 'var(--color-stroke)' }}>
-          <span className="text-[10px]" style={{ color: 'var(--color-body-color)' }}>
-            {projects.length > 0
-              ? t('dash.projects_page.showing', {
-                  first: (page - 1) * pageSize + 1,
-                  last: Math.min(page * pageSize, totalPages ? totalPages * pageSize : projects.length),
-                  total: totalPages ? totalPages * pageSize : projects.length,
-                  defaultValue: `Showing ${(page - 1) * pageSize + 1}–${Math.min(page * pageSize, totalPages ? totalPages * pageSize : projects.length)} of ${totalPages ? totalPages * pageSize : projects.length}`,
-                })
-              : t('dash.projects_page.no_results', { defaultValue: 'No results' })}
-          </span>
-          <div className="flex items-center gap-2">
-            <PaginationBtn onClick={onPagePrev} disabled={page === 1}>
-              {t('dash.projects_page.prev', { defaultValue: 'Previous' })}
-            </PaginationBtn>
-            {totalPages && totalPages > 1 && (
-              <span className="text-xs" style={{ color: 'var(--color-body-color)' }}>
-                {t('dash.projects_page.page_of', { page, total: totalPages, defaultValue: `Page ${page} of ${totalPages}` })}
-              </span>
-            )}
-            <PaginationBtn onClick={onPageNext} disabled={page >= (totalPages || 1)}>
-              {t('dash.projects_page.next', { defaultValue: 'Next' })}
-            </PaginationBtn>
-          </div>
-        </div>
       </div>
     </>
   )
@@ -189,19 +152,6 @@ function ActionBtn({ onClick, title, hoverBg, hoverColor, children }) {
       style={{ color: 'var(--color-dark-6)' }}
       onMouseEnter={(e) => { e.currentTarget.style.background = hoverBg; e.currentTarget.style.color = hoverColor }}
       onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--color-dark-6)' }}
-    >
-      {children}
-    </button>
-  )
-}
-
-function PaginationBtn({ onClick, disabled, children }) {
-  return (
-    <button onClick={onClick} disabled={disabled}
-      className="rounded-xl border px-3 py-1.5 text-xs font-medium transition-colors disabled:opacity-40"
-      style={{ borderColor: 'var(--color-stroke)', color: 'var(--color-body-color)' }}
-      onMouseEnter={(e) => !disabled && (e.currentTarget.style.background = 'var(--color-gray-1)')}
-      onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
     >
       {children}
     </button>

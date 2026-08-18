@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import ErrorBoundary from './components/ErrorBoundary'
 import MainLayout from './components/layouts/MainLayout'
 import ProtectedRoute from './components/ProtectedRoute'
 
@@ -34,7 +35,7 @@ import ServicesDashboardPage from './pages/dashboard/ServicesDashboardPage'
 
 function App() {
   return (
-    <>
+    <ErrorBoundary>
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
@@ -78,7 +79,7 @@ function App() {
           <Route path="payments" element={<PaymentsDashboardPage />} />
         </Route>
       </Routes>
-    </>
+    </ErrorBoundary>
   )
 }
 

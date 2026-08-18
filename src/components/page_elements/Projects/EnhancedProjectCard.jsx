@@ -86,26 +86,38 @@ const EnhancedProjectCard = ({ project, index }) => {
     navigate(`/projects/${project.slug || project.id}`)
   }
 
+  const handleArrowClick = (e) => {
+    e.stopPropagation()
+    navigate(`/projects/${project.slug || project.id}`)
+  }
+
   const handleQuickView = (e) => {
     e.stopPropagation()
     // Quick view functionality can be implemented later
     console.log('Quick view:', project)
   }
 
-  const formatPrice = (price) => {
+  const formatPrice = (price, currency = 'USD') => {
     if (!price) return 'Price on request'
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
+    const formatted = new Intl.NumberFormat('en-US', {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
     }).format(price)
+    
+    return currency === 'RWF' ? `${formatted} Rwf` : `${formatted} USD`
   }
 
   const mainImage = project.images?.[0]?.url || '/project1.png'
-  const priceRange = project.pricingTiers?.length > 0 
-    ? `${formatPrice(project.pricingTiers[0].amount)} - ${formatPrice(project.pricingTiers[project.pricingTiers.length - 1].amount)}`
-    : 'Price on request'
+  
+  // Determine price display
+  let priceDisplay = 'Price on request'
+  if (project.pricingTiers?.length > 0) {
+    const firstTier = project.pricingTiers[0]
+    const lastTier = project.pricingTiers[project.pricingTiers.length - 1]
+    priceDisplay = `${formatPrice(firstTier.amount, firstTier.currency)} - ${formatPrice(lastTier.amount, lastTier.currency)}`
+  } else if (project.basePrice) {
+    priceDisplay = formatPrice(project.basePrice, project.currency)
+  }
 
   return (
     <div
@@ -203,7 +215,7 @@ const EnhancedProjectCard = ({ project, index }) => {
 
           {/* Description */}
         <p className="text-slate-300 text-sm mb-4 line-clamp-2 leading-relaxed">
-          {project.description}
+          {project.description?.replace(/<[^>]*>/g, '') || project.description}
         </p>
 
         {/* Key Details */}
@@ -221,7 +233,7 @@ const EnhancedProjectCard = ({ project, index }) => {
         {/* Price */}
         <div className="flex items-center gap-2 mb-4">
           <DollarSign className="w-4 h-4 text-riec-orange" />
-          <span className="text-white font-bold text-sm">{priceRange}</span>
+          <span className="text-white font-bold text-sm">{priceDisplay}</span>
         </div>
 
         {/* Footer */}
@@ -243,11 +255,16 @@ const EnhancedProjectCard = ({ project, index }) => {
           </div>
           
           <button
-            onClick={handleCardClick}
-            className="flex items-center gap-2 text-riec-orange font-semibold text-sm group-hover:gap-3 transition-all duration-300 hover:scale-105"
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation()
+              navigate(`/projects/${project.slug || project.id}`)
+            }}
+            className="flex items-center gap-2 text-riec-orange font-semibold text-sm group-hover:gap-3 transition-all duration-300 hover:scale-105 cursor-pointer"
+            aria-label="View project details"
           >
             View Details
-            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 pointer-events-none" />
           </button>
         </div>
       </div>

@@ -21,9 +21,12 @@ export function useGetProjects(params = {}) {
         requestParams.limit = pageSize
       }
       requestParams.include = include
-      // published defaults to 'true' (published only) from API — pass 'all' for dashboard
+      // For dashboard/admin, fetch all projects (published + drafts)
+      // For public pages, fetch only published
       if (requestParams.published === undefined && requestParams.isPublished === undefined) {
-        requestParams.published = 'true'
+        // Check if we're in admin context by looking for JWT token
+        const token = sessionStorage.getItem('riecToken') || localStorage.getItem('riecToken')
+        requestParams.published = token ? 'all' : 'true'
       }
       const response = await axios.get(`${BASE}/projects`, { params: requestParams, headers: getAuthHeaders() })
       return {

@@ -15,7 +15,7 @@ export function useGetCareer(id) {
     queryKey: ['career', id],
     queryFn: async () => {
       const response = await axios.get(`${BASE}/careers/${id}`)
-      return response.data
+      return response.data.data ?? response.data
     },
     enabled: !!id,
     staleTime: 5 * 60 * 1000,

@@ -11,7 +11,7 @@ export default function Careers() {
   const { data, isLoading, isFetching } = useGetCareers({
     page,
     limit: 9,
-    published: true,
+    published: true,  // Only show published jobs on public careers page
     location: filters.location || undefined,
     department: filters.department || undefined,
     type: filters.type || undefined,
@@ -100,7 +100,7 @@ export default function Careers() {
                     to={`/careers/${job.slug || job.id}`}
                     className="mt-5 inline-flex items-center rounded-full bg-riec-orange px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-riec-orange-light"
                   >
-                    View role
+                    View role / Apply
                   </Link>
                 </article>
               ))}

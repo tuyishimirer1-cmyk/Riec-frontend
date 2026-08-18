@@ -17,42 +17,50 @@ const Services = () => {
     {
       icon: Compass,
       title: t('common.services.surveying'),
-      description: t('common.services.descriptions.surveying')
+      description: t('common.services.descriptions.surveying'),
+      slug: 'land-surveying'
     },
     {
       icon: Ruler,
       title: t('common.services.boundary_surveying'),
-      description: t('common.services.descriptions.boundary_surveying')
+      description: t('common.services.descriptions.boundary_surveying'),
+      slug: 'boundary-surveying'
     },
     {
       icon: Map,
       title: t('common.services.topographic_surveying'),
-      description: t('common.services.descriptions.topographic_surveying')
+      description: t('common.services.descriptions.topographic_surveying'),
+      slug: 'topographic-surveying'
     },
     {
       icon: Layers,
       title: t('common.services.construction_layout'),
-      description: t('common.services.descriptions.construction_layout')
+      description: t('common.services.descriptions.construction_layout'),
+      slug: 'construction-layout'
     },
     {
       icon: Palette,
       title: t('common.services.interior_design'),
-      description: t('common.services.descriptions.interior_design')
+      description: t('common.services.descriptions.interior_design'),
+      slug: 'interior-design'
     },
     {
       icon: Home,
       title: t('common.services.house_design'),
-      description: t('common.services.descriptions.house_design')
+      description: t('common.services.descriptions.house_design'),
+      slug: 'house-design'
     },
     {
       icon: HardHat,
       title: t('common.services.construction_supervision'),
-      description: t('common.services.descriptions.construction_supervision')
+      description: t('common.services.descriptions.construction_supervision'),
+      slug: 'construction-supervision'
     },
     {
       icon: DollarSign,
       title: t('common.services.property_valuation'),
-      description: t('common.services.descriptions.property_valuation')
+      description: t('common.services.descriptions.property_valuation'),
+      slug: 'property-valuation'
     }
   ];
 
@@ -97,10 +105,11 @@ const Services = () => {
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <div
+              <Link
                 key={index}
+                to={`/services/${service.slug}`}
                 ref={el => cardsRef.current[index] = el}
-                className="group bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-riec-orange/50 transition-all duration-500 hover:shadow-2xl hover:shadow-riec-orange/20 hover:-translate-y-2"
+                className="group bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-riec-orange/50 transition-all duration-500 hover:shadow-2xl hover:shadow-riec-orange/20 hover:-translate-y-2 cursor-pointer"
               >
                 <div className="bg-gradient-to-br from-riec-orange/20 to-riec-red/20 w-16 h-16 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Icon className="w-8 h-8 text-riec-orange" />
@@ -111,7 +120,11 @@ const Services = () => {
                 <p className="text-gray-400 text-sm leading-relaxed">
                   {service.description}
                 </p>
-              </div>
+                <div className="mt-4 flex items-center text-riec-orange group-hover:gap-2 transition-all duration-300">
+                  <span className="text-sm font-semibold">Learn more</span>
+                  <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                </div>
+              </Link>
             );
           })}
         </div>

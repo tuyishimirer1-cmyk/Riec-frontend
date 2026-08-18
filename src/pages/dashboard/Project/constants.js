@@ -29,9 +29,11 @@ export const EMPTY = {
   type: '', category: '',
   featured: false, purchasable: false,
   youtubeVideoUrl: '',
+  basePrice: '',
+  currency: 'USD',
 }
 
-export const TYPES      = ['COMPLETED', 'PLAN_TO_BUY']
+export const TYPES      = ['COMPLETED']
 
 export const DOCUMENT_TYPES = [
   'PRESENTATION', 'PERSPECTIVE', 'SITE_PLAN',
