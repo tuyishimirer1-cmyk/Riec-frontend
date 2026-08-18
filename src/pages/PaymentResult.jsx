@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { CheckCircle2, CircleX, Download, Loader2 } from 'lucide-react'
@@ -13,10 +13,17 @@ export default function PaymentResult() {
   const [tokenInput, setTokenInput] = useState(tokenFromUrl)
   const [submittedToken, setSubmittedToken] = useState(tokenFromUrl)
 
+  // Auto-load downloads when token is in URL
+  useEffect(() => {
+    if (tokenFromUrl && tokenFromUrl.trim()) {
+      setSubmittedToken(tokenFromUrl.trim())
+    }
+  }, [tokenFromUrl])
+
   const { data: downloadsData, isFetching, error } = useGetDownloads(submittedToken)
   const fetchDownloadUrlMutation = useGetProjectAssetDownloadUrl()
 
-  const isSuccess = status === 'successful' || status === 'completed'
+  const isSuccess = status === 'successful' || status === 'completed' || status === 'success'
   const isFailed = status === 'failed' || status === 'cancelled'
 
   const assets = useMemo(() => {
