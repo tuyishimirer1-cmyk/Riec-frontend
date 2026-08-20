@@ -81,7 +81,8 @@ export default function PaymentResult() {
 
             {isSuccess && (
               <p className="mb-4 rounded-xl border border-emerald-700/40 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-200">
-                Your payment was successful. Check your email for a download token, then paste it below to unlock purchased files.
+                🎉 Payment successful! Check your email for your purchased project PDF and download token.
+                Your project files are also available below for immediate download.
               </p>
             )}
 
