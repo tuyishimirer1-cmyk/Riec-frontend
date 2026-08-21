@@ -47,10 +47,12 @@ export default function PaymentResult() {
 
     try {
       const result = await fetchDownloadUrlMutation.mutateAsync({ projectId, assetId: asset.id })
-      const url = result?.downloadUrl || result?.url
+      // Backend wraps response in {statusCode, message, data: {downloadUrl}}
+      const url = result?.data?.downloadUrl || result?.downloadUrl || result?.data?.url || result?.url
       if (url) window.open(url, '_blank', 'noopener,noreferrer')
-    } catch {
-      // Keep this page resilient: UI already shows token/data state.
+    } catch (err) {
+      console.error('Download error:', err)
+      alert('Failed to generate download link. Please try again.')
     }
   }
 
