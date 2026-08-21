@@ -27,6 +27,7 @@ export default function PaymentResult() {
   const isFailed = status === 'failed' || status === 'cancelled'
 
   const assets = useMemo(() => {
+    if (Array.isArray(downloadsData?.data)) return downloadsData.data
     if (Array.isArray(downloadsData?.assets)) return downloadsData.assets
     if (Array.isArray(downloadsData)) return downloadsData
     return []
