@@ -67,7 +67,19 @@ export default function AssetsPanel({ projectId }) {
   const handleDownload = async (assetId) => {
     try {
       const result = await fetchDownloadUrlMutation.mutateAsync({ projectId, assetId })
-      if (result?.downloadUrl) window.open(result.downloadUrl, '_blank')
+      const url = result?.data?.downloadUrl || result?.downloadUrl
+      if (url) {
+        // Get the asset to find filename
+        const asset = assets.find(a => a.id === assetId)
+        // Force download instead of opening in new tab
+        const link = document.createElement('a')
+        link.href = url
+        link.download = asset?.filename || 'download'
+        link.target = '_blank'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      }
     } catch { /* silently fail */ }
   }
 

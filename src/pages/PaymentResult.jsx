@@ -38,7 +38,14 @@ export default function PaymentResult() {
   const handleDownload = async (asset) => {
     const directUrl = asset?.downloadUrl || asset?.url
     if (directUrl) {
-      window.open(directUrl, '_blank', 'noopener,noreferrer')
+      // Force download instead of opening in new tab
+      const link = document.createElement('a')
+      link.href = directUrl
+      link.download = asset?.filename || 'download'
+      link.target = '_blank'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
       return
     }
 
@@ -49,7 +56,16 @@ export default function PaymentResult() {
       const result = await fetchDownloadUrlMutation.mutateAsync({ projectId, assetId: asset.id })
       // Backend wraps response in {statusCode, message, data: {downloadUrl}}
       const url = result?.data?.downloadUrl || result?.downloadUrl || result?.data?.url || result?.url
-      if (url) window.open(url, '_blank', 'noopener,noreferrer')
+      if (url) {
+        // Force download instead of opening in new tab
+        const link = document.createElement('a')
+        link.href = url
+        link.download = asset?.filename || 'download'
+        link.target = '_blank'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      }
     } catch (err) {
       console.error('Download error:', err)
       alert('Failed to generate download link. Please try again.')
