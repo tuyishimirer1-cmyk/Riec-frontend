@@ -37,15 +37,28 @@ export default function PaymentResult() {
 
   const handleDownload = async (asset) => {
     const directUrl = asset?.downloadUrl || asset?.url
+    const filename = asset?.filename || 'download'
+    
     if (directUrl) {
-      // Force download instead of opening in new tab
-      const link = document.createElement('a')
-      link.href = directUrl
-      link.download = asset?.filename || 'download'
-      link.target = '_blank'
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+      // Open in new tab for preview
+      window.open(directUrl, '_blank', 'noopener,noreferrer')
+      
+      // Also trigger automatic download to PC
+      try {
+        const response = await fetch(directUrl)
+        const blob = await response.blob()
+        const url = window.URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = filename
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        window.URL.revokeObjectURL(url)
+      } catch (err) {
+        console.error('Auto-download failed:', err)
+        // Preview still works even if auto-download fails
+      }
       return
     }
 
@@ -54,17 +67,28 @@ export default function PaymentResult() {
 
     try {
       const result = await fetchDownloadUrlMutation.mutateAsync({ projectId, assetId: asset.id })
-      // Backend wraps response in {statusCode, message, data: {downloadUrl}}
       const url = result?.data?.downloadUrl || result?.downloadUrl || result?.data?.url || result?.url
+      
       if (url) {
-        // Force download instead of opening in new tab
-        const link = document.createElement('a')
-        link.href = url
-        link.download = asset?.filename || 'download'
-        link.target = '_blank'
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
+        // Open in new tab for preview
+        window.open(url, '_blank', 'noopener,noreferrer')
+        
+        // Also trigger automatic download to PC
+        try {
+          const response = await fetch(url)
+          const blob = await response.blob()
+          const blobUrl = window.URL.createObjectURL(blob)
+          const link = document.createElement('a')
+          link.href = blobUrl
+          link.download = filename
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link)
+          window.URL.revokeObjectURL(blobUrl)
+        } catch (err) {
+          console.error('Auto-download failed:', err)
+          // Preview still works even if auto-download fails
+        }
       }
     } catch (err) {
       console.error('Download error:', err)

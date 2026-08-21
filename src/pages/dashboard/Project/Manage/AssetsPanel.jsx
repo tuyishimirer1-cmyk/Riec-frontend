@@ -68,17 +68,30 @@ export default function AssetsPanel({ projectId }) {
     try {
       const result = await fetchDownloadUrlMutation.mutateAsync({ projectId, assetId })
       const url = result?.data?.downloadUrl || result?.downloadUrl
+      
       if (url) {
-        // Get the asset to find filename
         const asset = assets.find(a => a.id === assetId)
-        // Force download instead of opening in new tab
-        const link = document.createElement('a')
-        link.href = url
-        link.download = asset?.filename || 'download'
-        link.target = '_blank'
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
+        const filename = asset?.filename || 'download'
+        
+        // Open in new tab for preview
+        window.open(url, '_blank', 'noopener,noreferrer')
+        
+        // Also trigger automatic download to PC
+        try {
+          const response = await fetch(url)
+          const blob = await response.blob()
+          const blobUrl = window.URL.createObjectURL(blob)
+          const link = document.createElement('a')
+          link.href = blobUrl
+          link.download = filename
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link)
+          window.URL.revokeObjectURL(blobUrl)
+        } catch (err) {
+          console.error('Auto-download failed:', err)
+          // Preview still works even if auto-download fails
+        }
       }
     } catch { /* silently fail */ }
   }
