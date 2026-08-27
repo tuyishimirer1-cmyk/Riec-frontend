@@ -33,7 +33,7 @@ const ProjectDetails = () => {
   const { slug } = useParams()
   const navigate = useNavigate()
   const [isShared, setIsShared] = useState(false)
-  const [buyerInfo, setBuyerInfo] = useState({ fullName: '', email: '' })
+  const [buyerInfo, setBuyerInfo] = useState({ fullName: '', email: '', phone: '' })
 
   // Use React Query directly instead of Redux selectors
   const { data: project, isLoading, error } = useGetProjectBySlug(slug, { enabled: !!slug })
@@ -197,8 +197,8 @@ const ProjectDetails = () => {
   }
 
   const handleCheckout = async (tierId) => {
-    if (!buyerInfo.fullName || !buyerInfo.email) {
-      window.alert('Please enter your full name and email before checkout.')
+    if (!buyerInfo.fullName || !buyerInfo.email || !buyerInfo.phone) {
+      window.alert('Please enter your full name, email, and phone number before checkout.')
       return
     }
 
@@ -207,6 +207,7 @@ const ProjectDetails = () => {
         projectId: project.id,
         fullName: buyerInfo.fullName,
         email: buyerInfo.email,
+        phone: buyerInfo.phone,
       }
       
       // Only add tierId if it's provided (for tier-based purchases)
@@ -415,6 +416,13 @@ const ProjectDetails = () => {
                       placeholder="Email"
                       className="rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-riec-orange focus:outline-none"
                     />
+                    <input
+                      type="tel"
+                      value={buyerInfo.phone}
+                      onChange={(e) => setBuyerInfo((prev) => ({ ...prev, phone: e.target.value }))}
+                      placeholder="Phone (07XXXXXXXX)"
+                      className="rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-riec-orange focus:outline-none sm:col-span-2"
+                    />
                   </div>
 
                   <p className="rounded-xl border border-riec-orange/30 bg-riec-orange/10 px-3 py-2 text-xs text-slate-200">
@@ -481,6 +489,13 @@ const ProjectDetails = () => {
                     placeholder="Your email address"
                     className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-riec-orange focus:outline-none transition-colors"
                   />
+                  <input
+                    type="tel"
+                    value={buyerInfo.phone}
+                    onChange={(e) => setBuyerInfo((prev) => ({ ...prev, phone: e.target.value }))}
+                    placeholder="Your phone number (07XXXXXXXX)"
+                    className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-riec-orange focus:outline-none transition-colors"
+                  />
                 </div>
 
                 <p className="rounded-xl border border-riec-orange/30 bg-riec-orange/10 px-4 py-3 text-xs text-slate-200 mb-6">
@@ -489,8 +504,8 @@ const ProjectDetails = () => {
 
                 <button
                   onClick={() => {
-                    if (!buyerInfo.fullName || !buyerInfo.email) {
-                      window.alert('Please enter your name and email to continue with purchase.')
+                    if (!buyerInfo.fullName || !buyerInfo.email || !buyerInfo.phone) {
+                      window.alert('Please enter your name, email, and phone number to continue with purchase.')
                       return
                     }
                     if (!project.basePrice) {
