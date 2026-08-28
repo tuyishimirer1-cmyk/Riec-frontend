@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import {
   LayoutDashboard, FolderKanban, Briefcase, Users, Mail,
   CreditCard, LogOut, Menu, X, Globe, ChevronDown, Bell, Search,
-  Wrench,
+  Wrench, Home,
 } from 'lucide-react'
 import gsap from 'gsap'
 import { useAuth, useLogout, useGetContactSubmissions } from '../../react-query'
@@ -15,6 +15,7 @@ const NAV = [
   { to: '/dashboard/overview',      labelKey: 'dash.nav.overview',      icon: LayoutDashboard },
   { to: '/dashboard/projects',      labelKey: 'dash.nav.projects',       icon: FolderKanban },
   { to: '/dashboard/services',      labelKey: 'dash.nav.services',       icon: Wrench },
+  { to: '/dashboard/properties',    labelKey: 'dash.nav.properties',     icon: Home },
   { to: '/dashboard/careers',       labelKey: 'dash.nav.careers',        icon: Briefcase },
   { to: '/dashboard/applications',  labelKey: 'dash.nav.applications',   icon: Users },
   { to: '/dashboard/contact',       labelKey: 'dash.nav.contact',        icon: Mail },
