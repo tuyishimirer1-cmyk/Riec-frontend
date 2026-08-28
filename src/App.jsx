@@ -11,6 +11,7 @@ import CareerDetails from './pages/CareerDetails'
 import Projects from './pages/Projects'
 import ProjectsByCategory from './pages/ProjectsByCategory'
 import ProjectDetails from './pages/ProjectDetails'
+import Properties from './pages/Properties'
 import AboutUs from './pages/AboutUs'
 import Favorites from './pages/Favorites'
 import PaymentResult from './pages/PaymentResult'
@@ -30,6 +31,7 @@ import ApplicationsDashboardPage from './pages/dashboard/ApplicationsDashboardPa
 import ContactDashboardPage from './pages/dashboard/ContactDashboardPage'
 import PaymentsDashboardPage from './pages/dashboard/PaymentsDashboardPage'
 import ServicesDashboardPage from './pages/dashboard/ServicesDashboardPage'
+import PropertiesDashboardPage from './pages/dashboard/PropertiesDashboardPage'
 
 function App() {
   return (
@@ -46,6 +48,7 @@ function App() {
           <Route path="projects/category/:category" element={<ProjectsByCategory />} />
           <Route path="projects/:slug" element={<ProjectDetails />} />
           <Route path="projects/*" element={<ProjectNotFoundPage />} />
+          <Route path="properties" element={<Properties />} />
           <Route path="favorites" element={<Favorites />} />
           <Route path="about" element={<AboutUs />} />
           <Route path="payment/result" element={<PaymentResult />} />
@@ -69,6 +72,7 @@ function App() {
           <Route path="overview" element={<OverviewPage />} />
           <Route path="projects" element={<ProjectsDashboardPage />} />
           <Route path="services" element={<ServicesDashboardPage />} />
+          <Route path="properties" element={<PropertiesDashboardPage />} />
           <Route path="careers" element={<CareersDashboardPage />} />
           <Route path="applications" element={<ApplicationsDashboardPage />} />
           <Route path="contact" element={<ContactDashboardPage />} />
