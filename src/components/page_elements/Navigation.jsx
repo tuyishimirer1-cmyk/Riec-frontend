@@ -72,14 +72,10 @@ const Navigation = ({isDefault}) => {
       })),
     },
     {
-      href: '/plans',
-      text: t('nav.plans'),
-      path: '/plans',
-      hasDropdown: true,
-      dropdownItems: categories.map((cat) => ({
-        href: `/plans/category/${cat.toLowerCase()}`,
-        text: CATEGORY_LABELS[cat] || cat,
-      })),
+      href: '/properties',
+      text: t('nav.properties'),
+      path: '/properties',
+      hasDropdown: false,
     },
     { href: '/about', text: t('nav.about_us'), path: '/about' },
     { href: '/careers', text: t('nav.careers', { defaultValue: 'Careers' }), path: '/careers' },

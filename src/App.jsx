@@ -10,9 +10,7 @@ import Careers from './pages/Careers'
 import CareerDetails from './pages/CareerDetails'
 import Projects from './pages/Projects'
 import ProjectsByCategory from './pages/ProjectsByCategory'
-import PlansByCategory from './pages/PlansByCategory'
 import ProjectDetails from './pages/ProjectDetails'
-import Plans from './pages/Plans'
 import AboutUs from './pages/AboutUs'
 import Favorites from './pages/Favorites'
 import PaymentResult from './pages/PaymentResult'
@@ -48,8 +46,6 @@ function App() {
           <Route path="projects/category/:category" element={<ProjectsByCategory />} />
           <Route path="projects/:slug" element={<ProjectDetails />} />
           <Route path="projects/*" element={<ProjectNotFoundPage />} />
-          <Route path="plans" element={<Plans />} />
-          <Route path="plans/category/:category" element={<PlansByCategory />} />
           <Route path="favorites" element={<Favorites />} />
           <Route path="about" element={<AboutUs />} />
           <Route path="payment/result" element={<PaymentResult />} />
