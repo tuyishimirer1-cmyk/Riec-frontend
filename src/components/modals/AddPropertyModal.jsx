@@ -140,6 +140,8 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
         return;
       }
 
+      console.log('Creating property with data:', formData);
+
       // Prepare data
       const propertyData = {
         ...formData,
@@ -151,13 +153,18 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
         parking: formData.parking ? parseInt(formData.parking) : undefined,
       };
 
+      console.log('Prepared property data:', propertyData);
+
       // Create property
+      console.log('Sending request to create property...');
       const newProperty = await createProperty.mutateAsync(propertyData);
+      console.log('Property created successfully:', newProperty);
       
       let hasErrors = false;
       
       // Upload images if any
       if (selectedImages.length > 0) {
+        console.log('Uploading images...');
         const imageFormData = new FormData();
         selectedImages.forEach((file) => {
           imageFormData.append('files', file);
@@ -165,6 +172,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
         
         try {
           await uploadImages.mutateAsync(imageFormData);
+          console.log('Images uploaded successfully');
         } catch (imageError) {
           console.error('Image upload failed:', imageError);
           toast.error('Property created but images failed to upload');
@@ -174,6 +182,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
 
       // Upload videos if any
       if (selectedVideos.length > 0) {
+        console.log('Uploading videos...');
         const videoFormData = new FormData();
         selectedVideos.forEach((file) => {
           videoFormData.append('files', file);
@@ -181,6 +190,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
         
         try {
           await uploadVideos.mutateAsync(videoFormData);
+          console.log('Videos uploaded successfully');
         } catch (videoError) {
           console.error('Video upload failed:', videoError);
           toast.error('Property created but videos failed to upload');
@@ -229,7 +239,14 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
       
     } catch (error) {
       console.error('Error creating property:', error);
-      toast.error(error.response?.data?.message || 'Failed to create property');
+      console.error('Error details:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status
+      });
+      
+      const errorMessage = error.response?.data?.message || error.message || 'Failed to create property';
+      toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
