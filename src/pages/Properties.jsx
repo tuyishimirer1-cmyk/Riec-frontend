@@ -103,7 +103,7 @@ const Properties = () => {
                     : 'border-gray-200 hover:border-riec-orange hover:text-riec-orange'
                 }`}
               >
-                🏠 {t('properties.types.house', 'House')}
+                {t('properties.types.house', 'House')}
               </button>
               <button 
                 onClick={() => handleTypeFilter('apartment')}
@@ -113,7 +113,7 @@ const Properties = () => {
                     : 'border-gray-200 hover:border-riec-orange hover:text-riec-orange'
                 }`}
               >
-                🏢 {t('properties.types.apartment', 'Apartment')}
+                {t('properties.types.apartment', 'Apartment')}
               </button>
               <button 
                 onClick={() => handleTypeFilter('land')}
@@ -123,7 +123,7 @@ const Properties = () => {
                     : 'border-gray-200 hover:border-riec-orange hover:text-riec-orange'
                 }`}
               >
-                🌳 {t('properties.types.land', 'Land')}
+                {t('properties.types.land', 'Land')}
               </button>
               <button 
                 onClick={() => handleTypeFilter('commercial')}
@@ -133,7 +133,7 @@ const Properties = () => {
                     : 'border-gray-200 hover:border-riec-orange hover:text-riec-orange'
                 }`}
               >
-                🏭 {t('properties.types.commercial', 'Commercial')}
+                {t('properties.types.commercial', 'Commercial')}
               </button>
               <button 
                 onClick={handleVerifiedFilter}
@@ -143,7 +143,7 @@ const Properties = () => {
                     : 'bg-green-50 border-green-200 text-green-700 hover:bg-green-100'
                 }`}
               >
-                ✓ {t('properties.verified_only', 'Verified Only')}
+                Verified Only
               </button>
             </div>
           </div>

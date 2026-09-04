@@ -104,12 +104,12 @@ const PropertiesTable = () => {
 
   const getPropertyIcon = (type) => {
     switch (type) {
-      case 'HOUSE': return '🏠';
-      case 'APARTMENT': return '🏢';
-      case 'LAND': return '🌳';
-      case 'COMMERCIAL': return '🏭';
-      case 'VILLA': return '🏰';
-      default: return '📍';
+      case 'HOUSE': return 'House';
+      case 'APARTMENT': return 'Apartment';
+      case 'LAND': return 'Land';
+      case 'COMMERCIAL': return 'Commercial';
+      case 'VILLA': return 'Villa';
+      default: return 'Other';
     }
   };
 
@@ -187,7 +187,6 @@ const PropertiesTable = () => {
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
-                        <span className="text-2xl">{getPropertyIcon(property.propertyType)}</span>
                         <div>
                           <p className="text-sm font-medium text-gray-900">{property.propertyType}</p>
                           <p className="text-xs text-gray-500">{property.listingType === 'FOR_SALE' ? 'For Sale' : 'For Rent'}</p>
@@ -312,7 +311,7 @@ const PropertiesTable = () => {
 
       {/* Property Details Modal */}
       {showDetailsModal && selectedProperty && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 overflow-y-auto">
+        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
           <div className="bg-white rounded-2xl w-full max-w-3xl my-8 max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between rounded-t-2xl">
               <h2 className="text-xl font-bold text-gray-900">Property Details</h2>
@@ -420,7 +419,7 @@ const PropertiesTable = () => {
 
       {/* Reject Modal */}
       {showRejectModal && selectedProperty && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl w-full max-w-md p-6">
             <h3 className="text-lg font-bold text-gray-900 mb-4">Reject Property</h3>
             <p className="text-sm text-gray-600 mb-4">

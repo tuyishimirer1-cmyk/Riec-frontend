@@ -226,7 +226,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
       <div className="bg-white rounded-2xl w-full max-w-4xl my-8 max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between rounded-t-2xl">
@@ -290,12 +290,12 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
                   required
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-riec-orange focus:border-transparent"
                 >
-                  <option value="HOUSE">🏠 House</option>
-                  <option value="APARTMENT">🏢 Apartment</option>
-                  <option value="LAND">🌳 Land</option>
-                  <option value="COMMERCIAL">🏭 Commercial</option>
-                  <option value="VILLA">🏰 Villa</option>
-                  <option value="OTHER">📍 Other</option>
+                  <option value="HOUSE">House</option>
+                  <option value="APARTMENT">Apartment</option>
+                  <option value="LAND">Land</option>
+                  <option value="COMMERCIAL">Commercial</option>
+                  <option value="VILLA">Villa</option>
+                  <option value="OTHER">Other</option>
                 </select>
               </div>
 
