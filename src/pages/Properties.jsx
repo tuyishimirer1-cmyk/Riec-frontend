@@ -10,6 +10,11 @@ const Properties = () => {
   const titleRef = useRef(null);
   const descRef = useRef(null);
 
+  // State for filters and search
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedType, setSelectedType] = useState(null); // 'house', 'apartment', 'land', 'commercial'
+  const [verifiedOnly, setVerifiedOnly] = useState(false);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(titleRef.current,
@@ -25,6 +30,26 @@ const Properties = () => {
 
     return () => ctx.revert();
   }, []);
+
+  // Handle search
+  const handleSearch = () => {
+    console.log('Searching for:', {
+      query: searchQuery,
+      type: selectedType,
+      verifiedOnly
+    });
+    // TODO: Implement actual search logic when properties API is ready
+  };
+
+  // Handle property type filter
+  const handleTypeFilter = (type) => {
+    setSelectedType(selectedType === type ? null : type);
+  };
+
+  // Handle verified filter
+  const handleVerifiedFilter = () => {
+    setVerifiedOnly(!verifiedOnly);
+  };
 
   return (
     <>
@@ -53,30 +78,71 @@ const Properties = () => {
                 <Search className="text-gray-400 w-5 h-5" />
                 <input
                   type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                   placeholder={t('properties.search_placeholder', 'Search location or property...')}
                   className="w-full outline-none text-gray-700"
                 />
               </div>
-              <button className="bg-riec-orange text-white font-bold px-8 py-3 rounded-xl hover:bg-riec-orange-light transition-all duration-300 hover:scale-105">
+              <button 
+                onClick={handleSearch}
+                className="bg-riec-orange text-white font-bold px-8 py-3 rounded-xl hover:bg-riec-orange-light transition-all duration-300 hover:scale-105"
+              >
                 {t('properties.search_button', 'Search')}
               </button>
             </div>
 
             {/* Quick Filters */}
             <div className="flex flex-wrap gap-3 mt-6">
-              <button className="px-4 py-2 border border-gray-200 rounded-lg hover:border-riec-orange hover:text-riec-orange transition-colors">
+              <button 
+                onClick={() => handleTypeFilter('house')}
+                className={`px-4 py-2 border rounded-lg transition-all duration-200 ${
+                  selectedType === 'house' 
+                    ? 'border-riec-orange bg-riec-orange text-white' 
+                    : 'border-gray-200 hover:border-riec-orange hover:text-riec-orange'
+                }`}
+              >
                 🏠 {t('properties.types.house', 'House')}
               </button>
-              <button className="px-4 py-2 border border-gray-200 rounded-lg hover:border-riec-orange hover:text-riec-orange transition-colors">
+              <button 
+                onClick={() => handleTypeFilter('apartment')}
+                className={`px-4 py-2 border rounded-lg transition-all duration-200 ${
+                  selectedType === 'apartment' 
+                    ? 'border-riec-orange bg-riec-orange text-white' 
+                    : 'border-gray-200 hover:border-riec-orange hover:text-riec-orange'
+                }`}
+              >
                 🏢 {t('properties.types.apartment', 'Apartment')}
               </button>
-              <button className="px-4 py-2 border border-gray-200 rounded-lg hover:border-riec-orange hover:text-riec-orange transition-colors">
+              <button 
+                onClick={() => handleTypeFilter('land')}
+                className={`px-4 py-2 border rounded-lg transition-all duration-200 ${
+                  selectedType === 'land' 
+                    ? 'border-riec-orange bg-riec-orange text-white' 
+                    : 'border-gray-200 hover:border-riec-orange hover:text-riec-orange'
+                }`}
+              >
                 🌳 {t('properties.types.land', 'Land')}
               </button>
-              <button className="px-4 py-2 border border-gray-200 rounded-lg hover:border-riec-orange hover:text-riec-orange transition-colors">
+              <button 
+                onClick={() => handleTypeFilter('commercial')}
+                className={`px-4 py-2 border rounded-lg transition-all duration-200 ${
+                  selectedType === 'commercial' 
+                    ? 'border-riec-orange bg-riec-orange text-white' 
+                    : 'border-gray-200 hover:border-riec-orange hover:text-riec-orange'
+                }`}
+              >
                 🏭 {t('properties.types.commercial', 'Commercial')}
               </button>
-              <button className="px-4 py-2 bg-green-50 border border-green-200 text-green-700 rounded-lg">
+              <button 
+                onClick={handleVerifiedFilter}
+                className={`px-4 py-2 border rounded-lg transition-all duration-200 ${
+                  verifiedOnly 
+                    ? 'bg-green-600 border-green-600 text-white' 
+                    : 'bg-green-50 border-green-200 text-green-700 hover:bg-green-100'
+                }`}
+              >
                 ✓ {t('properties.verified_only', 'Verified Only')}
               </button>
             </div>
