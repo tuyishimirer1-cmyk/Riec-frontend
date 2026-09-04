@@ -154,6 +154,8 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
       // Create property
       const newProperty = await createProperty.mutateAsync(propertyData);
       
+      let hasErrors = false;
+      
       // Upload images if any
       if (selectedImages.length > 0) {
         const imageFormData = new FormData();
@@ -166,6 +168,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
         } catch (imageError) {
           console.error('Image upload failed:', imageError);
           toast.error('Property created but images failed to upload');
+          hasErrors = true;
         }
       }
 
@@ -178,13 +181,20 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
         
         try {
           await uploadVideos.mutateAsync(videoFormData);
-          toast.success('Property and media uploaded successfully!');
         } catch (videoError) {
           console.error('Video upload failed:', videoError);
           toast.error('Property created but videos failed to upload');
+          hasErrors = true;
         }
-      } else if (selectedImages.length === 0) {
-        toast.success('Property added successfully! Pending verification.');
+      }
+
+      // Show success message if no errors occurred
+      if (!hasErrors) {
+        if (selectedImages.length > 0 || selectedVideos.length > 0) {
+          toast.success('Property and media uploaded successfully!');
+        } else {
+          toast.success('Property added successfully! Pending verification.');
+        }
       }
 
       onClose();
