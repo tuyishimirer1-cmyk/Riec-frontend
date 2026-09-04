@@ -245,11 +245,21 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
       console.error('Error details:', {
         message: error.message,
         response: error.response?.data,
-        status: error.response?.status
+        status: error.response?.status,
+        url: error.config?.url
       });
       
-      const errorMessage = error.response?.data?.message || error.message || 'Failed to create property';
-      toast.error(errorMessage);
+      // Check for specific error types
+      if (error.response?.status === 401) {
+        toast.error('You are not logged in. Please login and try again.');
+      } else if (error.response?.status === 403) {
+        toast.error('You do not have permission to create properties. Admin access required.');
+      } else if (error.response?.status === 404) {
+        toast.error('Properties API endpoint not found. Backend may still be deploying. Please wait and try again.');
+      } else {
+        const errorMessage = error.response?.data?.message || error.message || 'Failed to create property';
+        toast.error(errorMessage);
+      }
     } finally {
       setIsSubmitting(false);
     }
