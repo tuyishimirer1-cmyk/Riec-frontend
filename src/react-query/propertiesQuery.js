@@ -314,3 +314,19 @@ export function useUploadPropertyImages() {
     },
   })
 }
+
+// Upload property videos (cloudinary)
+export function useUploadPropertyVideos() {
+  return useMutation({
+    mutationFn: async (formData) => {
+      const response = await axios.post(`${BASE}/cloudinary/upload-video`, formData, {
+        headers: {
+          ...getAuthHeaders(),
+          'Content-Type': 'multipart/form-data',
+        },
+        timeout: 300000, // 5 minutes timeout for videos
+      })
+      return response.data
+    },
+  })
+}

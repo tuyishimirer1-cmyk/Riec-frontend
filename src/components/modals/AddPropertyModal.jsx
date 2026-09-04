@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { X, Upload, MapPin, Home, DollarSign, Image as ImageIcon, Loader2 } from 'lucide-react';
+import { X, Upload, MapPin, Home, DollarSign, Image as ImageIcon, Video, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { useCreateProperty, useUploadPropertyImages } from '../../react-query/propertiesQuery';
+import { useCreateProperty, useUploadPropertyImages, useUploadPropertyVideos } from '../../react-query/propertiesQuery';
 
 const AddPropertyModal = ({ isOpen, onClose }) => {
   const createProperty = useCreateProperty();
   const uploadImages = useUploadPropertyImages();
+  const uploadVideos = useUploadPropertyVideos();
 
   const [formData, setFormData] = useState({
     // Basic Info
@@ -42,6 +43,8 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
   const [amenityInput, setAmenityInput] = useState('');
   const [selectedImages, setSelectedImages] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
+  const [selectedVideos, setSelectedVideos] = useState([]);
+  const [videoPreviews, setVideoPreviews] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!isOpen) return null;
@@ -90,6 +93,41 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
     setImagePreviews(prev => prev.filter((_, i) => i !== index));
   };
 
+  const handleVideoSelect = (e) => {
+    const files = Array.from(e.target.files);
+    
+    // Validate video files (max 100MB per video)
+    const invalidFiles = files.filter(file => file.size > 100 * 1024 * 1024);
+    if (invalidFiles.length > 0) {
+      toast.error('Some videos are too large. Maximum size is 100MB per video.');
+      return;
+    }
+
+    setSelectedVideos(prev => [...prev, ...files]);
+    
+    // Create previews
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setVideoPreviews(prev => [...prev, { name: file.name, size: file.size, url: reader.result }]);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleRemoveVideo = (index) => {
+    setSelectedVideos(prev => prev.filter((_, i) => i !== index));
+    setVideoPreviews(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const formatFileSize = (bytes) => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -131,7 +169,24 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
         }
       }
 
-      toast.success('Property added successfully! Pending verification.');
+      // Upload videos if any
+      if (selectedVideos.length > 0) {
+        const videoFormData = new FormData();
+        selectedVideos.forEach((file) => {
+          videoFormData.append('files', file);
+        });
+        
+        try {
+          await uploadVideos.mutateAsync(videoFormData);
+          toast.success('Property and media uploaded successfully!');
+        } catch (videoError) {
+          console.error('Video upload failed:', videoError);
+          toast.error('Property created but videos failed to upload');
+        }
+      } else if (selectedImages.length === 0) {
+        toast.success('Property added successfully! Pending verification.');
+      }
+
       onClose();
       
       // Reset form
@@ -159,6 +214,8 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
       });
       setSelectedImages([]);
       setImagePreviews([]);
+      setSelectedVideos([]);
+      setVideoPreviews([]);
       
     } catch (error) {
       console.error('Error creating property:', error);
@@ -545,6 +602,56 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
                       type="button"
                       onClick={() => handleRemoveImage(index)}
                       className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Videos */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+              <Video className="w-5 h-5 text-riec-orange" />
+              Property Videos
+            </h3>
+
+            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6">
+              <input
+                type="file"
+                id="property-videos"
+                multiple
+                accept="video/*"
+                onChange={handleVideoSelect}
+                className="hidden"
+              />
+              <label
+                htmlFor="property-videos"
+                className="flex flex-col items-center justify-center cursor-pointer"
+              >
+                <Upload className="w-12 h-12 text-gray-400 mb-2" />
+                <span className="text-sm text-gray-600">Click to upload property videos</span>
+                <span className="text-xs text-gray-500 mt-1">Support: MP4, MOV, AVI (Max 100MB each)</span>
+              </label>
+            </div>
+
+            {videoPreviews.length > 0 && (
+              <div className="space-y-3">
+                {videoPreviews.map((preview, index) => (
+                  <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg group hover:bg-gray-100 transition-colors">
+                    <div className="flex-shrink-0">
+                      <Video className="w-10 h-10 text-riec-orange" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-gray-900 truncate">{preview.name}</p>
+                      <p className="text-xs text-gray-500">{formatFileSize(preview.size)}</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveVideo(index)}
+                      className="flex-shrink-0 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
                     >
                       <X className="w-4 h-4" />
                     </button>
