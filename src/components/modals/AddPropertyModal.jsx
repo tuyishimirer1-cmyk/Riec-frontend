@@ -130,16 +130,19 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('🔴 SUBMIT BUTTON CLICKED!'); // This should appear immediately
     setIsSubmitting(true);
 
     try {
       // Validate required fields
       if (!formData.title || !formData.description || !formData.price) {
+        console.log('❌ Validation failed - missing required fields');
         toast.error('Please fill in all required fields');
         setIsSubmitting(false);
         return;
       }
 
+      console.log('✅ Validation passed');
       console.log('Creating property with data:', formData);
 
       // Prepare data
