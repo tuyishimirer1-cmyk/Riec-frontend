@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
-import { Search, Home, Building2, MapPin, Calendar } from 'lucide-react';
+import { Search, Home, Building2, MapPin, Calendar, Bed, Bath, Maximize, Phone, Mail } from 'lucide-react';
 import gsap from 'gsap';
+import { useGetProperties } from '../react-query/propertiesQuery';
+import LoadingSpinner from '../components/ui/LoadingSpinner';
 
 const Properties = () => {
   const { t } = useTranslation();
@@ -12,8 +14,18 @@ const Properties = () => {
 
   // State for filters and search
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedType, setSelectedType] = useState(null); // 'house', 'apartment', 'land', 'commercial'
-  const [verifiedOnly, setVerifiedOnly] = useState(false);
+  const [selectedType, setSelectedType] = useState(null); // 'HOUSE', 'APARTMENT', 'LAND', 'COMMERCIAL'
+  const [verifiedOnly, setVerifiedOnly] = useState(true); // Default to verified only
+
+  // Fetch properties with filters
+  const { data: propertiesData, isLoading } = useGetProperties({
+    search: searchQuery,
+    propertyType: selectedType,
+    verifiedOnly: verifiedOnly,
+  });
+
+  const properties = propertiesData?.items || [];
+  const hasProperties = properties.length > 0;
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -33,12 +45,12 @@ const Properties = () => {
 
   // Handle search
   const handleSearch = () => {
-    console.log('Searching for:', {
+    // Properties will auto-refresh due to useGetPublicProperties dependency on filters
+    console.log('Searching with filters:', {
       query: searchQuery,
       type: selectedType,
       verifiedOnly
     });
-    // TODO: Implement actual search logic when properties API is ready
   };
 
   // Handle property type filter
@@ -50,6 +62,9 @@ const Properties = () => {
   const handleVerifiedFilter = () => {
     setVerifiedOnly(!verifiedOnly);
   };
+
+  const properties = propertiesData?.data || [];
+  const hasProperties = properties.length > 0;
 
   return (
     <>
@@ -96,9 +111,9 @@ const Properties = () => {
             {/* Quick Filters */}
             <div className="flex flex-wrap gap-3 mt-6">
               <button 
-                onClick={() => handleTypeFilter('house')}
+                onClick={() => handleTypeFilter('HOUSE')}
                 className={`px-4 py-2 border rounded-lg transition-all duration-200 ${
-                  selectedType === 'house' 
+                  selectedType === 'HOUSE' 
                     ? 'border-riec-orange bg-riec-orange text-white' 
                     : 'border-gray-200 hover:border-riec-orange hover:text-riec-orange'
                 }`}
@@ -106,9 +121,9 @@ const Properties = () => {
                 {t('properties.types.house', 'House')}
               </button>
               <button 
-                onClick={() => handleTypeFilter('apartment')}
+                onClick={() => handleTypeFilter('APARTMENT')}
                 className={`px-4 py-2 border rounded-lg transition-all duration-200 ${
-                  selectedType === 'apartment' 
+                  selectedType === 'APARTMENT' 
                     ? 'border-riec-orange bg-riec-orange text-white' 
                     : 'border-gray-200 hover:border-riec-orange hover:text-riec-orange'
                 }`}
@@ -116,9 +131,9 @@ const Properties = () => {
                 {t('properties.types.apartment', 'Apartment')}
               </button>
               <button 
-                onClick={() => handleTypeFilter('land')}
+                onClick={() => handleTypeFilter('LAND')}
                 className={`px-4 py-2 border rounded-lg transition-all duration-200 ${
-                  selectedType === 'land' 
+                  selectedType === 'LAND' 
                     ? 'border-riec-orange bg-riec-orange text-white' 
                     : 'border-gray-200 hover:border-riec-orange hover:text-riec-orange'
                 }`}
@@ -126,9 +141,9 @@ const Properties = () => {
                 {t('properties.types.land', 'Land')}
               </button>
               <button 
-                onClick={() => handleTypeFilter('commercial')}
+                onClick(() => handleTypeFilter('COMMERCIAL')}
                 className={`px-4 py-2 border rounded-lg transition-all duration-200 ${
-                  selectedType === 'commercial' 
+                  selectedType === 'COMMERCIAL' 
                     ? 'border-riec-orange bg-riec-orange text-white' 
                     : 'border-gray-200 hover:border-riec-orange hover:text-riec-orange'
                 }`}
@@ -150,69 +165,139 @@ const Properties = () => {
         </div>
       </section>
 
-      {/* Coming Soon Section */}
+      {/* Properties Listing Section */}
       <section className="py-16 px-6 md:px-12 bg-white">
-        <div className="max-w-screen-2xl mx-auto text-center">
-          <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-12 md:p-16">
-            <div className="w-20 h-20 bg-riec-orange/10 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Home className="w-10 h-10 text-riec-orange" />
+        <div className="max-w-screen-2xl mx-auto">
+          {isLoading ? (
+            <div className="flex justify-center items-center py-20">
+              <LoadingSpinner />
             </div>
-            
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              {t('properties.coming_soon.title', 'Properties Marketplace Coming Soon!')}
-            </h2>
-            
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-8">
-              {t('properties.coming_soon.description', 'We are building a comprehensive real estate marketplace where you can find verified properties for sale and rent across Rwanda.')}
-            </p>
-
-            <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-8">
-              <div className="bg-white rounded-xl p-6 shadow-lg">
-                <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <Building2 className="w-6 h-6 text-blue-600" />
-                </div>
-                <h3 className="font-bold text-gray-900 mb-2">
-                  {t('properties.coming_soon.feature1', 'Verified Properties')}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  {t('properties.coming_soon.feature1_desc', 'All properties verified by RIEC')}
+          ) : hasProperties ? (
+            <>
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                  {properties.length} {t('properties.results', 'Properties Found')}
+                </h2>
+                <p className="text-gray-600">
+                  {selectedType && `Showing ${selectedType.toLowerCase()} properties`}
+                  {verifiedOnly && ' (Verified only)'}
                 </p>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-lg">
-                <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <MapPin className="w-6 h-6 text-green-600" />
-                </div>
-                <h3 className="font-bold text-gray-900 mb-2">
-                  {t('properties.coming_soon.feature2', 'All Locations')}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  {t('properties.coming_soon.feature2_desc', 'Properties across Rwanda')}
-                </p>
-              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {properties.map((property) => (
+                  <div key={property.id} className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                    {/* Property Image */}
+                    <div className="relative h-64 overflow-hidden">
+                      {property.images && property.images[0] ? (
+                        <img 
+                          src={property.images[0].url} 
+                          alt={property.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                          <Home className="w-16 h-16 text-gray-400" />
+                        </div>
+                      )}
+                      {property.verificationStatus === 'VERIFIED' && (
+                        <div className="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          ✓ Verified
+                        </div>
+                      )}
+                      {property.isFeatured && (
+                        <div className="absolute top-4 left-4 bg-riec-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          ⭐ Featured
+                        </div>
+                      )}
+                      <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg">
+                        <p className="text-riec-orange font-bold text-xl">
+                          {property.price.toLocaleString()} {property.currency}
+                        </p>
+                        <p className="text-sm text-gray-600">{property.listingType === 'FOR_SALE' ? 'For Sale' : 'For Rent'}</p>
+                      </div>
+                    </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-lg">
-                <div className="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <Calendar className="w-6 h-6 text-riec-orange" />
-                </div>
-                <h3 className="font-bold text-gray-900 mb-2">
-                  {t('properties.coming_soon.feature3', 'Easy Viewing')}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  {t('properties.coming_soon.feature3_desc', 'Schedule property viewings easily')}
-                </p>
-              </div>
-            </div>
+                    {/* Property Details */}
+                    <div className="p-6">
+                      <h3 className="font-bold text-xl text-gray-900 mb-2 line-clamp-1">
+                        {property.title}
+                      </h3>
+                      
+                      <div className="flex items-center gap-2 text-gray-600 mb-4">
+                        <MapPin className="w-4 h-4" />
+                        <span className="text-sm">{property.sector}, {property.district}</span>
+                      </div>
 
-            <div className="bg-riec-orange/10 border border-riec-orange/20 rounded-xl p-6 max-w-2xl mx-auto">
-              <p className="text-riec-orange font-semibold mb-2">
-                {t('properties.coming_soon.notify', '🔔 Want to be notified when we launch?')}
+                      <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                        {property.description}
+                      </p>
+
+                      {/* Property Features */}
+                      <div className="flex items-center gap-4 mb-4 text-sm text-gray-700">
+                        {property.bedrooms && (
+                          <div className="flex items-center gap-1">
+                            <Bed className="w-4 h-4" />
+                            <span>{property.bedrooms}</span>
+                          </div>
+                        )}
+                        {property.bathrooms && (
+                          <div className="flex items-center gap-1">
+                            <Bath className="w-4 h-4" />
+                            <span>{property.bathrooms}</span>
+                          </div>
+                        )}
+                        <div className="flex items-center gap-1">
+                          <Maximize className="w-4 h-4" />
+                          <span>{property.landSize}m²</span>
+                        </div>
+                      </div>
+
+                      {/* Contact Buttons */}
+                      <div className="flex gap-2">
+                        <a 
+                          href={`tel:${property.sellerPhone}`}
+                          className="flex-1 bg-riec-orange text-white text-center py-2 rounded-lg hover:bg-riec-orange-light transition-colors duration-200 flex items-center justify-center gap-2"
+                        >
+                          <Phone className="w-4 h-4" />
+                          Call
+                        </a>
+                        <a 
+                          href={`mailto:${property.sellerEmail}`}
+                          className="flex-1 bg-gray-100 text-gray-700 text-center py-2 rounded-lg hover:bg-gray-200 transition-colors duration-200 flex items-center justify-center gap-2"
+                        >
+                          <Mail className="w-4 h-4" />
+                          Email
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="text-center py-20">
+              <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Home className="w-10 h-10 text-gray-400" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                {t('properties.no_results', 'No Properties Found')}
+              </h3>
+              <p className="text-gray-600 mb-6">
+                {t('properties.no_results_desc', 'Try adjusting your filters or search query')}
               </p>
-              <p className="text-gray-600 text-sm mb-4">
-                {t('properties.coming_soon.contact', 'Contact us at')} <a href="mailto:riec2025@gmail.com" className="text-riec-orange font-semibold hover:underline">riec2025@gmail.com</a>
-              </p>
+              <button 
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedType(null);
+                  setVerifiedOnly(true);
+                }}
+                className="bg-riec-orange text-white px-6 py-3 rounded-lg hover:bg-riec-orange-light transition-colors duration-200"
+              >
+                {t('properties.clear_filters', 'Clear Filters')}
+              </button>
             </div>
-          </div>
+          )}
         </div>
       </section>
 
