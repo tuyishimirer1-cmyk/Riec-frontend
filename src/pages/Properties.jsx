@@ -138,7 +138,7 @@ const Properties = () => {
                 {t('properties.types.land', 'Land')}
               </button>
               <button 
-                onClick(() => handleTypeFilter('COMMERCIAL')}
+                onClick={() => handleTypeFilter('COMMERCIAL')}
                 className={`px-4 py-2 border rounded-lg transition-all duration-200 ${
                   selectedType === 'COMMERCIAL' 
                     ? 'border-riec-orange bg-riec-orange text-white' 
@@ -325,4 +325,5 @@ const Properties = () => {
 };
 
 export default Properties;
+
 
