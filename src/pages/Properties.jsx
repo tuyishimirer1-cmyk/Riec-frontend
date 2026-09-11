@@ -14,13 +14,12 @@ const Properties = () => {
   // State for filters and search
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState(null); // 'HOUSE', 'APARTMENT', 'LAND', 'COMMERCIAL'
-  const [verifiedOnly, setVerifiedOnly] = useState(true); // Default to verified only
 
   // Fetch properties with filters
   const { data: propertiesData, isLoading } = useGetProperties({
     search: searchQuery,
     propertyType: selectedType,
-    verifiedOnly: verifiedOnly,
+    verifiedOnly: false, // Show all properties
   });
 
   const properties = propertiesData?.items || [];
@@ -47,19 +46,13 @@ const Properties = () => {
     // Properties will auto-refresh due to useGetPublicProperties dependency on filters
     console.log('Searching with filters:', {
       query: searchQuery,
-      type: selectedType,
-      verifiedOnly
+      type: selectedType
     });
   };
 
   // Handle property type filter
   const handleTypeFilter = (type) => {
     setSelectedType(selectedType === type ? null : type);
-  };
-
-  // Handle verified filter
-  const handleVerifiedFilter = () => {
-    setVerifiedOnly(!verifiedOnly);
   };
 
   return (
@@ -146,16 +139,6 @@ const Properties = () => {
               >
                 {t('properties.types.commercial', 'Commercial')}
               </button>
-              <button 
-                onClick={handleVerifiedFilter}
-                className={`px-4 py-2 border rounded-lg transition-all duration-200 ${
-                  verifiedOnly 
-                    ? 'bg-green-600 border-green-600 text-white' 
-                    : 'bg-green-50 border-green-200 text-green-700 hover:bg-green-100'
-                }`}
-              >
-                Verified Only
-              </button>
             </div>
           </div>
         </div>
@@ -176,7 +159,6 @@ const Properties = () => {
                 </h2>
                 <p className="text-gray-600">
                   {selectedType && `Showing ${selectedType.toLowerCase()} properties`}
-                  {verifiedOnly && ' (Verified only)'}
                 </p>
               </div>
 
@@ -194,11 +176,6 @@ const Properties = () => {
                       ) : (
                         <div className="w-full h-full bg-gray-200 flex items-center justify-center">
                           <Home className="w-16 h-16 text-gray-400" />
-                        </div>
-                      )}
-                      {property.verificationStatus === 'VERIFIED' && (
-                        <div className="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                          ✓ Verified
                         </div>
                       )}
                       {property.isFeatured && (
@@ -286,7 +263,6 @@ const Properties = () => {
                 onClick={() => {
                   setSearchQuery('');
                   setSelectedType(null);
-                  setVerifiedOnly(true);
                 }}
                 className="bg-riec-orange text-white px-6 py-3 rounded-lg hover:bg-riec-orange-light transition-colors duration-200"
               >
