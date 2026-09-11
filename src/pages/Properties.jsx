@@ -63,9 +63,6 @@ const Properties = () => {
     setVerifiedOnly(!verifiedOnly);
   };
 
-  const properties = propertiesData?.data || [];
-  const hasProperties = properties.length > 0;
-
   return (
     <>
       <Helmet>
@@ -328,3 +325,4 @@ const Properties = () => {
 };
 
 export default Properties;
+
