@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet-async';
 import { Search, Home, Building2, MapPin, Calendar, Bed, Bath, Maximize, Phone, Mail } from 'lucide-react';
 import gsap from 'gsap';
 import { useGetProperties } from '../react-query/propertiesQuery';
-import LoadingSpinner from '../components/ui/LoadingSpinner';
 
 const Properties = () => {
   const { t } = useTranslation();
@@ -167,7 +166,7 @@ const Properties = () => {
         <div className="max-w-screen-2xl mx-auto">
           {isLoading ? (
             <div className="flex justify-center items-center py-20">
-              <LoadingSpinner />
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-riec-orange border-t-transparent"></div>
             </div>
           ) : hasProperties ? (
             <>
