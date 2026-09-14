@@ -29,10 +29,10 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: Facebook, href: 'https://facebook.com', label: 'Facebook' },
-    { icon: Twitter, href: 'https://x.com/riec2025', label: 'X' },
     { icon: Instagram, href: 'https://www.instagram.com/riec.2025/', label: 'Instagram' },
-    { icon: FaTiktok, href: 'https://vm.tiktok.com/ZS9jErCJbhL5b-dNsi0/', label: 'TikTok', isCustom: true },
     { icon: FaYoutube, href: 'https://www.youtube.com/@RIEC2025', label: 'YouTube', isCustom: true },
+    { icon: Twitter, href: 'https://x.com/riec2025', label: 'X' },
+    { icon: FaTiktok, href: 'https://vm.tiktok.com/ZS9jErCJbhL5b-dNsi0/', label: 'TikTok', isCustom: true },
     { icon: FaLinkedin, href: 'https://www.linkedin.com/in/riec-ltd-84050337a/', label: 'LinkedIn', isCustom: true }
   ];
 
@@ -128,15 +128,16 @@ const Footer = () => {
           {/* Social Media */}
           <div>
             <h3 className="text-lg font-bold mb-4">{t('common.footer.follow_us')}</h3>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gray-800 hover:bg-riec-orange p-3 rounded-lg transition-all duration-300 hover:scale-110"
+                  className="bg-gray-800 hover:bg-riec-orange p-3 rounded-lg transition-all duration-300 hover:scale-110 flex items-center justify-center"
                   aria-label={social.label}
+                  title={social.label}
                 >
                   {social.isCustom ? (
                     <social.icon className="w-5 h-5" />
