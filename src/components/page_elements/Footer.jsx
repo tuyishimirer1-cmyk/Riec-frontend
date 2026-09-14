@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram } from 'lucide-react';
-import { FaTiktok, FaLinkedin } from 'react-icons/fa';
+import { FaTiktok, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import logo from '../../assets/logo.svg';
 
 const Footer = () => {
@@ -32,6 +32,7 @@ const Footer = () => {
     { icon: Twitter, href: 'https://x.com/riec2025', label: 'X' },
     { icon: Instagram, href: 'https://www.instagram.com/riec.2025/', label: 'Instagram' },
     { icon: FaTiktok, href: 'https://vm.tiktok.com/ZS9jErCJbhL5b-dNsi0/', label: 'TikTok', isCustom: true },
+    { icon: FaYoutube, href: 'https://www.youtube.com/@RIEC2025', label: 'YouTube', isCustom: true },
     { icon: FaLinkedin, href: 'https://www.linkedin.com/in/riec-ltd-84050337a/', label: 'LinkedIn', isCustom: true }
   ];
 
