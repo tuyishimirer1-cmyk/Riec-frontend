@@ -131,7 +131,6 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('🔴 SUBMIT BUTTON CLICKED!');
-    alert('Submit handler called!'); // DEBUG
     setIsSubmitting(true);
 
     try {
@@ -145,61 +144,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
 
       console.log('✅ Validation passed');
 
-      // Step 1: Upload images first if any
-      let imageUrls = [];
-      if (selectedImages.length > 0) {
-        console.log('Uploading images...');
-        toast.loading('Uploading images...', { id: 'upload-images' });
-        const imageFormData = new FormData();
-        selectedImages.forEach((file) => {
-          imageFormData.append('files', file);
-        });
-        
-        try {
-          const imageResponse = await uploadImages.mutateAsync(imageFormData);
-          console.log('Images uploaded successfully:', imageResponse);
-          // Extract URLs from Cloudinary response
-          imageUrls = imageResponse.data?.map(img => ({
-            url: img.secure_url || img.url,
-            publicId: img.public_id
-          })) || [];
-          toast.success('Images uploaded!', { id: 'upload-images' });
-        } catch (imageError) {
-          console.error('Image upload failed:', imageError);
-          toast.error('Failed to upload images', { id: 'upload-images' });
-          setIsSubmitting(false);
-          return;
-        }
-      }
-
-      // Step 2: Upload videos if any
-      let videoUrls = [];
-      if (selectedVideos.length > 0) {
-        console.log('Uploading videos...');
-        toast.loading('Uploading videos...', { id: 'upload-videos' });
-        const videoFormData = new FormData();
-        selectedVideos.forEach((file) => {
-          videoFormData.append('files', file);
-        });
-        
-        try {
-          const videoResponse = await uploadVideos.mutateAsync(videoFormData);
-          console.log('Videos uploaded successfully:', videoResponse);
-          // Extract URLs from Cloudinary response
-          videoUrls = videoResponse.data?.map(vid => ({
-            url: vid.secure_url || vid.url,
-            publicId: vid.public_id
-          })) || [];
-          toast.success('Videos uploaded!', { id: 'upload-videos' });
-        } catch (videoError) {
-          console.error('Video upload failed:', videoError);
-          toast.error('Failed to upload videos', { id: 'upload-videos' });
-          setIsSubmitting(false);
-          return;
-        }
-      }
-
-      // Step 3: Prepare property data with image/video URLs
+      // SIMPLIFIED: Create property WITHOUT images first
       const propertyData = {
         ...formData,
         price: parseFloat(formData.price),
@@ -208,18 +153,22 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
         bedrooms: formData.bedrooms ? parseInt(formData.bedrooms) : undefined,
         bathrooms: formData.bathrooms ? parseInt(formData.bathrooms) : undefined,
         parking: formData.parking ? parseInt(formData.parking) : undefined,
-        images: imageUrls,
-        videos: videoUrls,
+        // Don't send images/videos for now - just create the property
       };
 
       console.log('Creating property with data:', propertyData);
 
-      // Step 4: Create property with all media URLs
+      // Create property
       toast.loading('Creating property...', { id: 'create-property' });
       const newProperty = await createProperty.mutateAsync(propertyData);
       console.log('Property created successfully:', newProperty);
       
       toast.success('Property created and published successfully!', { id: 'create-property' });
+
+      // TODO: Upload images after property is created (Phase 2)
+      if (selectedImages.length > 0) {
+        console.log('Note: Image upload will be implemented in next update');
+      }
 
       onClose();
       
