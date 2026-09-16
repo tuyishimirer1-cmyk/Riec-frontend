@@ -78,6 +78,26 @@ function App() {
           <Route path="contact" element={<ContactDashboardPage />} />
           <Route path="payments" element={<PaymentsDashboardPage />} />
         </Route>
+
+        {/* Admin routes (aliases for dashboard) */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute roles={['ADMIN', 'COMPANY_WORKER', 'ENGINEER']}>
+              <DashboardLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<OverviewPage />} />
+          <Route path="overview" element={<OverviewPage />} />
+          <Route path="projects" element={<ProjectsDashboardPage />} />
+          <Route path="services" element={<ServicesDashboardPage />} />
+          <Route path="properties" element={<PropertiesDashboardPage />} />
+          <Route path="careers" element={<CareersDashboardPage />} />
+          <Route path="applications" element={<ApplicationsDashboardPage />} />
+          <Route path="contact" element={<ContactDashboardPage />} />
+          <Route path="payments" element={<PaymentsDashboardPage />} />
+        </Route>
       </Routes>
     </ErrorBoundary>
   )
