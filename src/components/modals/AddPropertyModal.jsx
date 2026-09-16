@@ -131,6 +131,7 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('🔴 SUBMIT BUTTON CLICKED!');
+    alert('Submit handler called!'); // DEBUG
     setIsSubmitting(true);
 
     try {
