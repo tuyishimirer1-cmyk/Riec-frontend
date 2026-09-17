@@ -144,7 +144,69 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
 
       console.log('✅ Validation passed');
 
-      // SIMPLIFIED: Create property WITHOUT images first
+      // Step 1: Upload images first if any
+      let imageUrls = [];
+      if (selectedImages.length > 0) {
+        console.log('📸 Uploading', selectedImages.length, 'images...');
+        toast.loading('Uploading images...', { id: 'upload-images' });
+        
+        const imageFormData = new FormData();
+        selectedImages.forEach((file) => {
+          imageFormData.append('files', file);
+        });
+        
+        try {
+          const imageResponse = await uploadImages.mutateAsync(imageFormData);
+          console.log('✅ Images uploaded:', imageResponse);
+          
+          // Handle different response formats
+          const imagesData = imageResponse.data || imageResponse.urls || imageResponse;
+          imageUrls = Array.isArray(imagesData) ? imagesData.map(img => ({
+            url: img.secure_url || img.url,
+            publicId: img.public_id || img.publicId
+          })) : [];
+          
+          console.log('📸 Image URLs prepared:', imageUrls);
+          toast.success(`${imageUrls.length} images uploaded!`, { id: 'upload-images' });
+        } catch (imageError) {
+          console.error('❌ Image upload failed:', imageError);
+          toast.error('Image upload failed. Creating property without images.', { id: 'upload-images' });
+          // Continue without images instead of failing completely
+        }
+      }
+
+      // Step 2: Upload videos if any
+      let videoUrls = [];
+      if (selectedVideos.length > 0) {
+        console.log('🎥 Uploading', selectedVideos.length, 'videos...');
+        toast.loading('Uploading videos...', { id: 'upload-videos' });
+        
+        const videoFormData = new FormData();
+        selectedVideos.forEach((file) => {
+          videoFormData.append('files', file);
+        });
+        
+        try {
+          const videoResponse = await uploadVideos.mutateAsync(videoFormData);
+          console.log('✅ Videos uploaded:', videoResponse);
+          
+          // Handle different response formats
+          const videosData = videoResponse.data || videoResponse.urls || videoResponse;
+          videoUrls = Array.isArray(videosData) ? videosData.map(vid => ({
+            url: vid.secure_url || vid.url,
+            publicId: vid.public_id || vid.publicId
+          })) : [];
+          
+          console.log('🎥 Video URLs prepared:', videoUrls);
+          toast.success(`${videoUrls.length} videos uploaded!`, { id: 'upload-videos' });
+        } catch (videoError) {
+          console.error('❌ Video upload failed:', videoError);
+          toast.error('Video upload failed. Creating property without videos.', { id: 'upload-videos' });
+          // Continue without videos instead of failing completely
+        }
+      }
+
+      // Step 3: Create property with uploaded media
       const propertyData = {
         ...formData,
         price: parseFloat(formData.price),
@@ -153,22 +215,18 @@ const AddPropertyModal = ({ isOpen, onClose }) => {
         bedrooms: formData.bedrooms ? parseInt(formData.bedrooms) : undefined,
         bathrooms: formData.bathrooms ? parseInt(formData.bathrooms) : undefined,
         parking: formData.parking ? parseInt(formData.parking) : undefined,
-        // Don't send images/videos for now - just create the property
+        images: imageUrls.length > 0 ? imageUrls : undefined,
+        videos: videoUrls.length > 0 ? videoUrls : undefined,
       };
 
-      console.log('Creating property with data:', propertyData);
+      console.log('🏠 Creating property with data:', propertyData);
 
       // Create property
       toast.loading('Creating property...', { id: 'create-property' });
       const newProperty = await createProperty.mutateAsync(propertyData);
-      console.log('Property created successfully:', newProperty);
+      console.log('✅ Property created successfully:', newProperty);
       
       toast.success('Property created and published successfully!', { id: 'create-property' });
-
-      // TODO: Upload images after property is created (Phase 2)
-      if (selectedImages.length > 0) {
-        console.log('Note: Image upload will be implemented in next update');
-      }
 
       onClose();
       
