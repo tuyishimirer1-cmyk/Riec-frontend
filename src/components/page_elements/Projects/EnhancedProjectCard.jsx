@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
-import { ArrowRight, MapPin, DollarSign, Star, Eye } from 'lucide-react'
+import { ArrowRight, MapPin, Star, Eye } from 'lucide-react'
 import PropTypes from 'prop-types'
 
 const EnhancedProjectCard = ({ project, index }) => {
@@ -227,8 +227,7 @@ const EnhancedProjectCard = ({ project, index }) => {
         </div>
 
         {/* Price */}
-        <div className="flex items-center gap-2 mb-4">
-          <DollarSign className="w-4 h-4 text-riec-orange" />
+        <div className="mb-4">
           <span className="text-white font-bold text-sm">{priceDisplay}</span>
         </div>
 
