@@ -115,12 +115,24 @@ export function useDeleteProject() {
 
   return useMutation({
     mutationFn: async (id) => {
-      await axios.delete(`${BASE}/projects/identifier/${id}`, { headers: getAuthHeaders() })
+      console.log('🔥 React Query: Deleting project with ID:', id)
+      console.log('🔥 DELETE URL:', `${BASE}/projects/identifier/${id}`)
+      
+      const response = await axios.delete(`${BASE}/projects/identifier/${id}`, { 
+        headers: getAuthHeaders() 
+      })
+      
+      console.log('✅ React Query: Delete response:', response.data)
       return id
     },
     onSuccess: (id) => {
+      console.log('✅ React Query: Delete successful, invalidating queries for ID:', id)
       queryClient.invalidateQueries({ queryKey: ['projects'] })
       queryClient.removeQueries({ queryKey: ['project', id] })
+    },
+    onError: (error) => {
+      console.error('❌ React Query: Delete failed:', error)
+      console.error('❌ Error response:', error.response)
     },
   })
 }
