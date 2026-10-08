@@ -26,6 +26,14 @@ export default function ProjectWizard({ editing, onClose, onCreate, onUpdate }) 
   const imgUpload   = useXhrUpload()
   const assetUpload = useXhrUpload()
 
+  // Debug: Track images state changes
+  useEffect(() => {
+    console.log('🖼️ Images state changed:', images.length, 'images')
+    if (images.length > 0) {
+      console.log('   Files:', images.map(f => f.name))
+    }
+  }, [images])
+
   const toggleService = (slug) => {
     setServiceSlugs((prev) => prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug])
   }
@@ -101,12 +109,29 @@ export default function ProjectWizard({ editing, onClose, onCreate, onUpdate }) 
 
       const pid = project?.id || editing?.id
       if (pid) {
+        console.log('📤 Starting uploads for project:', pid)
+        console.log('📸 Images to upload:', images.length)
+        console.log('📁 Asset batches to upload:', assetBatches.length)
+        
         if (images.length) {
           setUploadLabel(t('dash.wizard.uploading_images', { defaultValue: 'Uploading images…' }))
+          console.log('📤 Uploading images...')
           const fd = new FormData()
-          images.forEach((f) => fd.append('files', f))
-          await imgUpload.upload(`/projects/${pid}/images`, fd).catch(() => {})
+          images.forEach((f, idx) => {
+            console.log(`  - Image ${idx + 1}:`, f.name, `(${(f.size / 1024).toFixed(1)} KB)`)
+            fd.append('files', f)
+          })
+          try {
+            const result = await imgUpload.upload(`/projects/${pid}/images`, fd)
+            console.log('✅ Images uploaded successfully:', result)
+          } catch (err) {
+            console.error('❌ Image upload failed:', err)
+            throw err
+          }
+        } else {
+          console.log('⚠️ No images to upload')
         }
+        
         for (let i = 0; i < assetBatches.length; i++) {
           const batch = assetBatches[i]
           if (!batch.files.length) continue
@@ -114,11 +139,18 @@ export default function ProjectWizard({ editing, onClose, onCreate, onUpdate }) 
             n: i + 1, total: assetBatches.length,
             defaultValue: `Uploading assets (${i + 1}/${assetBatches.length})…`,
           }))
+          console.log(`📤 Uploading asset batch ${i + 1}/${assetBatches.length}`)
           const fd = new FormData()
           batch.files.forEach((f) => fd.append('files', f))
           fd.append('documentType', batch.documentType)
-          await assetUpload.upload(`/projects/${pid}/assets`, fd).catch(() => {})
+          try {
+            const result = await assetUpload.upload(`/projects/${pid}/assets`, fd)
+            console.log(`✅ Asset batch ${i + 1} uploaded successfully:`, result)
+          } catch (err) {
+            console.error(`❌ Asset batch ${i + 1} upload failed:`, err)
+          }
         }
+        console.log('✅ All uploads completed!')
       }
       handleClose()
     } catch (err) {

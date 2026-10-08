@@ -160,11 +160,19 @@ export function StepMedia({ images, setImages, assetBatches, setAssetBatches }) 
   const { t } = useTranslation()
 
   /* ── Images ── */
-  const handleImageFiles = (files) => setImages((prev) => {
-    const existing = new Set(prev.map((f) => f.name + f.size))
-    return [...prev, ...files.filter((f) => !existing.has(f.name + f.size))]
-  })
-  const removeImage = (idx) => setImages((prev) => prev.filter((_, i) => i !== idx))
+  const handleImageFiles = (files) => {
+    console.log('📸 Adding images:', files.length)
+    setImages((prev) => {
+      const existing = new Set(prev.map((f) => f.name + f.size))
+      const newImages = [...prev, ...files.filter((f) => !existing.has(f.name + f.size))]
+      console.log('📸 Total images now:', newImages.length)
+      return newImages
+    })
+  }
+  const removeImage = (idx) => {
+    console.log('🗑️ Removing image at index:', idx)
+    setImages((prev) => prev.filter((_, i) => i !== idx))
+  }
 
   /* ── Asset batches ── */
   const addBatch = (files, documentType) => {
