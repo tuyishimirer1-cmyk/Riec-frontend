@@ -9,6 +9,20 @@ const getAuthHeaders = () => {
   return token ? { Authorization: `Bearer ${token}` } : {}
 }
 
+// useVerifyPassword - verify current user password
+export function useVerifyPassword() {
+  return useMutation({
+    mutationFn: async (password) => {
+      const response = await axios.post(
+        `${BASE}/auth/verify-password`,
+        { password },
+        { headers: getAuthHeaders() }
+      )
+      return response.data.data ?? response.data
+    },
+  })
+}
+
 // useGetProjects
 export function useGetProjects(params = {}) {
   // Default include to fetch images and services for cards/tables

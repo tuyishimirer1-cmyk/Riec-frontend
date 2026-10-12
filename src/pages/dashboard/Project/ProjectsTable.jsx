@@ -120,7 +120,7 @@ export default function ProjectsTable({
                         hoverBg="rgba(19,194,150,0.10)" hoverColor="var(--color-secondary)">
                         {p.isPublished ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
                       </ActionBtn>
-                      <ActionBtn onClick={() => onDelete(p.id)} title="Delete"
+                      <ActionBtn onClick={() => onDelete(p)} title="Delete"
                         hoverBg="rgba(225,27,37,0.10)" hoverColor="var(--color-riec-red)">
                         <Trash2 className="h-3.5 w-3.5" />
                       </ActionBtn>

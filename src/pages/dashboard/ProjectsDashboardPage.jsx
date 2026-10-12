@@ -4,12 +4,13 @@ import { Plus } from 'lucide-react'
 import {
   useGetProjects, useCreateProject, useUpdateProject,
   useDeleteProject, usePublishProject, useUnpublishProject,
-  useSearchProjects,
+  useSearchProjects, useVerifyPassword,
 } from '../../react-query'
 import ProjectWizard       from './Project/ProjectWizard'
 import ProjectsTable       from './Project/ProjectsTable'
 import ProjectManageDrawer from './Project/Manage/ProjectManageDrawer'
 import DashboardSearchBar  from './components/DashboardSearchBar'
+import PasswordConfirmModal from '../../components/modals/PasswordConfirmModal'
 
 export default function ProjectsDashboardPage() {
   const { t } = useTranslation()
@@ -20,6 +21,7 @@ export default function ProjectsDashboardPage() {
   const [filters,  setFilters]  = useState({})
   const [wizard,   setWizard]   = useState(null)
   const [managing, setManaging] = useState(null)
+  const [deleteConfirm, setDeleteConfirm] = useState(null) // { id, title }
 
   const isSearching = search.trim().length >= 2
 
@@ -30,6 +32,7 @@ export default function ProjectsDashboardPage() {
   const deleteProjectMutation = useDeleteProject()
   const publishProjectMutation = usePublishProject()
   const unpublishProjectMutation = useUnpublishProject()
+  const verifyPasswordMutation = useVerifyPassword()
 
   const projects  = isSearching ? (searchData?.items || []) : (projectsData?.items || [])
   const meta      = projectsData || {}
@@ -39,25 +42,83 @@ export default function ProjectsDashboardPage() {
     ? Math.ceil(meta.total / meta.pageSize)
     : null
 
-  const handleDelete = async (id) => {
-    console.log('🗑️ Attempting to delete project:', id)
-    
-    if (!window.confirm(t('dash.projects_page.delete_confirm', { defaultValue: 'Delete this project? This cannot be undone.' }))) {
-      console.log('❌ Delete cancelled by user')
-      return
-    }
+  const handleDeleteRequest = (project) => {
+    console.log('🗑️ Delete requested for project:', project.title, project.id)
+    setDeleteConfirm({ id: project.id, title: project.title })
+  }
+
+  const handleDeleteConfirm = async (password) => {
+    if (!deleteConfirm) return
+
+    console.log('🔐 Verifying password for project deletion...')
     
     try {
-      console.log('📤 Sending delete request for project ID:', id)
-      await deleteProjectMutation.mutateAsync(id)
+      // Step 1: Verify password
+      console.log('📤 Sending password verification request...')
+      await verifyPasswordMutation.mutateAsync(password)
+      console.log('✅ Password verified successfully!')
+
+      // Step 2: Delete project
+      console.log('📤 Sending delete request for project ID:', deleteConfirm.id)
+      await deleteProjectMutation.mutateAsync(deleteConfirm.id)
       console.log('✅ Project deleted successfully!')
-      alert('Project deleted successfully!')
+      
+      // Close modal
+      setDeleteConfirm(null)
+      
+      alert(t('dash.projects_page.delete_success', { 
+        defaultValue: 'Project deleted successfully!' 
+      }))
     } catch (error) {
-      console.error('❌ Delete error:', error)
+      console.error('❌ Error during delete process:', error)
       console.error('Error response:', error?.response)
       console.error('Error data:', error?.response?.data)
+      
+      // Don't close modal on error - let user retry
       const message = error?.response?.data?.message || error?.message || 'Failed to delete project'
-      alert(`Error: ${Array.isArray(message) ? message.join(', ') : message}`)
+      
+      // Re-throw error to be handled by PasswordConfirmModal
+      throw new Error(Array.isArray(message) ? message.join(', ') : message)
+    }
+  }
+
+  const handleDeleteRequest = (project) => {
+    console.log('🗑️ Delete requested for project:', project.title, project.id)
+    setDeleteConfirm({ id: project.id, title: project.title })
+  }
+
+  const handleDeleteConfirm = async (password) => {
+    if (!deleteConfirm) return
+
+    console.log('🔐 Verifying password for project deletion...')
+    
+    try {
+      // Step 1: Verify password
+      console.log('📤 Sending password verification request...')
+      await verifyPasswordMutation.mutateAsync(password)
+      console.log('✅ Password verified successfully!')
+
+      // Step 2: Delete project
+      console.log('📤 Sending delete request for project ID:', deleteConfirm.id)
+      await deleteProjectMutation.mutateAsync(deleteConfirm.id)
+      console.log('✅ Project deleted successfully!')
+      
+      // Close modal
+      setDeleteConfirm(null)
+      
+      alert(t('dash.projects_page.delete_success', { 
+        defaultValue: 'Project deleted successfully!' 
+      }))
+    } catch (error) {
+      console.error('❌ Error during delete process:', error)
+      console.error('Error response:', error?.response)
+      console.error('Error data:', error?.response?.data)
+      
+      // Don't close modal on error - let user retry
+      const message = error?.response?.data?.message || error?.message || 'Failed to delete project'
+      
+      // Re-throw error to be handled by PasswordConfirmModal
+      throw new Error(Array.isArray(message) ? message.join(', ') : message)
     }
   }
 
@@ -109,7 +170,7 @@ export default function ProjectsDashboardPage() {
         onPageSizeChange={setPageSize}
         onEdit={(p) => setWizard(p)}
         onManage={(p) => setManaging(p)}
-        onDelete={handleDelete}
+        onDelete={handleDeleteRequest}
         onPublish={handlePublish}
         onUnpublish={handleUnpublish}
         onPagePrev={() => setPage((p) => Math.max(1, p - 1))}
@@ -129,6 +190,32 @@ export default function ProjectsDashboardPage() {
         <ProjectManageDrawer
           project={managing}
           onClose={() => setManaging(null)}
+        />
+      )}
+
+      {deleteConfirm && (
+        <PasswordConfirmModal
+          isOpen={!!deleteConfirm}
+          onClose={() => setDeleteConfirm(null)}
+          onConfirm={handleDeleteConfirm}
+          title={t('dash.projects_page.delete_title', { defaultValue: 'Delete Project' })}
+          message={
+            <>
+              {t('dash.projects_page.delete_warning', { 
+                defaultValue: 'You are about to delete the project:' 
+              })}
+              <br />
+              <strong style={{ color: 'var(--color-riec-red)' }}>
+                "{deleteConfirm.title}"
+              </strong>
+              <br /><br />
+              {t('dash.projects_page.delete_password_prompt', { 
+                defaultValue: 'Please enter your admin password to confirm this action. This cannot be undone.' 
+              })}
+            </>
+          }
+          actionLabel={t('dash.projects_page.delete_button', { defaultValue: 'Delete Project' })}
+          danger={true}
         />
       )}
     </div>
