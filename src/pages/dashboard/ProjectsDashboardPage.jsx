@@ -82,46 +82,6 @@ export default function ProjectsDashboardPage() {
     }
   }
 
-  const handleDeleteRequest = (project) => {
-    console.log('🗑️ Delete requested for project:', project.title, project.id)
-    setDeleteConfirm({ id: project.id, title: project.title })
-  }
-
-  const handleDeleteConfirm = async (password) => {
-    if (!deleteConfirm) return
-
-    console.log('🔐 Verifying password for project deletion...')
-    
-    try {
-      // Step 1: Verify password
-      console.log('📤 Sending password verification request...')
-      await verifyPasswordMutation.mutateAsync(password)
-      console.log('✅ Password verified successfully!')
-
-      // Step 2: Delete project
-      console.log('📤 Sending delete request for project ID:', deleteConfirm.id)
-      await deleteProjectMutation.mutateAsync(deleteConfirm.id)
-      console.log('✅ Project deleted successfully!')
-      
-      // Close modal
-      setDeleteConfirm(null)
-      
-      alert(t('dash.projects_page.delete_success', { 
-        defaultValue: 'Project deleted successfully!' 
-      }))
-    } catch (error) {
-      console.error('❌ Error during delete process:', error)
-      console.error('Error response:', error?.response)
-      console.error('Error data:', error?.response?.data)
-      
-      // Don't close modal on error - let user retry
-      const message = error?.response?.data?.message || error?.message || 'Failed to delete project'
-      
-      // Re-throw error to be handled by PasswordConfirmModal
-      throw new Error(Array.isArray(message) ? message.join(', ') : message)
-    }
-  }
-
   const handlePublish = async (id) => publishProjectMutation.mutateAsync(id)
   const handleUnpublish = async (id) => unpublishProjectMutation.mutateAsync(id)
 
