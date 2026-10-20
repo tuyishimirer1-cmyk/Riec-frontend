@@ -28,7 +28,20 @@ export function useSearchProjects(query, filters = {}) {
   return useQuery({
     queryKey: ['search', 'projects', query, filters],
     queryFn: async () => {
-      const params = new URLSearchParams({ q: query, ...filters })
+      // Check if we're in admin context
+      const token = sessionStorage.getItem('riecToken') || localStorage.getItem('riecToken')
+      
+      // Add published parameter for admin (same logic as useGetProjects)
+      const params = new URLSearchParams({ 
+        q: query, 
+        ...filters 
+      })
+      
+      // If admin and no explicit published filter, fetch all projects
+      if (token && !filters.published) {
+        params.set('published', 'all')
+      }
+      
       const response = await axios.get(`${BASE}/search/projects?${params}`, { headers: getAuthHeaders() })
       return {
         items: response.data.data ?? [],
