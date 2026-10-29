@@ -112,6 +112,7 @@ const AboutUs = () => {
     { name: t('about.team.project_engineer.name'),             role: t('about.team.project_engineer.role'),             desc: t('about.team.project_engineer.desc'),             image: '/team3.jpg',                                       email: 'riec2025@gmail.com',        phone: '0738 117 255' },
     { name: t('about.team.electrical_engineer.name'),          role: t('about.team.electrical_engineer.role'),          desc: t('about.team.electrical_engineer.desc'),          image: '/team4.jpg',                                       email: 'muhuzasergeadelit@gmail.com', phone: '+250 780 584 866' },
     { name: t('about.team.developer_it_manager.name'),         role: t('about.team.developer_it_manager.role'),         desc: t('about.team.developer_it_manager.desc'),         image: '/team5.jpg',                                      email: 'riec2025@gmail.com',        phone: '0783 968 441' },
+    { name: 'Sage Mberabagabo',                                role: 'Surveyor',                                        desc: 'Professional land surveyor specializing in cadastral surveys, topographic mapping, and construction site measurements.',  image: '/team6.jpg',  email: 'riec2025@gmail.com',        phone: '0788 331 523' },
     { name: t('about.team.site_engineer_assistant_operator.name'), role: t('about.team.site_engineer_assistant_operator.role'), desc: t('about.team.site_engineer_assistant_operator.desc'), image: '/tresor.jpeg',                              email: 'tresbalin1@gmail.com',      phone: '0783 304 952' },
   ];
 
