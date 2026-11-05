@@ -22,6 +22,7 @@ import {
 import {
   useAddFavorite,
   useCreateCheckout,
+  useCreatePawapayCheckout,
   useGetFavoriteStatus,
   useGetProjectAssetDownloadUrl,
   useGetProjectBySlug,
@@ -41,7 +42,11 @@ const ProjectDetails = () => {
   const addFavoriteMutation = useAddFavorite()
   const removeFavoriteMutation = useRemoveFavorite()
   const createCheckoutMutation = useCreateCheckout()
+  const createPawapayCheckoutMutation = useCreatePawapayCheckout()
   const fetchDownloadUrlMutation = useGetProjectAssetDownloadUrl()
+  
+  // Payment method state: 'rwandapay' or 'pawapay'
+  const [paymentMethod, setPaymentMethod] = useState('rwandapay')
 
   // Derive isLiked directly from favoriteStatus instead of using local state
   const isLiked = favoriteStatus?.favorited ?? false
@@ -215,23 +220,45 @@ const ProjectDetails = () => {
         payload.tierId = tierId
       }
 
-      const result = await createCheckoutMutation.mutateAsync(payload)
-      
-      // Backend wraps response in { statusCode, message, data }
-      const responseData = result?.data || result
-
-      const checkoutLink = responseData?.link || responseData?.paymentLink || responseData?.checkoutUrl || responseData?.url
-      
-      if (checkoutLink) {
-        // Check if it's a test mode redirect (same domain) or external payment gateway
-        const isTestMode = responseData?.testMode === true || checkoutLink.startsWith(window.location.origin)
+      // Choose payment gateway based on selected method
+      let result
+      if (paymentMethod === 'pawapay') {
+        // PawaPay: Mobile money (MTN/Airtel)
+        result = await createPawapayCheckoutMutation.mutateAsync(payload)
         
-        if (isTestMode) {
-          // Test mode: redirect in same window to show result
-          window.location.href = checkoutLink
+        // Backend wraps response in { statusCode, message, data }
+        const responseData = result?.data || result
+        
+        // PawaPay sends USSD push notification to phone
+        const depositId = responseData?.depositId
+        const status = responseData?.status
+        const message = responseData?.message || 'Check your phone to complete payment'
+        
+        if (depositId) {
+          window.alert(`✅ ${message}\n\n📱 Payment ID: ${depositId}\nStatus: ${status}`)
         } else {
-          // Production mode: open payment gateway in new tab
-          window.open(checkoutLink, '_blank', 'noopener,noreferrer')
+          window.alert('Payment initiated. Check your phone to complete.')
+        }
+      } else {
+        // RwandaPay: Redirect to hosted payment page
+        result = await createCheckoutMutation.mutateAsync(payload)
+        
+        // Backend wraps response in { statusCode, message, data }
+        const responseData = result?.data || result
+
+        const checkoutLink = responseData?.link || responseData?.paymentLink || responseData?.checkoutUrl || responseData?.url
+        
+        if (checkoutLink) {
+          // Check if it's a test mode redirect (same domain) or external payment gateway
+          const isTestMode = responseData?.testMode === true || checkoutLink.startsWith(window.location.origin)
+          
+          if (isTestMode) {
+            // Test mode: redirect in same window to show result
+            window.location.href = checkoutLink
+          } else {
+            // Production mode: open payment gateway in new tab
+            window.open(checkoutLink, '_blank', 'noopener,noreferrer')
+          }
         }
       }
     } catch (e) {
@@ -401,7 +428,48 @@ const ProjectDetails = () => {
               <h2 className="mb-8 text-3xl font-bold text-white animate-fade-in-up">Pricing Options</h2>
 
               {purchasable && (
-                <div className="mb-6 space-y-3 rounded-2xl border border-slate-700 bg-slate-900/70 p-4">
+                <div className="mb-6 space-y-4 rounded-2xl border border-slate-700 bg-slate-900/70 p-5">
+                  {/* Payment Method Selection */}
+                  <div>
+                    <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                      Choose Payment Method
+                    </label>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <button
+                        type="button"
+                        onClick={() => setPaymentMethod('rwandapay')}
+                        className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition-all ${
+                          paymentMethod === 'rwandapay'
+                            ? 'border-riec-orange bg-riec-orange/20 text-riec-orange'
+                            : 'border-slate-700 bg-slate-900 text-slate-300 hover:border-slate-600'
+                        }`}
+                      >
+                        <CheckCircle className={`h-4 w-4 ${paymentMethod === 'rwandapay' ? 'opacity-100' : 'opacity-0'}`} />
+                        <span>RwandaPay</span>
+                        <span className="text-xs text-slate-400">(Cards, Mobile Money)</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setPaymentMethod('pawapay')}
+                        className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition-all ${
+                          paymentMethod === 'pawapay'
+                            ? 'border-riec-orange bg-riec-orange/20 text-riec-orange'
+                            : 'border-slate-700 bg-slate-900 text-slate-300 hover:border-slate-600'
+                        }`}
+                      >
+                        <CheckCircle className={`h-4 w-4 ${paymentMethod === 'pawapay' ? 'opacity-100' : 'opacity-0'}`} />
+                        <span>PawaPay</span>
+                        <span className="text-xs text-slate-400">(MTN, Airtel - Fast)</span>
+                      </button>
+                    </div>
+                    {paymentMethod === 'pawapay' && (
+                      <p className="mt-2 rounded-lg bg-blue-500/10 border border-blue-500/30 px-3 py-2 text-xs text-blue-200">
+                        ⚡ PawaPay sends instant USSD push to your phone. No redirect needed!
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Buyer Information */}
                   <div className="grid gap-3 sm:grid-cols-2">
                     <input
                       value={buyerInfo.fullName}
@@ -473,6 +541,50 @@ const ProjectDetails = () => {
                     ) : 'Price on Request'}
                   </p>
                   <p className="text-slate-400">Complete engineering plans and documentation</p>
+                </div>
+
+                {/* Payment Method Selection */}
+                <div className="mb-6">
+                  <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-slate-400 text-center">
+                    Choose Payment Method
+                  </label>
+                  <div className="grid gap-3 sm:grid-cols-2 mb-4">
+                    <button
+                      type="button"
+                      onClick={() => setPaymentMethod('rwandapay')}
+                      className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition-all ${
+                        paymentMethod === 'rwandapay'
+                          ? 'border-riec-orange bg-riec-orange/20 text-riec-orange'
+                          : 'border-slate-700 bg-slate-900 text-slate-300 hover:border-slate-600'
+                      }`}
+                    >
+                      <CheckCircle className={`h-4 w-4 ${paymentMethod === 'rwandapay' ? 'opacity-100' : 'opacity-0'}`} />
+                      <div className="flex flex-col items-start">
+                        <span>RwandaPay</span>
+                        <span className="text-xs text-slate-400">Cards, Mobile Money</span>
+                      </div>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setPaymentMethod('pawapay')}
+                      className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition-all ${
+                        paymentMethod === 'pawapay'
+                          ? 'border-riec-orange bg-riec-orange/20 text-riec-orange'
+                          : 'border-slate-700 bg-slate-900 text-slate-300 hover:border-slate-600'
+                      }`}
+                    >
+                      <CheckCircle className={`h-4 w-4 ${paymentMethod === 'pawapay' ? 'opacity-100' : 'opacity-0'}`} />
+                      <div className="flex flex-col items-start">
+                        <span>PawaPay ⚡</span>
+                        <span className="text-xs text-slate-400">MTN, Airtel - Instant</span>
+                      </div>
+                    </button>
+                  </div>
+                  {paymentMethod === 'pawapay' && (
+                    <p className="rounded-lg bg-blue-500/10 border border-blue-500/30 px-3 py-2 text-xs text-blue-200 text-center">
+                      ⚡ Instant USSD push to your phone. No redirect needed!
+                    </p>
+                  )}
                 </div>
 
                 <div className="space-y-4 mb-8">

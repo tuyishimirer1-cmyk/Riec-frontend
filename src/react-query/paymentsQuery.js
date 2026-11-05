@@ -3,11 +3,21 @@ import axios from 'axios'
 
 const BASE = import.meta.env.VITE_APP_URL_BACKEND
 
-// useCreateCheckout
+// useCreateCheckout - RwandaPay (default)
 export function useCreateCheckout() {
   return useMutation({
     mutationFn: async (body) => {
       const response = await axios.post(`${BASE}/payments/project-checkout`, body)
+      return response.data
+    },
+  })
+}
+
+// useCreatePawapayCheckout - PawaPay mobile money
+export function useCreatePawapayCheckout() {
+  return useMutation({
+    mutationFn: async (body) => {
+      const response = await axios.post(`${BASE}/payments/pawapay-checkout`, body)
       return response.data
     },
   })
