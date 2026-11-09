@@ -107,7 +107,7 @@ const AboutUs = () => {
   ];
 
   const team = [
-    { name: t('about.team.ceo.name'),                          role: t('about.team.ceo.role'),                          desc: t('about.team.ceo.desc'),                          image: '/libert.jpeg',                                     email: 'izerlibert10@gmail.com',   phone: '0787 106 857' },
+    { name: t('about.team.ceo.name'),                          role: t('about.team.ceo.role'),                          desc: t('about.team.ceo.desc'),                          image: '/libert.jpeg',                                     email: 'izerlibert10@gmail.com',   phone: '0787 106 854' },
     { name: t('about.team.operation_manager.name'),            role: t('about.team.operation_manager.role'),            desc: t('about.team.operation_manager.desc'),            image: 'team2.jpg',                                        email: 'futuremanirakiza@gmail.com', phone: '0784 231 101' },
     { name: t('about.team.project_engineer.name'),             role: t('about.team.project_engineer.role'),             desc: t('about.team.project_engineer.desc'),             image: '/team3.jpg',                                       email: 'riec2025@gmail.com',        phone: '0738 117 255' },
     { name: 'Sage Mberabagabo',                                role: 'Professional Land Surveyor',                      desc: 'Expert land surveyor with extensive experience in precision measurements, topographic mapping, and site analysis. Specializes in delivering accurate surveys for infrastructure development, construction projects, and urban planning initiatives across Rwanda.',  image: '/team6.jpg',  email: 'riec2025@gmail.com',        phone: '0788 331 523' },
